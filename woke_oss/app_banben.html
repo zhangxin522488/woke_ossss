@@ -1,0 +1,207 @@
+<!DOCTYPE html>
+<html>
+
+	<head>
+		<meta charset="UTF-8">
+		<title>功能模块列表</title>
+		<!--<link rel="stylesheet" type="text/css" href="css/samples.css" />-->
+		<!--<link rel="stylesheet" type="text/css" href="css/neo.css" />-->
+		<link rel="stylesheet" type="text/css" href="css/public.css" />
+		<link rel="stylesheet" href="bootstrap/dist/css/bootstrap.min.css">
+		<link rel="stylesheet" href="css/font-awesome.min.css">
+		<link rel="stylesheet" href="css/ionicons.min.css">
+		<link rel="stylesheet" href="css/AdminLTE.min.css">
+		<link rel="stylesheet" href="dist/css/skins/_all-skins.min.css">
+		<link rel="stylesheet" type="text/css" href="css/bootstrap-datetimepicker.min.css" />
+		<link rel="stylesheet" type="text/css" href="css/fileinput.min.css" />
+
+		<!--swich开关-->
+		<!--<link rel="stylesheet" type="text/css" href="css/bootstrap-switch.min.css" />-->
+		<link rel="stylesheet" type="text/css" href="css/public_main.css" />
+		<style type="text/css">
+
+		</style>
+	</head>
+
+	<body>
+		<div class="box">
+			<div class="box-header with-border">
+				<h3 class="box-title">版本控制</h3>
+			</div>
+			<div id="mohu" class="clear">
+				<button data-toggle="modal" data-target="#myModal3" id="add_yuangong"  type="button" class="btn btn-info">添加新版本</button>
+				<!--<div class="search_search">
+					<input type="text" name="" id="text_sousuo" value="" placeholder="请输入需要查询的内容" />
+					<button id="search_chaxun" style="margin-top: -2px;" type="button" class="btn btn-success">搜索</button>
+				</div>-->
+			</div>
+			<!--<div style="margin-top: 10px;margin-left: 20px;" class="add_add">
+
+			</div>-->
+
+			<div class="box-body">
+				<table class="table table-bordered">
+					<tr>
+						<th>序号</th>
+						<th>app版本ID</th>
+						<th>版本号</th>
+						<th>创建人名</th>
+						<th>创建时间</th>
+						<th>类型</th>
+						<th style="display: none;">下载地址</th>
+						<th style="display: none;">更新内容</th>
+						<th>操作</th>
+
+					</tr>
+					<tbody id="tbbb">
+						<tr>
+							<td>1.</td>
+							<th>正在加载数据...</th>
+							<th>正在加载数据...</th>
+							<th>正在加载数据...</th>
+							<th>正在加载数据...</th>
+							<th>正在加载数据...</th>
+							<th>正在加载数据...</th>
+						</tr>
+					</tbody>
+				</table>
+			</div>
+			<!-- 模态框（Modal） -->
+			<div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+				<div class="modal-dialog">
+					<div class="modal-content">
+						<div class="modal-header">
+							<button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+							<h4 class="modal-title" id="myModalLabel"></h4>
+						</div>
+						<div id="shenhe" class="modal-body">
+							<ul id="ppp">
+								<li>
+									<span>app版本ID:</span><s id="app_id"></s>
+								</li>
+								<li>
+									<span>版本号:</span><s id="app_hao"></s>
+								</li>
+
+								<li>
+									<span>创建人姓名:</span><s id="app_name"></s>
+								</li>
+								<li>
+									<span>创建时间:</span><s id="app_time"></s>
+								</li>
+								<li>
+									<span>类型:</span><s id="app_leixing"></s>
+								</li>
+
+								<li>
+									<span>下载地址:</span>
+									<!--<s id="app_down"></s>-->
+									<div style="height: 50px;" id="app_down">
+
+									</div>
+								</li>
+								<li>
+									<span>更新内容:</span>
+									<div id="app_con">
+
+									</div>
+								</li>
+							</ul>
+						</div>
+						<div class="modal-footer">
+							<div class="shenhe_no">
+								<button type="button" class="btn btn-default fanhui" data-dismiss="modal">返回</button>
+								<button data-toggle="modal" data-target="#myModal4" type="button" class="btn btn-danger ">删除</button>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+			<!-- 模态框（Modal） -->
+			<div class="modal fade" id="myModal4" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+				<div class="modal-dialog">
+					<div class="modal-content">
+						<div class="modal-header">
+							<button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+							<h4 class="modal-title" id="myModalLabel">是否确认删除</h4>
+						</div>
+						<div class="modal-body">删除后数据无法找回</div>
+						<div class="modal-footer">
+							<button type="button" class="btn btn-default" data-dismiss="modal">关闭</button>
+							<button type="button" class="btn btn-danger remove">确定删除</button>
+						</div>
+					</div>
+					<!-- /.modal-content -->
+				</div>
+				<!-- /.modal -->
+			</div>
+			<!--添加新版本-->
+			<div class="modal fade" id="myModal3" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+				<div class="modal-dialog">
+					<div class="modal-content">
+						<div class="modal-header">
+							<button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+							<h4 class="modal-title" id="myModalLabel">添加新版本</h4>
+						</div>
+						<div id="shenhe" class="modal-body">
+							<ul id="ppp">
+								<li>
+									<span>版本号:</span><input type="number" id="app_hao_s" placeholder="版本号只能为正整数">
+								</li>
+
+								<form style="" id="Form1" action="http://www.wkdzkj.cn/pic/picApplication/pic/addFile" method="post" enctype="multipart/form-data" onsubmit="return saveReport();" target="hidden_frame">
+									<input id="uploadfile" name="files" type="file" class="file">
+								</form>
+
+								<li>
+									<span>更新内容:</span>
+									<textarea id="app_con1" placeholder="请输入新版本更新内容" name="" rows="" cols=""></textarea>
+									<!--<button type="button" class="btn btn-default "><a href="ck_editor.html" target="_blank">获取html代码</a></button>-->
+								</li>
+								<li>
+									<span>类型:</span>
+									<select id="app_type" name="app_type">
+										<option value="1">安卓</option>
+										<option value="2">苹果</option>
+									</select>
+								</li>
+
+							</ul>
+							<div class="modal-footer">
+								<button type="button" class="btn btn-default" data-dismiss="modal">关闭</button>
+								<button type="button" class="btn btn-info app_tijiao">提交</button>
+							</div>
+						</div>
+					</div>
+					<!-- /.modal-content -->
+				</div>
+				<!-- /.modal -->
+			</div>
+			<!-- /.box-body -->
+			<div class="box-footer clearfix">
+				<div>
+					<s style="margin-top: 5px;">共有：</s> <span id="count"></span><s>条,每页显示13条</s>
+				</div>
+				<ul id='bp-3-element-test'>
+				</ul>
+			</div>
+		</div>
+
+	</body>
+
+</html>
+<script src="js/jquery.min.js" type="text/javascript" charset="utf-8"></script>
+<script src="bootstrap/dist/js/bootstrap.min.js" type="text/javascript" charset="utf-8"></script>
+<script src="js/jquery.slimscroll.min.js"></script>
+<script src="js/fastclick.js"></script>
+<script src="dist/js/adminlte.min.js"></script>
+<script src="dist/js/demo.js"></script>
+<script src="js/qunit-1.11.0.js" type="text/javascript" charset="utf-8"></script>
+<script src="js/bootstrap-paginator.js" type="text/javascript" charset="utf-8"></script>
+<script src="js/bootstrap-datetimepicker.js" type="text/javascript" charset="utf-8"></script>
+<script src="js/bootstrap-datetimepicker.zh-CN.js" type="text/javascript" charset="utf-8"></script>
+<script src="js/fileinput.min.js" type="text/javascript" charset="utf-8"></script>
+<script src="js/zh.js" type="text/javascript" charset="utf-8"></script>
+<script src="js/app_banben.js" type="text/javascript" charset="utf-8"></script>
+<script type="text/javascript">
+</script>

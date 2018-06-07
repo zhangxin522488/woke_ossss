@@ -1,0 +1,281 @@
+<!DOCTYPE html>
+<html>
+
+	<head>
+		<meta charset="UTF-8">
+		<title>服务商注册审核列表</title>
+
+		<link rel="stylesheet" type="text/css" href="css/public.css" />
+		<link rel="stylesheet" href="bootstrap/dist/css/bootstrap.min.css">
+		<link rel="stylesheet" href="css/font-awesome.min.css">
+		<link rel="stylesheet" href="css/ionicons.min.css">
+		<link rel="stylesheet" href="css/AdminLTE.min.css">
+		<link rel="stylesheet" href="dist/css/skins/_all-skins.min.css">
+		<link rel="stylesheet" type="text/css" href="css/bootstrap-datetimepicker.min.css" />
+		<link rel="stylesheet" type="text/css" href="css/public_main.css" />
+
+		<style type="text/css">
+			body #tbbb .btn {
+				padding: 0;
+				cursor: default;
+			}
+			
+			body #select_type,
+			#select_type1,
+			#select_type2 {
+				display: inline-block;
+				/*margin-top: 5px;*/
+				width: 120px;
+				height: 34px;
+				margin-left: 10px;
+			}
+			
+			#search_chaxun {
+				/*margin-top: 10px;*/
+				margin-left: 10px;
+			}
+			
+			#text_sousuo {
+				margin-left: 20px;
+			}
+		</style>
+	</head>
+
+	<body>
+		<div class="box">
+			<div class="box-header with-border">
+				<h3 class="box-title">优惠券</h3>
+			</div>
+			<div id="mohu" class="clear">
+				<div id="star_time" class="form-group">
+					<label for="dtp_input2" class=" control-label">开始时间</label>
+					<div class="input-group date form_date " data-date="" data-date-format="yyyy-mm-dd" data-link-field="dtp_input2" data-link-format="yyyy-mm-dd">
+						<input id="datepicker" placeholder="请选择开始时间" onchange="gaibian()" class="form-control input_1" size="16" type="text" value="" readonly>
+						<span class="input-group-addon"><span class="glyphicon glyphicon-remove"></span></span>
+						<span class="input-group-addon"><span class="glyphicon glyphicon-calendar"></span></span>
+
+						<input type="hidden" id="dtp_input2" value="" />
+					</div>
+
+				</div>
+				<div id="end_time" class="form-group">
+					<label for="dtp_input2" class="control-label">结束时间</label>
+					<div class="input-group date form_date2 " data-date="" data-date-format="yyyy-mm-dd" data-link-field="dtp_input2" data-link-format="yyyy-mm-dd">
+						<input class="form-control input_2" placeholder="请选择结束时间" size="16" type="text" value="" readonly>
+						<span class="input-group-addon"><span class="glyphicon glyphicon-remove"></span></span>
+						<span class="input-group-addon"><span class="glyphicon glyphicon-calendar"></span></span>
+
+						<input type="hidden" id="dtp_input2" value="" />
+					</div>
+				</div>
+
+				<!--</div>-->
+				<!--<div style="margin-top:0px;margin-left: 20px;" class="my_feilei">-->
+
+				<label for="name">劵类型：</label>
+				<!--<s>选择状态</s>-->
+				<select id="select_type" style="display: inline-block;" class="form-control">
+					<option>选择类型</option>
+					<option>满减券</option>
+					<option>无门槛券</option>
+				</select>
+				<label for="name">发放途径：</label>
+				<!--<s>选择状态</s>-->
+				<select id="select_type1" style="display: inline-block;" class="form-control">
+					<option>选择途径</option>
+					<option>领取</option>
+					<option>满额赠送</option>
+				</select>
+				<label for="name">劵来源：</label>
+				<!--<s>选择状态</s>-->
+				<select id="select_type2" style="display: inline-block;" class="form-control">
+					<option>选择来源</option>
+					<option>商户</option>
+					<option>平台</option>
+				</select>
+
+				<input type="text" name="" id="text_sousuo" value="" placeholder="请输入需要查询的内容" />
+				<button id="search_chaxun" type="button" class="btn btn-success">搜索</button>
+				<!--<div class="search_search">-->
+					<button id="search_add" type="button" class="btn btn-info">添加优惠券</button>
+				<!--</div>-->
+			</div>
+			<!-- /.box-header -->
+			<div class="box-body">
+				<table class="table table-bordered">
+					<tr>
+						<th>序号</th>
+						<th>优惠券名字</th>
+						<th style="display: none;">优惠券ID</th>
+						<th>券类型</th>
+						<th>发放途径</th>
+						<th>劵来源</th>
+						<th>券详情</th>
+						<!--<th>可用商家</th>-->
+						<th>查看明细</th>
+						<th style="display: none;">审核状态</th>
+					</tr>
+					<tbody id="tbbb">
+						<tr>
+							<td>1.</td>
+							<th>正在加载数据...</th>
+							<th>正在加载数据...</th>
+							<th>正在加载数据...</th>
+							<th>正在加载数据...</th>
+							<th>正在加载数据...</th>
+							<!--<th>正在加载数据...</th>-->
+							<th>正在加载数据...</th>
+						</tr>
+					</tbody>
+
+				</table>
+			</div>
+			<!-- /.box-body -->
+			<div class="box-footer clearfix">
+				<div>
+					<s style="margin-top: 5px;">共有：</s> <span id="count"></span><s>条,每页显示10条</s>
+				</div>
+				<ul id='bp-3-element-test'>
+				</ul>
+			</div>
+		</div>
+
+		<!-- 模态框（Modal） -->
+		<div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+			<div class="modal-dialog">
+				<div class="modal-content">
+					<div class="modal-header">
+						<button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+						<h4 class="modal-title" id="myModalLabel">日志操作详请</h4>
+					</div>
+					<div id="shenhe" class="modal-body">
+						<ul id="myTab" class="nav nav-tabs">
+							<li class="active">
+								<a href="#home" data-toggle="tab">
+									基础操作
+								</a>
+							</li>
+							<li>
+								<a href="#fix" data-toggle="tab">
+									详细信息
+								</a>
+							</li>
+						</ul>
+						<ul id="ppp">
+							<div id="myTabContent" class="tab-content">
+								<div class=" tab-pane fade in active" id="home">
+									<li>
+										<span>优惠券名字:</span><s id="s_name"></s>
+									</li>
+									<li style="display: none;">
+										<span>优惠券ID:</span><s id="s_id"></s>
+									</li>
+									<li>
+										<span>劵类型:</span><s id="s_type"></s>
+									</li>
+									<li>
+										<span>劵来源:</span><s id="s_laiyuan"></s>
+									</li>
+									<li>
+										<span>发放途径:</span><s id="s_tujing"></s>
+									</li>
+									<li>
+										<span>满减金额:</span><s id="s_manjian"></s>
+									</li>
+									<li>
+										<span>每张金额:</span><s id="s_meizhnag"></s>
+									</li>
+									<li>
+										<span>发放张数:</span><s id="s_zhangshu"></s>
+									</li>
+
+									<li>
+										<span>赠送起额:</span><s id="s_qie"></s>
+									</li>
+
+								</div>
+								<div class="tab-pane fade" id="fix">
+									<li>
+										<span>创建人姓名:</span><s id="s_crname"></s>
+									</li>
+									<li>
+										<span>创建时间:</span><s id="s_crtime"></s>
+									</li>
+									<li style="display: none;">
+										<span>审核人姓名:</span><s id="s_shenhename"></s>
+									</li>
+									<li style="display: none;">
+										<span>审核时间:</span><s id="s_shenhetime"></s>
+									</li>
+									<li>
+										<span>有效日期开始:</span><s id="s_youxiao_st"></s>
+									</li>
+									<li>
+										<span>有效日期结束:</span><s id="s_youxiao_end"></s>
+									</li>
+									<li>
+										<span>发送时间:</span><s id="s_fasong_time"></s>
+									</li>
+									<li>
+										<span>摘要:</span><s id="s_zhaiyao"></s>
+									</li>
+									<li style="display: none;">
+										<span>审核状态:</span><s id="s_shnehezhuangtai"></s>
+									</li>
+								</div>
+							</div>
+						</ul>
+					</div>
+					<div class="modal-footer">
+						<!--<div class="shenhe_no">
+							<button type="button" class="btn btn-danger shnehe_nopass">审核不通过</button>
+							<button type="button" class="btn btn-success shnehe_pass">审核通过</button>
+						</div>-->
+						<div class="wuxushenhe">
+							<button type="button" class="btn btn-default fanhui" data-dismiss="modal">返回</button>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+
+		<!-- 模态框（Modal） -->
+		<!--<div class="modal fade" id="myModal2" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+			<div class="modal-dialog">
+				<div class="modal-content">
+					<div class="modal-header">
+						<button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+						<h4 class="modal-title" id="myModalLabel2"></h4>
+					</div>
+					<div id="shenhe" class="modal-body">
+						<ul id="pppp">
+							<li>
+								
+							</li>
+							
+						</ul>
+					</div>
+					<div class="modal-footer">						
+						<div class="wuxushenhe">
+							<button type="button" class="btn btn-default fanhui" data-dismiss="modal">返回</button>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>-->
+
+	</body>
+
+</html>
+<script src="js/jquery.min.js" type="text/javascript" charset="utf-8"></script>
+<script src="bootstrap/dist/js/bootstrap.min.js" type="text/javascript" charset="utf-8"></script>
+<script src="js/jquery.slimscroll.min.js"></script>
+<script src="js/fastclick.js"></script>
+<script src="dist/js/adminlte.min.js"></script>
+<script src="dist/js/demo.js"></script>
+<script src="js/qunit-1.11.0.js" type="text/javascript" charset="utf-8"></script>
+<script src="js/bootstrap-paginator.js" type="text/javascript" charset="utf-8"></script>
+<script src="js/bootstrap-datetimepicker.js" type="text/javascript" charset="utf-8"></script>
+<script src="js/bootstrap-datetimepicker.zh-CN.js" type="text/javascript" charset="utf-8"></script>
+<script src="js/Coupon_quan.js" type="text/javascript" charset="utf-8"></script>
+<script src="js/data.js" type="text/javascript" charset="utf-8"></script>

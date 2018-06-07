@@ -1,0 +1,254 @@
+<!DOCTYPE html>
+<html>
+
+	<head>
+		<meta charset="UTF-8">
+		<title>服务商小区权限列表</title>
+		<link rel="stylesheet" type="text/css" href="css/public.css" />
+		<link rel="stylesheet" href="bootstrap/dist/css/bootstrap.min.css">
+		<link rel="stylesheet" href="css/font-awesome.min.css">
+		<link rel="stylesheet" href="css/ionicons.min.css">
+		<link rel="stylesheet" href="css/AdminLTE.min.css">
+		<link rel="stylesheet" href="dist/css/skins/_all-skins.min.css">
+		<link rel="stylesheet" type="text/css" href="css/bootstrap-datetimepicker.min.css" />
+		<link rel="stylesheet" type="text/css" href="css/public_main.css" />
+		<style type="text/css">
+			body #select_zhanwei {
+				display: inline-block;
+				/*margin-top: 5px;*/
+				width: 120px;
+				height: 34px;
+			}
+			
+			#search_chaxun {
+				/*margin-top: 10px;*/
+				margin-left: 30px;
+			}
+			
+			body #tbbb .btn {
+				padding: 0;
+				cursor: default;
+			}
+			
+			body #select_type {
+				display: inline-block;
+				/*margin-top: 5px;*/
+				width: 160px;
+				height: 34px;
+				margin-left: 10px;
+			}
+			
+			body #select_type1 {
+				display: inline-block;
+				/*margin-top: 5px;*/
+				width: 120px;
+				height: 34px;
+				margin-left: 10px;
+			}
+			
+			#search_chaxun {
+				/*margin-top: 10px;*/
+				margin-left: 10px;
+			}
+			
+			#text_sousuo {
+				margin-left: 10px;
+			}
+			
+		</style>
+
+	</head>
+
+	<body>
+		<div class="box">
+			<div class="box-header with-border">
+				<h3 class="box-title">订单列表</h3>
+			</div>
+			<div id="mohu" class="clear">
+				<div id="star_time" class="form-group">
+					<label for="dtp_input2" class=" control-label">开始时间</label>
+					<div class="input-group date form_date " data-date="" data-date-format="yyyy-mm-dd" data-link-field="dtp_input2" data-link-format="yyyy-mm-dd">
+						<input id="datepicker" placeholder="请选择开始时间" onchange="gaibian()" class="form-control input_1" size="16" type="text" value="" readonly>
+						<span class="input-group-addon"><span class="glyphicon glyphicon-remove"></span></span>
+						<span class="input-group-addon"><span class="glyphicon glyphicon-calendar"></span></span>
+
+						<input type="hidden" id="dtp_input2" value="" />
+					</div>
+				</div>
+				<div id="end_time" class="form-group">
+					<label for="dtp_input2" class="control-label">结束时间</label>
+					<div class="input-group date form_date2 " data-date="" data-date-format="yyyy-mm-dd" data-link-field="dtp_input2" data-link-format="yyyy-mm-dd">
+						<input class="form-control input_2" placeholder="请选择结束时间" size="16" type="text" value="" readonly>
+						<span class="input-group-addon"><span class="glyphicon glyphicon-remove"></span></span>
+						<span class="input-group-addon"><span class="glyphicon glyphicon-calendar"></span></span>
+
+						<input type="hidden" id="dtp_input2" value="" />
+					</div>
+				</div>
+				<!--<div class="id_dingdan">
+					<input type="text" name="billid_dingdan" id="billid_dingdan" value="" placeholder="请输入订单id" />
+				</div>-->
+				<label for="name">商户性质 </label>
+				<!--<s>选择状态</s>-->
+				<select id="select_type" style="display: inline-block;" class="form-control">
+					<option value="">全部</option>
+					<option value="1">物业公司</option>
+					<option value="2">三方商户</option>
+				</select>
+
+				<label style="margin-left: 10px;" for="name">审核状态</label>
+				<select id="select_type1" style="display: inline-block;" class="form-control">
+					<option value="6">全部</option>
+					<option value="0">未审核</option>
+					<option value="1">审核通过</option>
+					<option value="2">审核未通过</option>
+				</select>
+				<input type="text" name="" id="text_sousuo" value="" placeholder="请输入需要查询的内容" />
+				<button id="search_chaxun"  type="button" class="btn btn-success">搜索</button>
+			</div>
+			<!--<div style="margin-top:0px;margin-left: 20px;" class="my_feilei">
+
+				<!--<button id="search_chaxun" style="margin-top: -2px;" type="button" class="btn btn-info">生成结算单</button>-->
+			<!--</div>-->
+			<!-- /.box-header -->
+			<div class="box-body">
+				<table class="table table-bordered">
+					<tr>
+						<th>序号</th>
+						<th>公司名称</th>
+						<th>商户性质</th>
+						<th>交易截止日</th>
+						<th>结算笔数</th>
+						<th>结算方式</th>
+						<th>审核状态</th>
+
+						<th>操作</th>
+					</tr>
+					<tbody id="tbbb">
+						<tr>
+							<td>1.</td>
+							<th>正在加载数据...</th>
+							<th>正在加载数据...</th>
+							<th>正在加载数据...</th>
+							<th>正在加载数据...</th>
+							<th>正在加载数据...</th>
+							<th>正在加载数据...</th>
+						</tr>
+					</tbody>
+
+				</table>
+			</div>
+			<!-- /.box-body -->
+			<div class="box-footer clearfix">
+				<div>
+					<s style="margin-top: 5px;">共有：</s> <span id="count"></span><s>条,每页显示10条</s>
+				</div>
+				<ul id='bp-3-element-test'>
+				</ul>
+			</div>
+		</div>
+
+		<!-- 模态框（Modal） -->
+		<div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+			<div class="modal-dialog">
+				<div class="modal-content">
+					<div class="modal-header">
+						<button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+						<h4 class="modal-title" id="myModalLabel"></h4>
+					</div>
+					<div id="shenhe" class="modal-body">
+						<ul id="myTab" class="nav nav-tabs">
+							<li class="active">
+								<a href="#home" data-toggle="tab">
+									基础信息
+								</a>
+							</li>
+							<li>
+								<a href="#fix" data-toggle="tab">
+									结算信息
+								</a>
+							</li>
+							<li>
+								<a href="#zizhi" data-toggle="tab">
+									优惠信息
+								</a>
+							</li>
+							<li>
+								<a href="#zhuce" data-toggle="tab">
+									审核/作废信息
+								</a>
+							</li>
+
+						</ul>
+						<ul id="ppp">
+							<div id="myTabContent" class="tab-content">
+								<div class=" tab-pane fade in active" id="home">
+
+									<li><span>公司Id:</span><s id="j_gsId"></s></li>
+									<li><span>公司名称:</span><s id="j_gsname"></s></li>
+									<li><span>商户性质:</span><s id="j_shxz"></s></li>
+									<li><span>入库时间:</span><s id="j_rksj"></s></li>
+									<li><span>摘要:</span><textarea id="j_zhaiyao" name="" rows="" cols=""></textarea>
+								</div>
+								<div class="tab-pane fade" id="fix">
+									<li><span>结算单ID:</span><s id="j_jsdID"></s></li>
+									<li><span>单据号:</span><s id="j_djh"></s></li>
+									<li><span>单据日期:</span><s id="j_djrq"></s></li>
+									<li><span>交易截止日:</span><s id="j_jyjzr"></s></li>
+									<li><span>结算笔数:</span><s id="j_jsbs"></s></li>
+									<li><span>实结算金额:</span><s id="j_sjsje"></s></li>
+									<li><span>应结算金额:</span><s id="j_yjsje"></s></li>
+									<li><span>结算方式:</span><s id="j_jsfs"></s></li>
+									<li><span>费率:</span><s id="j_fl"></s></li>
+									<li><span>手续费:</span><s id="j_sxf"></s></li>
+									<li><span>实收金额:</span><s id="j_ssje"></s></li>
+									<li><span>实际退款金额:</span><s id="j_sjtkje"></s></li>
+								</div>
+								<div class="tab-pane fade" id="zizhi">
+									<li><span>商户劵扣额:</span><s id="j_shqke"></s></li>
+									<li><span>商户劵退款额:</span><s id="j_shqtke"></s></li>
+									<li><span>沃克劵扣额:</span><s id="j_wkqke"></s></li>
+									<li><span>沃克劵退额:</span><s id="j_wkqte"></s></li>
+									<li><span>沃豆抵消额:</span><s id="j_wddxe"></s></li>
+									<li><span>沃豆退款抵消额:</span><s id="j_wdtkdxe"></s></li>
+								</div>
+								<div class="tab-pane fade" id="zhuce">
+									<li><span>作废状态:</span><s id="j_zfzt"></s></li>
+									<li><span>作废人:</span><s id="j_zfr"></s></li>
+									<li><span>作废人姓名:</span><s id="j_zfrname"></s></li>
+									<li><span>作废时间:</span><s id="j_zfsj"></s></li>
+									<li><span>审核状态:</span><s id="j_shzt"></s></li>
+									<li><span>审核时间:</span><s id="j_shsj"></s></li>
+									<li><span>审核人:</span><s id="j_shr"></s></li>
+									<li><span>审核人姓名:</span><s id="j_shrname"></s></li>
+								</div>
+							</div>
+						</ul>
+					</div>
+					<div class="modal-footer">
+						<div class="modal-footer">
+							<button type="button" class="btn btn-default fanhui" data-dismiss="modal">返回</button>
+							<button type="button" class="btn btn-success jslb_pass">审核通过</button>
+							<button type="button" class="btn btn-danger jslb_nopass">审核不通过</button>
+						</div>
+					</div>
+
+				</div>
+			</div>
+		</div>
+
+	</body>
+
+</html>
+<script src="js/jquery.min.js" type="text/javascript" charset="utf-8"></script>
+<script src="bootstrap/dist/js/bootstrap.min.js" type="text/javascript" charset="utf-8"></script>
+<script src="js/jquery.slimscroll.min.js"></script>
+<script src="js/fastclick.js"></script>
+<script src="dist/js/adminlte.min.js"></script>
+<script src="dist/js/demo.js"></script>
+<script src="js/qunit-1.11.0.js" type="text/javascript" charset="utf-8"></script>
+<script src="js/bootstrap-paginator.js" type="text/javascript" charset="utf-8"></script>
+<script src="js/bootstrap-datetimepicker.js" type="text/javascript" charset="utf-8"></script>
+<script src="js/bootstrap-datetimepicker.zh-CN.js" type="text/javascript" charset="utf-8"></script>
+<script src="js/jiesuanliebiao.js" type="text/javascript" charset="utf-8"></script>
+<script src="js/data.js" type="text/javascript" charset="utf-8"></script>

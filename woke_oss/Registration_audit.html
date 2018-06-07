@@ -1,0 +1,303 @@
+<!DOCTYPE html>
+<html>
+
+	<head>
+		<meta charset="UTF-8">
+		<title>服务商详情</title>
+		<link rel="stylesheet" type="text/css" href="css/public.css" />
+		<link rel="stylesheet" href="bootstrap/dist/css/bootstrap.min.css">
+		<link rel="stylesheet" href="css/font-awesome.min.css">
+		<link rel="stylesheet" href="css/ionicons.min.css">
+		<link rel="stylesheet" href="css/AdminLTE.min.css">
+		<link rel="stylesheet" href="dist/css/skins/_all-skins.min.css">
+		<link rel="stylesheet" type="text/css" href="css/bootstrap-datetimepicker.min.css" />
+		<link rel="stylesheet" type="text/css" href="css/public_main.css" />
+		<style type="text/css">
+			body #tbbb .btn {
+				padding: 0;
+				cursor: default;
+			}
+			
+			body #select_type {
+				display: inline-block;
+				/*margin-top: 5px;*/
+				width: 120px;
+				height: 34px;
+				margin-left: 10px;
+			}
+			.selectet{
+				/*margin-top: -5px;*/
+			}
+			/*#search_chaxun {
+				margin-top: 10px;
+				margin-left: 10px;
+			}*/
+			
+			#text_sousuo {
+				margin-left: 10px;
+			}
+		</style>
+	</head>
+
+	<body>
+		<div class="box">
+			<div class="box-header with-border">
+				<h3 class="box-title">服务商资料审核列表</h3>
+			</div>
+			<div id="mohu" class="clear">
+				<div id="star_time"  class="form-group">
+					<label for="dtp_input1" class=" control-label">开始时间:</label>
+					<div class="input-group date form_date " data-date="" data-date-format="yyyy-mm-dd" data-link-field="dtp_input1" data-link-format="yyyy-mm-dd">
+						<input id="datepicker" placeholder="请选择开始时间" onchange="gaibian()" class="form-control input_1" size="16" type="text" value="" readonly>
+						<span class="input-group-addon"><span class="glyphicon glyphicon-remove"></span></span>
+						<span class="input-group-addon"><span class="glyphicon glyphicon-calendar"></span></span>
+						<input type="hidden" id="dtp_input2" value="" />
+					</div>
+				</div>
+				<div id="end_time"   class="form-group">
+					<label for="dtp_input2" class="control-label">结束时间:</label>
+					<div class="input-group date form_date2 " data-date="" data-date-format="yyyy-mm-dd" data-link-field="dtp_input2" data-link-format="yyyy-mm-dd">
+						<input class="form-control input_2" placeholder="请选择结束时间" size="16" type="text" value="" readonly>
+						<span class="input-group-addon"><span class="glyphicon glyphicon-remove"></span></span>
+						<span class="input-group-addon"><span class="glyphicon glyphicon-calendar"></span></span>
+
+						<input type="hidden" id="dtp_input2" value="" />
+					</div>
+				</div>
+				<div style="float:left;" class="selectet">
+					<label for="name">选择状态</label>
+					<!--<s>选择状态</s>-->
+					<select id="select_type" style="display: inline-block;" class="form-control">
+						<!--<option>全部</option>-->
+						<option>待审核</option>
+						<option>审核不通过</option>
+					</select>
+				</div>
+				<input type="text" name="" id="text_sousuo" value="" placeholder="请输入应用名称进行查询" />
+				<button id="search_chaxun" style="margin-left: 10px;" type="button" class="btn btn-success">搜索</button>
+			</div>
+			
+			<!-- /.box-header -->
+			<div class="box-body">
+				<table class="table table-bordered">
+					<tr>
+						<th>序号</th>
+						<th>服务商名称</th>
+						<th>服务商类型</th>
+						<th style="display: none;">服务商ID</th>
+						<th>创建时间</th>
+						<th>账号</th>
+						<th>审核结果</th>
+						<th>操作</th>
+						<th>记录</th>
+
+					</tr>
+					<tbody id="tbbb">
+						<tr>
+							<td>1.</td>
+							<th>正在加载数据...</th>
+							<th>正在加载数据...</th>
+							<th>正在加载数据...</th>
+							<th>正在加载数据...</th>
+							<th>正在加载数据...</th>
+							<th>正在加载数据...</th>
+							<th>正在加载数据...</th>
+						</tr>
+					</tbody>
+
+				</table>
+			</div>
+			<!-- /.box-body -->
+			<div class="box-footer clearfix">
+				<div>
+					<s style="margin-top: 15px;">共有：</s> <span id="count"></span><s>条,每页显示10条</s>
+				</div>
+				<ul id='bp-3-element-test'>
+				</ul>
+			</div>
+		</div>
+
+		<!-- 模态框（Modal） -->
+		<div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+			<div class="modal-dialog">
+				<div class="modal-content">
+					<div class="modal-header">
+						<button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+						<h4 class="modal-title" id="myModalLabel"></h4>
+					</div>
+					<div id="shenhe" class="modal-body">
+						<ul id="myTab" class="nav nav-tabs">
+							<li class="active">
+								<a href="#home" data-toggle="tab">
+									基础信息
+								</a>
+							</li>
+							<li>
+								<a href="#fix" data-toggle="tab">
+									修改信息
+								</a>
+							</li>
+							<li>
+								<a href="#zhuce" data-toggle="tab">
+									注册资料
+								</a>
+							</li>
+							<li>
+								<a href="#zizhi" data-toggle="tab">
+									资质图片
+								</a>
+							</li>
+						</ul>
+						<ul id="ppp">
+							<div id="myTabContent" class="tab-content">
+								<div class="tab-pane fade in active" id="home">
+									<li>
+										<span>商户名:</span><s id="s_name"></s>
+									</li>
+
+									<li>
+										<span>账号:</span><s id="s_zhanghao"></s>
+									</li>
+									<li style="display: none;">
+										<span>服务商id:</span><s id="s_id"></s>
+									</li>
+
+									<li>
+										<span>服务商类型:</span><s id="s_type"></s>
+									</li>
+									<li>
+										<span>二级类型:</span><s id="s_type_er"></s>
+									</li>
+									<li>
+										<span>三级类型:</span><s id="s_type_san"></s>
+									</li>
+
+									<li>
+										<span>审核状态:</span><s id="s_shenhestate"></s>
+									</li>
+								</div>
+								<div class="tab-pane fade" id="fix">
+									<li style="display: none;">
+										<span>创建人:</span><s id="s_chuang"></s>
+									</li>
+									<li>
+										<span>创建时间:</span><s id="s_stime"></s>
+									</li>
+									<li>
+										<span>创建人姓名:</span><s id="s_chuangname"></s>
+									</li>
+									<li>
+										<span>邮箱:</span><s id="s_email"></s>
+									</li>
+									<li>
+										<span>联系人:</span><s id="s_person"></s>
+									</li>
+
+									<li>
+										<span>手机号:</span><s id="s_telephone"></s>
+									</li>
+
+									<li>
+										<span>电话:</span><s id="s_tel"></s>
+									</li>
+									<!--<li>
+								<span>创建时间:</span><s id="s_chuangtime"></s>
+							</li>-->
+
+									<!--<li style="display: none;">
+										<span>修改人:</span><s id="s_update"></s>
+									</li>
+									<li>
+										<span>修改人名字:</span><s id="s_updatename"></s>
+									</li>
+									<li>
+										<span>修改时间:</span><s id="s_updatetime"></s>
+									</li>
+
+									<li style="display: none;">
+										<span>删除标记:</span><s id="s_remove_biaoji"></s>
+									</li>
+
+									<li style="display: none;">
+										<span>删除人:</span><s id="s_remove_ren"></s>
+									</li>
+									<li>
+										<span>删除人姓名:</span><s id="s_removename"></s>
+									</li>
+									<li>
+										<span>删除时间:</span><s id="s_removetime"></s>
+									</li>
+									<li>
+										<span>时间戳:</span><s id="s_shijianchuo"></s>
+									</li>
+									<li>
+										<span>排序:</span><s id="s_paixu"></s>
+									</li>-->
+								</div>
+								<div class="tab-pane fade" id="zhuce">
+									<li>
+										<span>法人姓名:</span><s id="s_farenName"></s>
+									</li>
+									<li>
+										<span>法人身份证号:</span><s id="s_shenfenNum"></s>
+									</li>
+									<li>
+										<span>注册登记时间:</span><s id="s_zhucetime"></s>
+									</li>
+									<li style="shenhepizhu">
+										<span>审核批注：</span>
+										<textarea style="display: block;" id="s_pizhu" name="" rows="5" cols="74"></textarea>
+									</li>
+								</div>
+								<div class="tab-pane fade" id="zizhi">
+									<li>
+										<span>身份证照片面:</span>
+										<img data-action="zoom" id="s_shenfenZheng" src="" />
+									</li>
+									<li>
+										<span>身份证国徽面:</span>
+										<img data-action="zoom" id="s_shenfenFan" src="" />
+									</li>
+									<!--<li>
+										<span>资质图:</span>
+										<img data-action="zoom" id="s_zzhi" src="dist/img/avatar04.png" />
+									</li>-->
+									<li>
+										<span>营业执照图:</span>
+										<img data-action="zoom" id="s_zhizhao" src="" />
+									</li>
+								</div>
+							</div>
+						</ul>
+
+					</div>
+					<div class="modal-footer">
+						<div class="shenhe_no">
+							<button type="button" class="btn btn-danger shnehe_nopass">审核不通过</button>
+							<button type="button" class="btn btn-success shnehe_pass">审核通过</button>
+						</div>
+						<div class="wuxushenhe">
+							<button type="button" class="btn btn-default fanhui" data-dismiss="modal">返回</button>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+
+	</body>
+
+</html>
+<script src="js/jquery.min.js" type="text/javascript" charset="utf-8"></script>
+<script src="bootstrap/dist/js/bootstrap.min.js" type="text/javascript" charset="utf-8"></script>
+<script src="js/jquery.slimscroll.min.js"></script>
+<script src="js/fastclick.js"></script>
+<script src="dist/js/adminlte.min.js"></script>
+<script src="dist/js/demo.js"></script>
+<script src="js/qunit-1.11.0.js" type="text/javascript" charset="utf-8"></script>
+<script src="js/bootstrap-paginator.js" type="text/javascript" charset="utf-8"></script>
+<script src="js/bootstrap-datetimepicker.js" type="text/javascript" charset="utf-8"></script>
+<script src="js/bootstrap-datetimepicker.zh-CN.js" type="text/javascript" charset="utf-8"></script>
+<script src="js/Registration_audit.js" type="text/javascript" charset="utf-8"></script>
+
+<script src="js/zooming.js" type="text/javascript" charset="utf-8"></script>
+<script src="js/data.js" type="text/javascript" charset="utf-8"></script>

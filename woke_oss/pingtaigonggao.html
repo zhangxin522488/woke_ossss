@@ -1,0 +1,239 @@
+<!DOCTYPE html>
+<html>
+
+	<head>
+		<meta charset="UTF-8">
+		<title>服务商详情</title>
+		<link rel="stylesheet" type="text/css" href="css/public.css" />
+		<link rel="stylesheet" href="bootstrap/dist/css/bootstrap.min.css">
+		<link rel="stylesheet" href="font-awesome/css/font-awesome.min.css">
+		<link rel="stylesheet" href="css/ionicons.min.css">
+		<link rel="stylesheet" href="css/AdminLTE.min.css">
+		<link rel="stylesheet" href="dist/css/skins/_all-skins.min.css">
+		<link rel="stylesheet" type="text/css" href="css/bootstrap-datetimepicker.min.css" />
+		<link rel="stylesheet" type="text/css" href="css/fileinput.min.css" />
+		<link rel="stylesheet" type="text/css" href="css/public_main.css" />
+		<style type="text/css">
+			body #xiashulouyu_se,
+			#xiashulouyu_se1 {
+				display: inline-block;
+				/*margin-top: 5px;*/
+				width: 150px;
+				height: 34px;
+				margin-left: 10px;
+			}
+		</style>
+	</head>
+
+	<body>
+		<div class="box">
+			<div class="box-header with-border">
+				<h3 class="box-title">平台公告列表</h3>
+			</div>
+			<div style="margin-top:0px;margin-left: 20px;" id="mohu" class="my_feilei">
+
+				<!--<label for="name">组：</label>
+				<select id="xiashulouyu_se" style="display: inline-block;" class="form-control">
+					<option value="">全部</option>
+					<option value="1">平台</option>
+					<option value="2">物业</option>
+					<option value="3">服务商</option>
+				</select>
+				<label for="name">发送类型：</label>
+				<select id="xiashulouyu_se1" style="display: inline-block;" class="form-control">
+					<option value="">全部</option>
+					<option value="1">单发</option>
+					<option value="2">按小区发</option>
+					<option value="3">群发</option>
+
+				</select>-->
+				<input type="text" name="" id="text_sousuo" value="" placeholder="请输入需要查询的内容" />
+				<button id="search_chaxun"  type="button" class="btn btn-success">搜索</button>
+				<!--<button data-toggle="modal" data-target="#myModal2" id="wuye_add-add" style="margin-top: -2px;" type="button" class="btn btn-info">添加推送</button>-->
+			</div>
+
+			<!--<div class="my_feilei">-->
+			<!-- /.box-header -->
+			<div class="box-body">
+				<table class="table table-bordered">
+					<tr>
+						<th>序号</th>
+						<th>物业/服务商</th>
+						<th>组</th>
+						<th>发送类型</th>
+						<th>创建人</th>
+						<th>创建时间</th>
+						<th>查看详情</th>
+					</tr>
+					<tbody id="tbbb">
+						<tr>
+							<td>1.</td>
+							<th>正在加载数据...</th>
+							<th>正在加载数据...</th>
+							<th>正在加载数据...</th>
+							<th>正在加载数据...</th>
+							<th>正在加载数据...</th>
+							<th data-toggle="modal" data-target="#myModal" style="color:blue;cursor: pointer" ;><i class="fa fa-github-eye"></i></th>
+
+						</tr>
+					</tbody>
+
+				</table>
+			</div>
+			<!-- /.box-body -->
+			<div class="box-footer clearfix">
+				<div>
+					<s style="margin-top: 5px;">共有：</s> <span id="count"></span><s>条,每页显示13条</s>
+				</div>
+				<ul id='bp-3-element-test'>
+				</ul>
+			</div>
+		</div>
+		<!-- 模态框（Modal） -->
+		<div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+			<div class="modal-dialog">
+				<div class="modal-content">
+					<div class="modal-header">
+						<button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+						<h4 class="modal-title" id="myModalLabel">推送消息详情</h4>
+					</div>
+					<div class="modal-body">
+						<div id="shenhe" class="modal-body">
+							<ul id="ppp">
+								<li style="display: none;">
+									<span>推送id:</span><s id="xx_pushid"></s>
+								</li>
+								<li>
+									<span>组:</span><s id="xx_zu"></s>
+								</li>
+								<li style="display: none;">
+									<span>物业/服务商ID:</span><s id="xx_wuyeid"></s>
+								</li>
+
+								<li>
+									<span>发送类型:</span><s id="xx_type"></s>
+								</li>
+								<li>
+									<span>推送人群:</span><s id="xx_renqun"></s>
+								</li>
+								<li>
+									<span>用户/小区名:</span><s id="xx_yonghu"></s>
+								</li>
+								<li>
+									<span>创建人:</span><s id="xx_creat"></s>
+								</li>
+								<li>
+									<span>创建时间:</span><s id="xx_creattime"></s>
+								</li>
+								<li>
+									<span>物业/服务商:</span><s id="xx_wuyename"></s>
+								</li>
+								<li>
+									<span>标题:</span><s id="xx_title"></s>
+								</li>
+								<li>
+									<span>内容:</span><textarea id="xx_info" name="xx_info" rows="" cols=""></textarea>
+								</li>
+							</ul>
+						</div>
+					</div>
+					<div class="modal-footer">
+						<button type="button" class="btn btn-default" data-dismiss="modal">关闭</button>
+					</div>
+				</div>
+				<!-- /.modal-content -->
+			</div>
+			<!-- /.modal -->
+		</div>
+
+		<!-- 模态框（Modal） -->
+		<div class="modal fade" id="myModal4" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+			<div class="modal-dialog">
+				<div class="modal-content">
+					<div class="modal-header">
+						<button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+						<h4 class="modal-title" id="myModalLabel">是否确认删除</h4>
+					</div>
+					<div class="modal-body">删除后数据无法找回</div>
+					<div class="modal-footer">
+						<button type="button" class="btn btn-default" data-dismiss="modal">关闭</button>
+						<button type="button" class="btn btn-danger yh_remove">确定删除</button>
+					</div>
+				</div>
+				<!-- /.modal-content -->
+			</div>
+			<!-- /.modal -->
+		</div>
+
+		<!-- 模态框（Modal） -->
+		<div class="modal fade" id="myModal2" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+			<div class="modal-dialog">
+				<div class="modal-content">
+					<div class="modal-header">
+						<button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+						<h4 class="modal-title" id="myModalLabel"></h4>
+					</div>
+					<div id="shenhe" class="modal-body">
+
+						<ul id="ppp">
+							<div id="myTabContent" class="tab-content">
+								<div class=" tab-pane fade in active" id="home">
+									<li>
+										<span>是否推送</span>
+										<select id="x_tuisong" name="">
+											<option value="0">否</option>
+											<option value="1">是</option>
+										</select>
+									</li>
+									<li>
+										<span>发送类型</span>
+										<select id="x_leixing" name="">
+											<option value="1">单发</option>
+											<option value="2">按小区发</option>
+											<option value="3">群发</option>
+
+										</select>
+									</li>
+									<li class="xiaoqu_id">
+										<span>推送人群</span>
+										<input type="text" name="" id="x_tuisongrenqun" value="" placeholder="请输入用户id或小区id" />
+									</li>
+									<li>
+										<span>消息标题</span>
+										<input type="text" name="" id="x_message_title" value="" placeholder="请输入消息标题" />
+									</li>
+									<li>
+										<span>消息内容</span>
+										<textarea name="" id="x_message_info" rows="" cols="" placeholder="请输入消息内容"></textarea>
+									</li>
+
+								</div>
+
+							</div>
+						</ul>
+					</div>
+					<div class="modal-footer">
+						<div class="shenhe_no">
+							<button type="button" class="btn btn-default fanhui" data-dismiss="modal">返回</button>
+							<button type="button" class="btn btn-info message_add" >添加</button>
+
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+
+	</body>
+
+</html>
+<script src="js/jquery.min.js" type="text/javascript" charset="utf-8"></script>
+<script src="bootstrap/dist/js/bootstrap.min.js" type="text/javascript" charset="utf-8"></script>
+<script src="js/qunit-1.11.0.js" type="text/javascript" charset="utf-8"></script>
+<script src="js/bootstrap-paginator.js" type="text/javascript" charset="utf-8"></script>
+<script src="js/bootstrap-datetimepicker.js" type="text/javascript" charset="utf-8"></script>
+<script src="js/bootstrap-datetimepicker.zh-CN.js" type="text/javascript" charset="utf-8"></script>
+<script src="js/zooming.js" type="text/javascript" charset="utf-8"></script>
+<script src="js/data.js" type="text/javascript" charset="utf-8"></script>
+<script src="js/fileinput.min.js" type="text/javascript" charset="utf-8"></script>
+<script src="js/zh.js" type="text/javascript" charset="utf-8"></script>
+<script src="js/xiaoxituisong.js" type="text/javascript" charset="utf-8"></script>

@@ -1,0 +1,374 @@
+<!DOCTYPE html>
+<html>
+
+	<head>
+		<meta charset="UTF-8">
+		<title>服务商小区权限列表</title>
+		<link rel="stylesheet" type="text/css" href="css/public.css" />
+		<link rel="stylesheet" href="bootstrap/dist/css/bootstrap.min.css">
+		<link rel="stylesheet" href="css/font-awesome.min.css">
+		<link rel="stylesheet" href="css/ionicons.min.css">
+		<link rel="stylesheet" href="css/AdminLTE.min.css">
+		<link rel="stylesheet" href="dist/css/skins/_all-skins.min.css">
+		<link rel="stylesheet" type="text/css" href="css/bootstrap-datetimepicker.min.css" />
+		<link rel="stylesheet" type="text/css" href="css/fileinput.min.css" />
+		<link rel="stylesheet" type="text/css" href="css/public_main.css" />
+		<style type="text/css">
+			body #select_zhanwei {
+				display: inline-block;
+				/*margin-top: 5px;*/
+				width: 120px;
+				height: 34px;
+			}
+			
+			#search_chaxun {
+				/*margin-top: 10px;*/
+				margin-left: 30px;
+			}
+			
+			body #tbbb .btn {
+				padding: 0;
+				cursor: default;
+			}
+			
+			body #select_type {
+				display: inline-block;
+				/*margin-top: 5px;*/
+				width: 160px;
+				height: 34px;
+				margin-left: 10px;
+			}
+			
+			body #select_type1 {
+				display: inline-block;
+				/*margin-top: 5px;*/
+				width: 120px;
+				height: 34px;
+				margin-left: 10px;
+			}
+			
+			#search_chaxun {
+				/*margin-top: 10px;*/
+				margin-left: 10px;
+			}
+			
+			#text_sousuo {
+				margin-left: 20px;
+			}
+			
+			.id_dingdan {
+				/*position: absolute;
+				top: 0;
+				left: 650px;*/
+			}
+			
+			.id_dingdan input {
+				width: 200px;
+				height: 34px;
+				margin-left: 20px;
+			}
+		</style>
+
+	</head>
+
+	<body>
+		<div class="box">
+			<div class="box-header with-border">
+				<h3 class="box-title">城市热点资讯</h3>
+			</div>
+			<div id="mohu" class="clear">
+				<div id="star_time" class="form-group">
+					<label for="dtp_input2" class=" control-label">开始时间</label>
+					<div class="input-group date form_date " data-date="" data-date-format="yyyy-mm-dd" data-link-field="dtp_input2" data-link-format="yyyy-mm-dd">
+						<input id="datepicker" placeholder="请选择开始时间" onchange="gaibian()" class="form-control input_1" size="16" type="text" value="" readonly>
+						<span class="input-group-addon"><span class="glyphicon glyphicon-remove"></span></span>
+						<span class="input-group-addon"><span class="glyphicon glyphicon-calendar"></span></span>
+
+						<input type="hidden" id="dtp_input2" value="" />
+					</div>
+				</div>
+				<div id="end_time" class="form-group">
+					<label for="dtp_input2" class="control-label">结束时间</label>
+					<div class="input-group date form_date2 " data-date="" data-date-format="yyyy-mm-dd" data-link-field="dtp_input2" data-link-format="yyyy-mm-dd">
+						<input class="form-control input_2" placeholder="请选择结束时间" size="16" type="text" value="" readonly>
+						<span class="input-group-addon"><span class="glyphicon glyphicon-remove"></span></span>
+						<span class="input-group-addon"><span class="glyphicon glyphicon-calendar"></span></span>
+
+						<input type="hidden" id="dtp_input2" value="" />
+					</div>
+				</div>
+				<!--<div class="id_dingdan">
+					<input type="text" name="billid_dingdan" id="billid_dingdan" value="" placeholder="请输入订单id" />
+				</div>-->
+				<label for="name">新闻类型 </label>
+				<!--<s>选择状态</s>-->
+				<select id="select_type" style="display: inline-block;" class="form-control">
+					<option value="">全部</option>
+					<option value="1">网页链接</option>
+					<option value="2">自定义内容</option>
+				</select>
+
+				<input type="text" name="" id="text_sousuo" value="" placeholder="请输入需要查询的内容" />
+				<button id="search_chaxun"  type="button" class="btn btn-success">搜索</button>
+				<button data-toggle="modal" data-target="#myModal5" id="search_chaxun"  type="button" class="btn btn-info">添加城市热点</button>
+			</div>
+			<!--<div style="margin-top:0px;margin-left: 20px;" class="my_feilei">
+
+			</div>-->
+			<!-- /.box-header -->
+			<div class="box-body">
+				<table class="table table-bordered">
+					<tr>
+						<th>序号</th>
+						<th>新闻类型</th>
+						<th>创建时间</th>
+						<th>发布时间</th>
+						<th>创建人</th>
+
+						<th>操作</th>
+					</tr>
+					<tbody id="tbbb">
+						<tr>
+							<td>1.</td>
+							<th>正在加载数据...</th>
+							<th>正在加载数据...</th>
+							<th>正在加载数据...</th>
+							<th>正在加载数据...</th>
+
+						</tr>
+					</tbody>
+
+				</table>
+			</div>
+			<!-- /.box-body -->
+			<div class="box-footer clearfix">
+				<div>
+					<s style="margin-top: 5px;">共有：</s> <span id="count"></span><s>条,每页显示10条</s>
+				</div>
+				<ul id='bp-3-element-test'>
+				</ul>
+			</div>
+		</div>
+
+		<!-- 模态框（Modal） -->
+		<div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+			<div class="modal-dialog">
+				<div class="modal-content">
+					<div class="modal-header">
+						<button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+						<h4 class="modal-title" id="myModalLabel"></h4>
+					</div>
+					<div id="shenhe" class="modal-body">
+						<ul id="myTab" class="nav nav-tabs">
+							<li class="active">
+								<a href="#home" data-toggle="tab">
+									基础信息
+								</a>
+							</li>
+							<li>
+								<a href="#fix" data-toggle="tab">
+									具体信息
+								</a>
+							</li>
+
+						</ul>
+						<ul id="ppp">
+							<div id="myTabContent" class="tab-content">
+								<div class=" tab-pane fade in active" id="home">
+									<li><span>主键ID:</span><s id="c_zjId"></s></li>
+									<li><span>新闻类型:</span><s id="c_xwlx"></s></li>
+									<li><span>内容简述:</span>
+										<div id="c_nrjs">
+
+										</div>
+									</li>
+									<li><span>创建日期:</span><s id="c_cjrq"></s></li>
+									<li><span>创建人ID:</span><s id="c_cjrid"></s></li>
+									<li><span>创建人名:</span><s id="c_cjrm"></s></li>
+									<li><span>发布时间:</span><s id="c_fbsj"></s></li>
+								</div>
+								<div class="tab-pane fade" id="fix">
+									<li><span>标题:</span><s id="c_bt"></s></li>
+									<li><span>新闻链接地址:</span>
+										<div id="c_xwljdz" class="tetet">
+
+										</div>
+									</li>
+									<li>
+										<span>图片地址:</span>
+										<img data-action="zoom" id="c_tpdz" src="dist/img/avatar04.png" />
+									</li>
+									<li><span>新闻内容:</span>
+										<div id="c_xwnr">
+
+										</div>
+									</li>
+								</div>
+							</div>
+						</ul>
+					</div>
+					<div class="modal-footer">
+						<div class="modal-footer">
+							<button type="button" class="btn btn-default fanhui" data-dismiss="modal">返回</button>
+							<button data-toggle="modal" data-target="#myModal4" type="button" class="btn btn-danger ">删除</button>
+
+						</div>
+					</div>
+
+				</div>
+			</div>
+		</div>
+		<div class="modal fade" id="myModal4" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+			<div class="modal-dialog">
+				<div class="modal-content">
+					<div class="modal-header">
+						<button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+						<h4 class="modal-title" id="myModalLabel">是否确认删除</h4>
+					</div>
+					<div class="modal-body">删除后数据无法找回</div>
+					<div class="modal-footer">
+						<button type="button" class="btn btn-default" data-dismiss="modal">关闭</button>
+						<button type="button" class="btn btn-danger remove">确定删除</button>
+					</div>
+				</div>
+				<!-- /.modal-content -->
+			</div>
+			<!-- /.modal -->
+		</div>
+
+		<!-- 模态框（Modal）增加 -->
+		<div class="modal fade" id="myModal5" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+			<div class="modal-dialog">
+				<div class="modal-content">
+					<div class="modal-header">
+						<button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+						<h4 class="modal-title" id="myModalLabel"></h4>
+					</div>
+					<div id="shenhe" class="modal-body">
+						<ul id="myTab" class="nav nav-tabs">
+							<li class="active">
+								<a href="#home1" data-toggle="tab">
+									基础信息
+								</a>
+							</li>
+							<li>
+								<a href="#fix1" data-toggle="tab">
+									具体信息
+								</a>
+							</li>
+
+						</ul>
+						<ul id="ppp">
+							<div id="myTabContent" class="tab-content">
+								<div class=" tab-pane fade in active" id="home1">
+									<li>
+										<span>新闻标题:</span>
+										<input type="text" name="c_add_bt" id="c_add_bt" value="" placeholder="请输入新闻标题" />
+									</li>
+									<li>
+										<span>新闻类型:</span>
+										<select id="new_type" name="">
+											<option value="0">请选择新闻类型</option>
+											<option value="1">网页链接</option>
+											<option value="2">自定义内容</option>
+										</select>
+									</li>
+									<li>
+										<span>发布时间:</span>
+										<input type="text" id="c_add_time">
+										<!--<input type="datetime-local" name="" id="c_add_time" value="" />-->
+									</li>
+
+									<form style="" id="Form1" action="http://192.168.3.137:8130/picApplication/pic/addServiceProviderQualifications" method="post" enctype="multipart/form-data" onsubmit="return saveReport();" target="hidden_frame">
+										<input id="uploadfile" name="pic" type="file" class="file">
+									</form>
+								</div>
+								<div class="tab-pane fade" id="fix1">
+									<li>
+										<span>内容简述:</span>
+										<textarea id="c_add_nrjs" name="" rows="" cols=""></textarea>
+									</li>
+									<li class="lianjie" style="display: none;">
+										<span>新闻链接地址:</span>
+										<input type="text" name="c_add_ljdz" id="c_add_ljdz" value="" placeholder="请输入新闻链接地址" />
+									</li>
+									<li class="zdynr" style="display: none;">
+										<span>新闻内容:</span>
+										<textarea id="c_add_xwnr" name="" rows="" cols="" placeholder="点击下面按钮，前去编辑新闻内容，编辑完成后请将html代码复制到这里"></textarea>
+										<button type="button" class="btn btn-default "><a href="ckeditor/samples/ck_editor.html" target="_blank">获取html代码</a></button>
+									</li>
+								</div>
+							</div>
+						</ul>
+					</div>
+					<div class="modal-footer">
+						<div class="modal-footer">
+							<button type="button" class="btn btn-default fanhui" data-dismiss="modal">返回</button>
+							<button type="button" class="btn btn-success ch_sureadd">确定增加</button>
+
+						</div>
+					</div>
+
+				</div>
+			</div>
+		</div>
+	</body>
+
+</html>
+<script src="js/jquery.min.js" type="text/javascript" charset="utf-8"></script>
+<script src="bootstrap/dist/js/bootstrap.min.js" type="text/javascript" charset="utf-8"></script>
+<script src="js/jquery.slimscroll.min.js"></script>
+<script src="js/fastclick.js"></script>
+<script src="dist/js/adminlte.min.js"></script>
+<script src="dist/js/demo.js"></script>
+<script src="js/qunit-1.11.0.js" type="text/javascript" charset="utf-8"></script>
+<script src="js/bootstrap-paginator.js" type="text/javascript" charset="utf-8"></script>
+<script src="js/bootstrap-datetimepicker.js" type="text/javascript" charset="utf-8"></script>
+<script src="js/bootstrap-datetimepicker.zh-CN.js" type="text/javascript" charset="utf-8"></script>
+<script src="js/fileinput.min.js" type="text/javascript" charset="utf-8"></script>
+<script src="js/zh.js" type="text/javascript" charset="utf-8"></script>
+<script src="js/zooming.js" type="text/javascript" charset="utf-8"></script>
+<script src="js/city_hot_zixun.js" type="text/javascript" charset="utf-8"></script>
+<script src="js/data.js" type="text/javascript" charset="utf-8"></script>
+<script type="text/javascript">
+	var ddd = new Date()
+	$("#c_add_time").datetimepicker({
+		format: 'yyyy-mm-dd hh:ii:ss',
+		language: 'zh-CN',
+		autoclose: true,
+		startDate: ddd,
+		endDate: '2099-02-11 15:48:02'
+	});
+	//	$('#c_add_time').datetimepicker('setEndDate', 5255255511515151515151515);
+	$("#uploadfile").fileinput({
+		language: 'zh', //设置语言
+		uploadUrl: "http://www.wkdzkj.cn/pic/picApplication/pic/addServiceProviderQualifications", //上传的地址
+		allowedFileExtensions: ['jpg', 'png', 'gif'], //接收的文件后缀
+		//uploadExtraData:{"id": 1, "fileName":'123.mp3'},
+		uploadAsync: true, //默认异步上传
+		showUpload: true, //是否显示上传按钮
+		showRemove: true, //显示移除按钮
+		showPreview: true, //是否显示预览
+		showCaption: false, //是否显示标题
+		browseClass: "btn btn-primary", //按钮样式    
+		dropZoneEnabled: true, //是否显示拖拽区域
+		//minImageWidth: 50, //图片的最小宽度
+		//minImageHeight: 50,//图片的最小高度
+		//maxImageWidth: 1000,//图片的最大宽度
+		//maxImageHeight: 1000,//图片的最大高度
+		//maxFileSize:0,//单位为kb，如果为0表示不限制文件大小
+		//minFileCount: 0,
+		maxFileCount: 1, //表示允许同时上传的最大文件个数
+		enctype: 'multipart/form-data',
+		validateInitialCount: true,
+		previewFileIcon: "<iclass='glyphicon glyphicon-king'></i>",
+		msgFilesTooMany: "选择上传的文件数量({n}) 超过允许的最大数值{m}！",
+	}).on("fileuploaded", function(event, data, previewId, index) {
+		//	debugger
+		//	console.log(data.response);
+		var url1 = data.response.returnString;
+		var bb = JSON.parse(url1);
+		urlo = "http://www.wkdzkj.cn/pic/" + bb[0].url;
+		console.log(urlo);
+	});
+</script>

@@ -1,0 +1,211 @@
+<!DOCTYPE html>
+<html>
+
+	<head>
+		<meta charset="UTF-8">
+		<title>功能模块列表</title>
+		<link rel="stylesheet" type="text/css" href="css/public.css" />
+		<link rel="stylesheet" href="bootstrap/dist/css/bootstrap.min.css">
+		<link rel="stylesheet" href="css/font-awesome.min.css">
+		<link rel="stylesheet" href="css/ionicons.min.css">
+		<link rel="stylesheet" href="css/AdminLTE.min.css">
+		<link rel="stylesheet" href="dist/css/skins/_all-skins.min.css">
+		<link rel="stylesheet" type="text/css" href="css/bootstrap-datetimepicker.min.css" />
+		<link rel="stylesheet" type="text/css" href="css/public_main.css" />
+
+	</head>
+
+	<body>
+		<div class="box">
+			<div class="box-header with-border">
+				<h3 class="box-title">数据权限信息列表</h3>
+			</div>
+			<div id="mohu" class="clear">
+				<!--<div id="star_time" class="form-group">
+					<label for="dtp_input2" class="col-md-1 control-label">开始时间</label>
+					<div class="input-group date form_date col-md-2" data-date="" data-date-format="yyyy-mm-dd" data-link-field="dtp_input2" data-link-format="yyyy-mm-dd">
+						<input id="datepicker" onchange="gaibian()" class="form-control input_1" size="16" type="text" value="" readonly>
+						<span class="input-group-addon"><span class="glyphicon glyphicon-remove"></span></span>
+						<span class="input-group-addon"><span class="glyphicon glyphicon-calendar"></span></span>
+
+						<input type="hidden" id="dtp_input2" value="" />
+					</div>
+				</div>
+				<div style="display: none;" id="end_time" class="form-group">
+					<label for="dtp_input2" class="col-md-1 control-label">结束时间</label>
+					<div class="input-group date form_date2 col-md-2" data-date="" data-date-format="yyyy-mm-dd" data-link-field="dtp_input2" data-link-format="yyyy-mm-dd">
+						<input class="form-control input_2" size="16" type="text" value="" readonly>
+						<span class="input-group-addon"><span class="glyphicon glyphicon-remove"></span></span>
+						<span class="input-group-addon"><span class="glyphicon glyphicon-calendar"></span></span>
+
+						<input type="hidden" id="dtp_input2" value="" />
+					</div>
+				</div>-->
+				<div class="search_search">
+					<input type="text" name="" id="text_sousuo" value="" placeholder="请输入需要查询的内容" />
+					<button id="search_chaxun"  type="button" class="btn btn-success">搜索</button>
+				</div>
+				<!--<div style="margin-top: 10px;margin-left: 20px;" class="add_add">-->
+					<button data-toggle="modal" data-target="#myModal3" id="add_yuangong"  type="button" class="btn btn-info">添加新功能</button>
+				<!--</div>-->
+			</div>
+
+			<!--<div class="my_feilei">-->
+			<!-- /.box-header -->
+			<div class="box-body">
+				<table class="table table-bordered">
+					<tr>
+						<th>序号</th>
+						<th>权限类型名称</th>
+						<th>创建人</th>
+						<th>创建时间</th>
+						<th style="display: none;">修改人</th>
+						<th style="display: none;">修改时间</th>
+						<th>操作</th>
+
+					</tr>
+					<tbody id="tbbb">
+						<tr>
+							<td>1.</td>
+							<th>正在加载数据...</th>
+							<th>正在加载数据...</th>
+							<th>正在加载数据...</th>
+							<!--<th>正在加载数据...</th>
+							<th>正在加载数据...</th>-->
+							<th>正在加载数据...</th>
+
+						</tr>
+					</tbody>
+
+				</table>
+			</div>
+			<!-- /.box-body -->
+			<div class="box-footer clearfix">
+				<div>
+					<s style="margin-top: 5px;">共有：</s> <span id="count"></span><s>条,每页显示13条</s>
+				</div>
+				<ul id='bp-3-element-test'>
+				</ul>
+			</div>
+		</div>
+
+		<!-- 模态框（Modal） -->
+		<div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+			<div class="modal-dialog">
+				<div class="modal-content">
+					<div class="modal-header">
+						<button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+						<h4 class="modal-title" id="myModalLabel">权限信息</h4>
+					</div>
+					<div id="shenhe" class="modal-body">
+
+						<ul id="ppp">
+							<li>
+								<span>权限类型名称:</span>
+								<input type="text" name="s_name" id="s_name" value="" />
+							</li>
+
+							<li>
+								<span>创建人:</span><s id="creat_name"></s>
+								<!--<input type="text" name="s_name" id="s_caidan" value="" />-->
+							</li>
+							<li>
+								<span>创建时间:</span><s id="s_cr_time"></s>
+								<!--<input type="text" name="s_name" id="s_paixu" value="" />-->
+							</li>
+							<li style="display: none;">
+								<span>修改人:</span><s id="s_fixper"></s>
+								<!--<input type="text" name="s_name" id="s_youxiao" value="" />-->
+							</li>
+							<li style="display: none;">
+								<span>修改时间:</span><s id="s_fix_time"></s>
+								<!--<input type="text" name="s_name" id="s_zhujian" value="" />-->
+							</li>
+							<li style="display: none;">
+								<span>id:</span><s id="s_id"></s>
+								<!--<input type="text" name="s_name" id="s_zhujian" value="" />-->
+							</li>
+
+						</ul>
+					</div>
+					<div class="modal-footer">
+						<div class="shenhe_no">
+							<button type="button" class="btn btn-default fanhui" data-dismiss="modal">返回</button>
+							<button type="button" data-loading-text="加载中..." class="btn btn-warning fix_fun">修改</button>
+							<button data-toggle="modal" data-target="#myModal4" type="button" class="btn btn-danger first_remove">删除</button>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+		<!-- 模态框（Modal） -->
+		<div class="modal fade" id="myModal4" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+			<div class="modal-dialog">
+				<div class="modal-content">
+					<div class="modal-header">
+						<button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+						<h4 class="modal-title" id="myModalLabel">是否确认删除</h4>
+					</div>
+					<div class="modal-body">删除后数据无法找回</div>
+					<div class="modal-footer">
+						<button type="button" class="btn btn-default" data-dismiss="modal">关闭</button>
+						<button type="button" class="btn btn-danger remove">确定删除</button>
+					</div>
+				</div>
+				<!-- /.modal-content -->
+			</div>
+			<!-- /.modal -->
+		</div>
+
+		<!-- 模态框（Modal）增加功能 -->
+		<div class="modal fade" id="myModal3" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+			<div class="modal-dialog">
+				<div class="modal-content">
+					<div class="modal-header">
+						<button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+						<h4 class="modal-title" id="myModalLabel">增加功能</h4>
+					</div>
+					<div id="shenhe" class="modal-body">
+						<ul id="ppp">
+							<li>
+								<span>权限信息名称:</span><input type="text" name="" id="i_name" />
+							</li>
+						</ul>
+					</div>
+					<div class="modal-footer">
+						<div class="shenhe_no">
+							<button type="button" class="btn btn-default fanhui" data-dismiss="modal">返回</button>
+							<button type="button" class="btn btn-success add_fun">提交</button>
+
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</body>
+
+</html>
+<script src="js/jquery.min.js" type="text/javascript" charset="utf-8"></script>
+<script src="bootstrap/dist/js/bootstrap.min.js" type="text/javascript" charset="utf-8"></script>
+<script src="js/jquery.slimscroll.min.js"></script>
+<script src="js/fastclick.js"></script>
+<script src="dist/js/adminlte.min.js"></script>
+<script src="dist/js/demo.js"></script>
+<script src="js/qunit-1.11.0.js" type="text/javascript" charset="utf-8"></script>
+<script src="js/bootstrap-paginator.js" type="text/javascript" charset="utf-8"></script>
+<script src="js/bootstrap-datetimepicker.js" type="text/javascript" charset="utf-8"></script>
+<script src="js/bootstrap-datetimepicker.zh-CN.js" type="text/javascript" charset="utf-8"></script>
+<script src="js/information_list.js" type="text/javascript" charset="utf-8"></script>
+
+<!--<script type="text/javascript">
+	$('.form_date').datetimepicker({
+		language: 'zh-CN',
+		weekStart: 1,
+		todayBtn: 1,
+		autoclose: 1,
+		todayHighlight: 1,
+		startView: 2,
+		minView: 2,
+		forceParse: 0
+	});
+</script>-->

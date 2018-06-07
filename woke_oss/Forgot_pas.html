@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html>
+
+	<head>
+		<meta charset="UTF-8">
+		<title>忘记密码</title>
+		<link rel="Shortcut Icon" href="img/logo_title.png" type="image/x-icon">
+		<link rel="stylesheet" href="css/public.css" />
+		<link rel="stylesheet" type="text/css" href="css/login.css" />
+		<link rel="stylesheet" type="text/css" href="css/bootstrap.min.css">
+		<style type="text/css">
+			body #denglu .login #now_denglu_zhanghao{
+				margin-top: 20px;
+			}
+			body #denglu .login input{
+				margin: 5px 0;
+			}
+		</style>
+	</head>
+
+	<body>
+		<section id="denglu">
+			<h3 id="title">沃克科技后台管理系统</h3>
+
+			<div class="login">
+				<div class="zhang_login">
+					<input type="text" name=""  id="denglu_use3" value="" placeholder="请输入您的手机号码" />
+					<button id="butt_yanzhangma" type="button" class="btn btn-default">点击发送验证码</button>
+					<input type="tel"  name="" id="denglu_pas3" value="" placeholder="请输入您收到验证码" />
+					<span style="color: red;" id="tips"></span>
+					<p id="now_denglu_zhanghao">下一步</p>
+				</div>
+				<div style="display: none;" class="tel_login">
+					<input type="password" name=""  id="denglu_use1" value="" placeholder="强输入新密码" />					
+					<input type="password" name=""  id="denglu_pas1" value="" placeholder="请再次输入新密码" />	
+					<span style="color: red;" id="tips1"></span>
+					<p id="now_denglu_tel">确定修改</p>
+				</div>
+
+			</div>
+			
+		</section>
+	</body>
+
+</html>
+<script src="js/jquery.min.js" type="text/javascript" charset="utf-8"></script>
+<script src="js/Forgot_pas.js" type="text/javascript" charset="utf-8"></script>

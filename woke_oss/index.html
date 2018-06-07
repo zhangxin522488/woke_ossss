@@ -1,0 +1,416 @@
+<!DOCTYPE html>
+<!--
+This is a starter template page. Use this page to start your new project from
+scratch. This page gets rid of all links and provides the needed markup only.
+-->
+<html>
+
+	<head>
+		<meta charset="utf-8">
+		<meta http-equiv="X-UA-Compatible" content="IE=edge">
+		<title>沃克智慧城市后台管理</title>
+		<link rel="Shortcut Icon" href="img/logo.png" type="image/x-icon">
+		<meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport">
+		<link rel="stylesheet" href="css/bootstrap.min.css" />
+		<link rel="stylesheet" href="font-awesome/css/font-awesome.min.css" />
+		<link rel="stylesheet" type="text/css" href="css/ionicons.min.css" />
+		<link rel="stylesheet" href="dist/css/AdminLTE.min.css">
+		<link rel="stylesheet" href="dist/css/skins/skin-blue.min.css">
+		<!--<link rel="stylesheet" type="text/css" href="swiper/css/animate.min.css"/>
+		<link rel="stylesheet" type="text/css" href="swiper/css/swiper-4.2.0.min.css"/>-->
+		<style type="text/css">
+			#userZ_name {
+				padding: 0;
+				margin: 10px 0 0;
+			}
+		</style>
+	</head>
+
+	<body class="hold-transition skin-blue sidebar-mini">
+		<div class="wrapper">
+			<header class="main-header">
+				<a href="index.html" class="logo">
+					<!-- mini logo for sidebar mini 50x50 pixels -->
+					<span class="logo-mini"><b>wo</b>ke</span>
+					<!-- logo for regular state and mobile devices -->
+					<span class="logo-lg"><b>沃克</b>智慧城市</span>
+				</a>
+				<nav class="navbar navbar-static-top" role="navigation">
+					<a href="#" class="sidebar-toggle" data-toggle="push-menu" role="button">
+						<span class="sr-only">Toggle navigation</span>
+					</a>
+					<div class="navbar-custom-menu">
+						<ul class="nav navbar-nav">
+
+							<!-- User Account Menu -->
+							<li class="dropdown user user-menu">
+								<!-- Menu Toggle Button -->
+								<a href="#" class="dropdown-toggle" data-toggle="dropdown">
+									<!-- The user image in the navbar-->
+									<img src="img/timg.jpg" class="user-image shenfen_img" alt="User Image">
+									<!-- hidden-xs hides the username on small devices so only the image appears. -->
+									<span id="span_username" class="hidden-xs">刘豪</span>
+								</a>
+								<ul class="dropdown-menu">
+									<!-- The user image in the menu -->
+									<li class="user-header">
+										<img src="img/timg.jpg" class="img-circle shenfen_img" alt="User Image">
+
+										<p id="ri_p_user">
+											刘豪 - 管理员
+											<small>2017-01-17</small>
+										</p>
+									</li>
+
+									<li class="user-footer">
+										<div class="pull-left">
+											<a href="#" class="btn btn-default btn-flat">返回</a>
+										</div>
+										<div id="tuichu" class="pull-right">
+											<a href="login.html" class="btn btn-default btn-flat">退出</a>
+										</div>
+									</li>
+								</ul>
+							</li>
+
+						</ul>
+					</div>
+				</nav>
+			</header>
+
+			<aside class="main-sidebar">
+				<section class="sidebar">
+					<div class="user-panel">
+						<div class="pull-left image">
+							<img src="img/timg.jpg" class="img-circle shenfen_img" alt="User Image">
+						</div>
+						<div class="pull-left info">
+							<p id="userZ_name"></p>
+							<!-- Status -->
+							<!--<a href="#"><i class="fa fa-circle text-success"></i> 在线</a>-->
+						</div>
+					</div>
+
+					<ul id="ul_big" class="sidebar-menu" data-widget="tree">
+						<li class="header">导航</li>
+
+						<!--添加active选中状态-->
+						<li style="display: none;" id="fuwushang" class="treeview">
+							<a href="#">
+								<i class="fa fa-github-alt"></i>
+								<span class="big_ti">服务商管理</span>
+								<span class="pull-right-container">
+					          	<i class="fa fa-angle-left pull-right"></i>
+					      		</span>
+							</a>
+							<ul class="treeview-menu">
+								<li style="display: none;" id="fuwushang_1" class="ifram_li">
+									<a _href="Business_listings.html" href="javascript:void(0)">
+										<i class="fa fa-circle-o glyphicon "></i> 服务商
+									</a>
+								</li>
+								<li style="display: none;" id="fuwushang_2" class="ifram_li">
+									<a _href="Registration_audit.html" href="javascript:void(0)"><i class="fa fa-circle-o glyphicon "></i>资料审核</a>
+								</li>
+								<li style="display: none;" id="fuwushang_3" class="ifram_li">
+									<a _href="fuwu_xiaoqu_quanxian_list.html" href="javascript:void(0)"><i class="fa fa-circle-o"></i>服务商小区列表</a>
+								</li>
+								<li style="display: none;" id="fuwushang_4" class="ifram_li">
+									<a _href="fuwu_quanxian_list.html" href="javascript:void(0)"><i class="fa fa-circle-o"></i>服务商小区申请权限</a>
+								</li>
+								<!--<li class="ifram_li">
+									<a _href="fuwu_shuju_list.html" href="javascript:void(0)"><i class="fa fa-circle-o"></i>数据权限</a>
+								</li>-->
+								<!--<li class="ifram_li">
+									<a _href="fuwu_shuju_shenhe_list.html" href="javascript:void(0)"><i class="fa fa-circle-o"></i>数据权限审核</a>
+								</li>-->
+								<li style="display: none;" id="fuwushang_5" class="ifram_li">
+									<a _href="business_list.html" href="javascript:void(0)"><i class="fa fa-circle-o"></i>应用列表</a>
+								</li>
+							</ul>
+						</li>
+						<!--功能-->
+						<li style="display: none;" id="PTGN" class="treeview">
+							<!--添加active选中状态-->
+							<a href="#">
+								<i class="fa fa-cogs"></i> <span class="big_ti">平台功能</span>
+								<span class="pull-right-container">
+					          		<i class="fa fa-angle-left pull-right"></i>
+					      </span>
+							</a>
+							<ul class="treeview-menu">
+								<li style="display: none;" id="PTGN_1" class=" ifram_li">
+									<a _href="Function_list.html" href="javascript:void(0)"><i class="fa fa-circle-o glyphicon "></i>平台功能列表</a>
+								</li>
+								<li style="display: none;" id="PTGN_2" class=" ifram_li">
+									<a _href="information_list.html" href="javascript:void(0)"><i class="fa fa-circle-o glyphicon "></i>数据权限信息列表</a>
+								</li>
+								<li style="display: none;" id="PTGN_3" class=" ifram_li">
+									<a _href="Coupon_quan.html" href="javascript:void(0)"><i class="fa fa-circle-o glyphicon "></i>优惠券</a>
+								</li>
+								<!--<li style="display: none;" class=" ifram_li">
+									<a _href="Add_coupons.html" href="javascript:void(0)"><i class="fa fa-circle-o glyphicon "></i>添加优惠券</a>
+								</li>-->
+								<li style="display: none;" id="PTGN_4" class=" ifram_li">
+									<a _href="show_log.html" href="javascript:void(0)"><i class="fa fa-circle-o glyphicon "></i>平台日志</a>
+								</li>
+								<li style="display: none;" id="PTGN_5" class=" ifram_li">
+									<a _href="xiaoxituisong.html" href="javascript:void(0)"><i class="fa fa-circle-o glyphicon "></i>消息推送</a>
+								</li>
+								<li style="display: none;" id="PTGN_7" class=" ifram_li">
+									<a _href="pingtaigonggao.html" href="javascript:void(0)"><i class="fa fa-circle-o glyphicon "></i>平台公告</a>
+								</li>
+
+								<li style="display: none;" id="PTGN_6" class=" ifram_li">
+									<a _href="app_banben.html" href="javascript:void(0)"><i class="fa fa-circle-o glyphicon "></i>版本控制</a>
+								</li>
+							</ul>
+						</li>
+						<!--消息-->
+						<!--<li class="treeview">
+							
+							<a href="#">
+								<i class="fa fa-commenting"></i> <span class="big_ti">消息设置</span>
+								<span class="pull-right-container">
+					          		<i class="fa fa-angle-left pull-right"></i>
+					      </span>
+							</a>
+							<ul class="treeview-menu">
+								<li class=" ifram_li">
+									<a _href="" href="javascript:void(0)"><i class="fa fa-circle-o glyphicon "></i>推送消息列表</a>
+								</li>
+								<li class="ifram_li">
+									<a _href="" href="javascript:void(0)"><i class="fa fa-circle-o glyphicon "></i>内部推送消息</a>
+								</li>
+								<li class="ifram_li">
+									<a _href=""><i class="fa fa-circle-o"></i>短消息发送</a>
+								</li>
+							</ul>
+						</li>-->
+						<!--app设置-->
+						<li style="display: none;" id="APP" class="treeview">
+							<!--添加active选中状态-->
+							<a href="#">
+								<i class="fa fa-asterisk"></i> <span>app设置</span>
+								<span class="pull-right-container">
+					          		<i class="fa fa-angle-left pull-right"></i>
+					      </span>
+							</a>
+							<ul class="treeview-menu">
+								<li style="display: none;" id="APP_1" class="ifram_li">
+									<a _href="zhanwei_setting.html" href="javascript:void(0)"><i class="fa fa-circle-o glyphicon "></i>展位设置</a>
+								</li>
+								<!--<li class="ifram_li">
+									<a _href="zhanwei_history.html" href="javascript:void(0)"><i class="fa fa-circle-o glyphicon "></i>展位操作历史记录</a>
+								</li>-->
+								<li style="display: none;" id="APP_2" class="ifram_li">
+									<a _href="zhanwei_audit.html"><i class="fa fa-circle-o"></i>展位审核列表</a>
+								</li>
+								<li style="display: none;" id="APP_4" class="ifram_li">
+									<a _href="app_yonghu.html"><i class="fa fa-circle-o"></i>app会员信息</a>
+								</li>
+								<!--<li style="display: none;" id="APP_5" class="ifram_li">
+									<a _href="fangwulist.html"><i class="fa fa-circle-o"></i>房屋列表 </a>
+								</li>-->
+								<li id="APP_5" style="display: none;" class=" ifram_li">
+									<a _href="city_hot_zixun.html" href="javascript:void(0)"><i class="fa fa-circle-o glyphicon "></i>城市热点资讯</a>
+								</li>
+								
+								<li id="APP_6" style="display: none;" class=" ifram_li">
+									<a _href="app_yijianfankui.html" href="javascript:void(0)"><i class="fa fa-circle-o glyphicon "></i>意见反馈</a>
+								</li>
+								<li id="APP_7" style="display: none;" class=" ifram_li">
+									<a _href="wodoushezhi.html" href="javascript:void(0)"><i class="fa fa-circle-o glyphicon "></i>沃豆设置</a>
+								</li>
+								
+							</ul>
+						</li>
+
+						<!--功能设置-->
+						<li style="display: none;" id="GNSZ" class="treeview">
+							<a href="#">
+								<i class="fa fa-cog"></i> <span>功能设置</span>
+								<span class="pull-right-container">
+					          		<i class="fa fa-angle-left pull-right"></i>
+					      </span>
+							</a>
+							<ul class="treeview-menu">
+								<li style="display: none;" id="GNSZ_1" class="ifram_li">
+									<a _href="Business_setting.html"><i class="fa fa-circle-o"></i>业务类型设置</a>
+								</li>
+								<!--<li class=" ifram_li">
+									<a _href="Function_list.html" href="javascript:void(0)"><i class="fa fa-circle-o glyphicon "></i>添加权限</a>
+								</li>-->
+								<!--<li class="ifram_li">
+									<a _href="" href="javascript:void(0)"><i class="fa fa-circle-o glyphicon "></i>小区列表</a>
+								</li>
+								<li class="ifram_li">
+									<a _href=""><i class="fa fa-circle-o"></i>新闻设置</a>
+								</li>
+								<li class="ifram_li">
+									<a _href=""><i class="fa fa-circle-o"></i>新闻添加</a>
+								</li>
+
+								<li class="ifram_li">
+									<a _href=""><i class="fa fa-circle-o"></i>新闻设置</a>
+								</li>-->
+
+							</ul>
+						</li>
+
+						<!--财务设置-->
+						<!--<li class="treeview">							
+							<a href="#">
+								<i class="fa fa-strikethrough"></i> <span>财务设置</span>
+								<span class="pull-right-container">
+					          		<i class="fa fa-angle-left pull-right"></i>
+					      </span>
+							</a>
+							<ul class="treeview-menu">
+								<li class=" ifram_li">
+									<a _href="" href="javascript:void(0)"><i class="fa fa-circle-o glyphicon "></i>保证金录入</a>
+								</li>
+								<li class=" ifram_li">
+									<a _href="" href="javascript:void(0)"><i class="fa fa-circle-o glyphicon "></i>费率设置</a>
+								</li>
+								<li class=" ifram_li">
+									<a _href="" href="javascript:void(0)"><i class="fa fa-circle-o glyphicon "></i>支付情况列表</a>
+								</li>
+								<li class=" ifram_li">
+									<a _href="" href="javascript:void(0)"><i class="fa fa-circle-o glyphicon "></i>退款列表</a>
+								</li>
+							</ul>
+						</li>-->
+						<!--物业管理-->
+						<li style="display: none;" id="WYGL" class="treeview">
+							<!--添加active选中状态-->
+							<a href="#">
+								<i class="fa  fa-linode"></i> <span>物业管理</span>
+								<span class="pull-right-container">
+					          		<i class="fa fa-angle-left pull-right"></i>
+					      </span>
+							</a>
+							<ul class="treeview-menu">
+								<li id="WYGL_1" style="display: none;" class=" ifram_li">
+									<a _href="wuyedangan.html" href="javascript:void(0)"><i class="fa fa-circle-o glyphicon "></i>物业档案</a>
+								</li>
+								<!--<li class=" ifram_li">
+									<a _href="wuyexiaoqu.html" href="javascript:void(0)"><i class="fa fa-circle-o glyphicon "></i>物业小区</a>
+								</li>-->
+								<!--<li class=" ifram_li">
+									<a _href="xiashulouyu.html" href="javascript:void(0)"><i class="fa fa-circle-o glyphicon "></i>物业楼宇</a>
+								</li>-->
+								<!--<li class=" ifram_li">
+									<a _href="fangwuliebiao.html" href="javascript:void(0)"><i class="fa fa-circle-o glyphicon "></i>业主档案</a>
+								</li>-->
+								<!--<li class=" ifram_li">
+									<a _href="wuyeyonghu.html" href="javascript:void(0)"><i class="fa fa-circle-o glyphicon "></i>系统用户</a>
+								</li>-->
+
+							</ul>
+						</li>
+						<li style="display: none;" id="DDGL" class="treeview">
+							<!--添加active选中状态-->
+							<a href="#">
+								<i class="fa  fa-user-md"></i> <span>订单管理</span>
+								<span class="pull-right-container">
+					          		<i class="fa fa-angle-left pull-right"></i>
+					      </span>
+							</a>
+							<ul class="treeview-menu">
+								<li id="DDGL_1" style="display: none;" class=" ifram_li">
+									<a _href="dingdnaguanli.html" href="javascript:void(0)"><i class="fa fa-circle-o glyphicon "></i>订单列表</a>
+								</li>
+								<li id="DDGL_2" style="display: none;" class=" ifram_li">
+									<a _href="tuikuanliebiao.html" href="javascript:void(0)"><i class="fa fa-circle-o glyphicon "></i>退款列表</a>
+								</li>
+								<li id="DDGL_4" style="display: none;" class=" ifram_li">
+									<a _href="shengchengjiesuandan.html" href="javascript:void(0)"><i class="fa fa-circle-o glyphicon "></i>生成结算单</a>
+								</li>
+
+								<li id="DDGL_3" style="display: none;" class=" ifram_li">
+									<a _href="jiesuanliebiao.html" href="javascript:void(0)"><i class="fa fa-circle-o glyphicon "></i>结算列表</a>
+								</li>
+								<li id="DDGL_5" style="display: none;" class=" ifram_li">
+									<a _href="zj_liushui.html" href="javascript:void(0)"><i class="fa fa-circle-o glyphicon "></i>资金流水列表</a>
+								</li>
+
+							</ul>
+						</li>
+						<!--员工管理-->
+						<li style="display: none;" id="YGGL" class="treeview">
+							<!--添加active选中状态-->
+							<a href="#">
+								<i class="fa  fa-user-plus"></i> <span>员工管理</span>
+								<span class="pull-right-container">
+					          		<i class="fa fa-angle-left pull-right"></i>
+					      </span>
+							</a>
+							<ul class="treeview-menu">
+								<li style="display: none;" id="YGGL_1" class=" ifram_li">
+									<a _href="Employee_list.html" href="javascript:void(0)"><i class="fa fa-circle-o glyphicon "></i>员工列表</a>
+								</li>
+							</ul>
+						</li>
+						<li class="treeview">
+							<!--添加active选中状态-->
+							<a href="#">
+								<i class="fa  fa-user-md"></i> <span>关于我的</span>
+								<span class="pull-right-container">
+					          		<i class="fa fa-angle-left pull-right"></i>
+					      </span>
+							</a>
+							<ul class="treeview-menu">
+								<li class=" ifram_li">
+									<a _href="My_message.html" href="javascript:void(0)"><i class="fa fa-circle-o glyphicon "></i>我的信息</a>
+								</li>
+
+							</ul>
+						</li>
+					</ul>
+					<!-- /.sidebar-menu -->
+				</section>
+				<!-- /.sidebar -->
+			</aside>
+
+			<!-- Content Wrapper. Contains page content -->
+			<div class="content-wrapper">
+				<!-- Content Header (Page header) -->
+				<section class="content-header">
+
+				</section>
+				<section class="content container-fluid">
+					<!--<div class="img" style="width: 100%;">
+						<p id="index_huanying">欢迎进入沃克智慧城市后台管理</p>
+					</div>-->
+					<div class="container img">
+						<div class="jumbotron">
+							<h2>欢迎进入沃克智慧城市后台管理！</h2>
+							<!--<p>这是一个超大屏幕（Jumbotron）的实例。</p>
+							<p>
+								<a class="btn btn-primary btn-lg" role="button">
+									学习更多</a>
+							</p>-->
+						</div>
+					</div>
+					<iframe style="display: none;" id="ifram_mian" scrolling="yes" style="width: 100%;" frameborder="0" src="">
+						
+					</iframe>
+				</section>
+			</div>
+			<footer class="main-footer">
+				<div class="pull-right hidden-xs">
+					智慧城市后台管理
+				</div>
+				<strong>© 2017 <a href="http://www.wkdzkj.cn/" target="_blank">西咸新区沃克智能科技有限公司</a>.</strong>有限公司版权所有 陕ICP备16016382号
+			</footer>
+
+		</div>
+
+	</body>
+
+</html>
+<script src="js/jquery.min.js"></script>
+<script src="js/bootstrap.min.js"></script>
+<script src="dist/js/adminlte.min.js"></script>
+<script src="js/ifram.js" type="text/javascript" charset="utf-8"></script>

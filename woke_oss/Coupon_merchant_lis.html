@@ -1,0 +1,194 @@
+<!DOCTYPE html>
+<html>
+
+	<head>
+		<meta charset="UTF-8">
+		<title>服务商注册审核列表</title>
+
+		<link rel="stylesheet" type="text/css" href="css/public.css" />
+		<link rel="stylesheet" href="bootstrap/dist/css/bootstrap.min.css">
+		<link rel="stylesheet" href="css/font-awesome.min.css">
+		<link rel="stylesheet" href="css/ionicons.min.css">
+		<link rel="stylesheet" href="css/AdminLTE.min.css">
+		<link rel="stylesheet" href="dist/css/skins/_all-skins.min.css">
+		<link rel="stylesheet" type="text/css" href="css/bootstrap-datetimepicker.min.css" />
+		<link rel="stylesheet" type="text/css" href="css/public_main.css" />
+
+		<style type="text/css">
+			body #tbbb .btn {
+				padding: 0;
+				cursor: default;
+			}
+			
+			body #select_type,
+			#select_type1,
+			#select_type2 {
+				display: inline-block;
+				/*margin-top: 5px;*/
+				width: 120px;
+				height: 34px;
+				margin-left: 10px;
+			}
+			
+			#search_chaxun {
+				/*margin-top: 10px;*/
+				margin-left: 10px;
+			}
+			
+			#text_sousuo {
+				margin-left: 10px;
+			}
+		</style>
+	</head>
+
+	<body>
+		<div class="box">
+			<div class="box-header with-border">
+				<h3 class="box-title">优惠券可用商户</h3>
+			</div>
+			<div id="mohu" class="clear">
+				<!--<div id="star_time" class="form-group">
+					<label for="dtp_input2" class="col-md-1 control-label">开始时间</label>
+					<div class="input-group date form_date col-md-2" data-date="" data-date-format="yyyy-mm-dd" data-link-field="dtp_input2" data-link-format="yyyy-mm-dd">
+						<input id="datepicker" onchange="gaibian()" class="form-control input_1" size="16" type="text" value="" readonly>
+						<span class="input-group-addon"><span class="glyphicon glyphicon-remove"></span></span>
+						<span class="input-group-addon"><span class="glyphicon glyphicon-calendar"></span></span>
+
+						<input type="hidden" id="dtp_input2" value="" />
+					</div>
+				</div>
+				<div style="display: none;" id="end_time" class="form-group">
+					<label for="dtp_input2" class="col-md-1 control-label">结束时间</label>
+					<div class="input-group date form_date2 col-md-2" data-date="" data-date-format="yyyy-mm-dd" data-link-field="dtp_input2" data-link-format="yyyy-mm-dd">
+						<input class="form-control input_2" size="16" type="text" value="" readonly>
+						<span class="input-group-addon"><span class="glyphicon glyphicon-remove"></span></span>
+						<span class="input-group-addon"><span class="glyphicon glyphicon-calendar"></span></span>
+
+						<input type="hidden" id="dtp_input2" value="" />
+					</div>
+				</div>-->
+				<!--<div class="search_search">-->
+				<input type="text" name="" id="text_sousuo" value="" placeholder="请输入需要查询的内容" />
+				<button id="search_chaxun" type="button" class="btn btn-success">搜索</button>
+				<!--</div>-->
+				<button data-toggle="modal" data-target="#myModal3" id="add_shanghu" s type="button" class="btn btn-info">添加新商户</button>
+
+			</div>
+			<!--<div id="add_shanghu" style="margin-top: 10px;margin-left: 20px;" class="add_add">
+
+			</div>-->
+
+			<!-- /.box-header -->
+			<div class="box-body">
+				<table class="table table-bordered">
+					<tr>
+						<th>序号</th>
+						<th>优惠券名字</th>
+						<th style="display: none;">优惠券ID</th>
+						<th>商户名字</th>
+						<th>详情</th>
+					</tr>
+					<tbody id="tbbb">
+						<tr>
+							<td>1.</td>
+							<th>正在加载数据...</th>
+							<th>正在加载数据...</th>
+							<th>正在加载数据...</th>
+							<th>正在加载数据...</th>
+						</tr>
+					</tbody>
+
+				</table>
+			</div>
+			<!-- 分页 -->
+			<div class="box-footer clearfix">
+				<div>
+					<s style="margin-top: 5px;">共有：</s> <span id="count"></span><s>条,每页显示10条</s>
+				</div>
+				<ul id='bp-3-element-test'>
+				</ul>
+			</div>
+		</div>
+		<!--模态框（Modal）详情-->
+		<div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+			<div class="modal-dialog">
+				<div class="modal-content">
+					<div class="modal-header">
+						<button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+						<h4 class="modal-title" id="myModalLabel"></h4>
+					</div>
+					<div id="shenhe" class="modal-body">
+						<ul id="ppp">
+							<li>
+								<span>优惠券名字：</span><s id="name_fuwu"></s>
+							</li>
+							<li>
+								<span>商户名字：</span><s id="shanghu_fuwu"></s>
+							</li>
+							<li>
+								<span>摘要：</span><s id="zhaiyao_fuwu"></s>
+							</li>
+						</ul>
+					</div>
+					<div class="modal-footer">
+						<div class="wuxushenhe">
+							<button type="button" class="btn btn-default fanhui" data-dismiss="modal">返回</button>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+
+		<!--模态框（Modal）-->
+		<div class="modal fade" id="myModal3" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+			<div class="modal-dialog">
+				<div class="modal-content">
+					<div class="modal-header">
+						<button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+						<h4 class="modal-title" id="myModalLabel2">添加新商户</h4>
+					</div>
+					<div id="shenhe" class="modal-body">
+						<ul id="ppp">
+							<li>
+								<span>选择商户：</span>
+								<select id="xuanze_shanghu" name="">
+									<option value="0">请选择商户</option>
+								</select>
+							</li>
+							<li>
+								<span>摘要：</span><input type="text" name="zhaiyao" id="zhaiyao" value="" placeholder="请输入摘要" />
+							</li>
+							<li style="display: none;">
+								<span>选择服务商性质：</span>
+								<select id="xuanze_shanghu" name="">
+									<option value="0">请选择服务商性质</option>
+									<option value="1">物业公司</option>
+									<option value="2">第三方商户</option>
+								</select>
+							</li>
+						</ul>
+					</div>
+					<div class="modal-footer">
+						<div class="wuxushenhe">
+							<button type="button" class="btn btn-success sure_add">确定添加</button>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+
+	</body>
+
+</html>
+<script src="js/jquery.min.js" type="text/javascript" charset="utf-8"></script>
+<script src="bootstrap/dist/js/bootstrap.min.js" type="text/javascript" charset="utf-8"></script>
+<script src="js/jquery.slimscroll.min.js"></script>
+<script src="js/fastclick.js"></script>
+<script src="dist/js/adminlte.min.js"></script>
+<script src="dist/js/demo.js"></script>
+<script src="js/qunit-1.11.0.js" type="text/javascript" charset="utf-8"></script>
+<script src="js/bootstrap-paginator.js" type="text/javascript" charset="utf-8"></script>
+<script src="js/bootstrap-datetimepicker.js" type="text/javascript" charset="utf-8"></script>
+<script src="js/bootstrap-datetimepicker.zh-CN.js" type="text/javascript" charset="utf-8"></script>
+<script src="js/Coupon_merchant_lis.js" type="text/javascript" charset="utf-8"></script>
+<script src="js/data.js" type="text/javascript" charset="utf-8"></script>

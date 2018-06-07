@@ -1,0 +1,240 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+<html>
+
+<head>
+	<meta charset="UTF-8">
+	<title>商户数据权限审核列表</title>
+	<link rel="stylesheet" type="text/css" href="css/public.css" />
+	<link rel="stylesheet" href="bootstrap/dist/css/bootstrap.min.css">
+	<link rel="stylesheet" href="css/font-awesome.min.css">
+	<link rel="stylesheet" href="css/ionicons.min.css">
+	<link rel="stylesheet" href="css/AdminLTE.min.css">
+	<link rel="stylesheet" href="dist/css/skins/_all-skins.min.css">
+	<link rel="stylesheet" type="text/css" href="css/bootstrap-datetimepicker.min.css" />
+	<link rel="stylesheet" type="text/css" href="css/public_main.css" />
+	<!--<link rel="stylesheet" href="css/zTreeStyle.css" />-->
+	<link rel="stylesheet" href="zTree_v3/css/zTreeStyle/zTreeStyle.css" />
+	<style type="text/css">
+		.dropdown-menu {
+			width: 500px;
+			height: 170px;
+			padding: 0;
+		}
+		
+		.dropdown-menu .all {
+			width: 100%;
+			height: 44px;
+			background-color: #f9f9fa;
+			line-height: 44px;
+			padding-left: 10px;
+		}
+		
+		.dropdown-menu input[type="checkbox"] {
+			margin-left: 20px;
+		}
+		
+		label.checkbox {
+			display: inline-block;
+		}
+		
+		.choose_bank label {
+			margin-bottom: 16px;
+		}
+		
+		.main_yikaitong {
+			margin-left: 20px;
+		}
+	</style>
+</head>
+
+<body>
+	<div class="box">
+		<div class="box-header with-border">
+			<h3 class="box-title">员工权限设置</h3>
+		</div>
+		<div class="content_wrap">
+			<div class="zTreeDemoBackground left">
+				<ul id="treeDemo" class="ztree"></ul>
+			</div>
+		</div>
+
+	</div>
+
+	<ul id="tree" class="ztree" style="width:230px; overflow:auto;"></ul>
+
+	<button id="tree_click" type="button" class="btn btn-primary">提交</button>
+</body>
+
+</html>
+<script src="js/jquery.min.js" type="text/javascript" charset="utf-8"></script>
+<script src="bootstrap/dist/js/bootstrap.min.js" type="text/javascript" charset="utf-8"></script>
+<script src="js/jquery.slimscroll.min.js"></script>
+<script src="js/fastclick.js"></script>
+<script src="dist/js/adminlte.min.js"></script>
+<script src="dist/js/demo.js"></script>
+<script src="js/qunit-1.11.0.js" type="text/javascript" charset="utf-8"></script>
+<script src="js/bootstrap-paginator.js" type="text/javascript" charset="utf-8"></script>
+<script src="js/bootstrap-datetimepicker.js" type="text/javascript" charset="utf-8"></script>
+<script src="js/bootstrap-datetimepicker.zh-CN.js" type="text/javascript" charset="utf-8"></script>
+<script src="js/public.js" type="text/javascript" charset="utf-8"></script>
+<!--<script src="js/quanxian_settings.js" type="text/javascript" charset="utf-8"></script>-->
+<!--<script src="zTree_v3/js/jquery-1.4.4.min.js" type="text/javascript" charset="utf-8"></script>-->
+<script src="zTree_v3/js/jquery.ztree.core.js" type="text/javascript" charset="utf-8"></script>
+<script src="zTree_v3/js/jquery.ztree.excheck.js" type="text/javascript" charset="utf-8"></script>
+<SCRIPT type="text/javascript">
+	var urltest = sessionStorage.getItem("urltest");
+	var userId = sessionStorage.getItem("userId");
+	var fullname = $(".box-title").html();
+	var setting = {
+		check: {
+			enable: true
+		},
+		data: {
+			simpleData: {
+				enable: true
+			}
+		},
+		callback: {
+			onCheck: onCheckNode //回调函数,获取选节点
+
+		}
+	};
+
+	var zNodes = [];
+
+	var code;
+
+	function setCheck() {
+		var zTree = $.fn.zTree.getZTreeObj("treeDemo"),
+			type = {
+				"Y": "ps",
+				"N": "sp"
+			};
+		zTree.setting.check.chkboxType = type;
+		showCode('setting.check.chkboxType = { "Y" : "' + type.Y + '", "N" : "' + type.N + '" };');
+	}
+
+	function showCode(str) {
+		if(!code) code = $("#code");
+		code.empty();
+		code.append("<li>" + str + "</li>");
+	}
+
+	$(document).ready(function() {
+		userId = userId;
+		$("#open_fun").hide();
+		$("#close_fun").show();
+		var yuanGong_id = sessionStorage.getItem("yuanGong_id")
+
+		var reque = function() {
+			return {
+				userid: yuanGong_id
+			}
+		}
+		rq1 = reque();
+		var req = function() {
+			return {
+				requestString: "",
+				userId: userId,
+				fullname: fullname
+			}
+		}
+		requestObj1 = req();
+		requestObj1.requestString = JSON.stringify(rq1);
+		var req3 = JSON.stringify(requestObj1);
+		$.ajax({
+			contentType: "application/json; charset=utf-8",
+			type: "POST",
+			url: urltest + 'verify/staff/selectStaffPer',
+			data: req3,
+			async: false,
+			dataType: "json",
+			success: function(msg) {
+				console.log(msg);
+				if(msg.responseCode == 200) {
+					zNodes = JSON.parse(msg.returnString);
+					//					zNodes=zNodes;
+				} else {
+					alert(msg.resoponseDisp)
+				}
+			},
+			error: function() {
+				alert("获取信息失败");
+			}
+		});
+
+		$.fn.zTree.init($("#treeDemo"), setting, zNodes);
+		setCheck();
+		$("#py").bind("change", setCheck);
+		$("#sy").bind("change", setCheck);
+		$("#pn").bind("change", setCheck);
+		$("#sn").bind("change", setCheck);
+	});
+
+	var chkNodeArr;
+	var chkNodeStr = "";
+	var nodeJson = new Array();
+
+	function onCheckNode() {
+		var treenode = $.fn.zTree.getZTreeObj("treeDemo");
+		chkNodeArr = treenode.getCheckedNodes(true); //true获取选中节点,false未选中节点,默认为true
+		for(var i = 0; i < chkNodeArr.length; i++) {
+			
+			nodeJson[i] = {
+				"id": chkNodeArr[i].id
+			};
+		}
+		//console.log(chkNodeArr);
+		chkNodeStr = nodeJson;
+	}
+
+
+
+	$("#tree_click").click(function() {
+		//		alert(chkNodeStr);
+		
+		console.log(chkNodeStr)
+		var moduleids = chkNodeStr;
+		var yuanGong_id = sessionStorage.getItem("yuanGong_id")
+
+		var reque = function() {
+			return {
+				userid: yuanGong_id,
+				moduleids: moduleids
+			}
+		}
+		rq1 = reque();
+		var req = function() {
+			return {
+				requestString: "",
+				userId: userId,
+				fullname: fullname
+			}
+		}
+		requestObj1 = req();
+		requestObj1.requestString = JSON.stringify(rq1);
+		var req3 = JSON.stringify(requestObj1);
+		$.ajax({
+			contentType: "application/json; charset=utf-8",
+			type: "POST",
+			url: urltest + 'verify/staff/addStaffPer',
+			data: req3,
+			async: false,
+			dataType: "json",
+			success: function(msg) {
+				console.log(msg);
+				if(msg.responseCode == 200) {
+					console.log(msg);
+					alert("已成功开通此员工权限");
+					location.href = "quanxian_settings.html";
+				} else {
+					alert(msg.resoponseDisp)
+				}
+			},
+			error: function() {
+				alert("获取信息失败");
+			}
+		});
+	})
+	//-->
+</SCRIPT>

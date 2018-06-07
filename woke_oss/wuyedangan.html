@@ -1,0 +1,901 @@
+<!DOCTYPE html>
+<html>
+
+	<head>
+		<meta charset="UTF-8">
+		<title>服务商详情</title>
+		<link rel="stylesheet" type="text/css" href="css/public.css" />
+		<link rel="stylesheet" href="bootstrap/dist/css/bootstrap.min.css">
+		<link rel="stylesheet" href="font-awesome/css/font-awesome.min.css">
+		<link rel="stylesheet" href="css/ionicons.min.css">
+		<link rel="stylesheet" href="css/AdminLTE.min.css">
+		<link rel="stylesheet" href="dist/css/skins/_all-skins.min.css">
+		<link rel="stylesheet" type="text/css" href="css/bootstrap-datetimepicker.min.css" />
+		<link rel="stylesheet" type="text/css" href="css/fileinput.min.css" />
+		<link rel="stylesheet" type="text/css" href="css/public_main.css" />
+		<style type="text/css">
+			.file-drop-zone-title img {
+				width: 200px;
+				height: 200px;
+			}
+		</style>
+		<!--<script language="JavaScript" type="text/javascript">
+			//第五种方法  
+			var idTmr;
+
+			function getExplorer() {
+				var explorer = window.navigator.userAgent;
+				//ie  
+				if(explorer.indexOf("MSIE") >= 0) {
+					return 'ie';
+				}
+				//firefox  
+				else if(explorer.indexOf("Firefox") >= 0) {
+					return 'Firefox';
+				}
+				//Chrome  
+				else if(explorer.indexOf("Chrome") >= 0) {
+					return 'Chrome';
+				}
+				//Opera  
+				else if(explorer.indexOf("Opera") >= 0) {
+					return 'Opera';
+				}
+				//Safari  
+				else if(explorer.indexOf("Safari") >= 0) {
+					return 'Safari';
+				}
+			}
+
+			function method5(tableid) {
+				if(getExplorer() == 'ie') {
+					var curTbl = document.getElementById(tableid);
+					var oXL = new ActiveXObject("Excel.Application");
+					var oWB = oXL.Workbooks.Add();
+					var xlsheet = oWB.Worksheets(1);
+					var sel = document.body.createTextRange();
+					sel.moveToElementText(curTbl);
+					sel.select();
+					sel.execCommand("Copy");
+					xlsheet.Paste();
+					oXL.Visible = true;
+
+					try {
+						var fname = oXL.Application.GetSaveAsFilename("Excel.xls", "Excel Spreadsheets (*.xls), *.xls");
+					} catch(e) {
+						print("Nested catch caught " + e);
+					} finally {
+						oWB.SaveAs(fname);
+						oWB.Close(savechanges = false);
+						oXL.Quit();
+						oXL = null;
+						idTmr = window.setInterval("Cleanup();", 1);
+					}
+
+				} else {
+					tableToExcel(tableid)
+				}
+			}
+
+			function Cleanup() {
+				window.clearInterval(idTmr);
+				CollectGarbage();
+			}
+			var tableToExcel = (function() {
+				var uri = 'data:application/vnd.ms-excel;base64,',
+					template = '<html><head><meta charset="UTF-8"></head><body><table>{table}</table></body></html>',
+					base64 = function(s) {
+						return window.btoa(unescape(encodeURIComponent(s)))
+					},
+					format = function(s, c) {
+						return s.replace(/{(\w+)}/g,
+							function(m, p) {
+								return c[p];
+							})
+					}
+				return function(table, name) {
+					if(!table.nodeType) table = document.getElementById(table)
+					var ctx = {
+						worksheet: name || 'Worksheet',
+						table: table.innerHTML
+					}
+					window.location.href = uri + base64(format(template, ctx))
+				}
+			})()
+		</script>-->
+
+	</head>
+
+	<body>
+		<div class="box">
+			<div class="box-header with-border">
+				<h3 class="box-title">物业档案</h3>
+			</div>
+			<div id="mohu" class="clear">
+				<div id="star_time" class="form-group">
+					<label for="dtp_input2" class=" control-label">开始时间</label>
+					<div class="input-group date form_date " data-date="" data-date-format="yyyy-mm-dd" data-link-field="dtp_input2" data-link-format="yyyy-mm-dd">
+						<input id="datepicker" placeholder="请选择开始时间" onchange="gaibian()" class="form-control input_1" size="16" type="text" value="" readonly>
+						<span class="input-group-addon"><span class="glyphicon glyphicon-remove"></span></span>
+						<span class="input-group-addon"><span class="glyphicon glyphicon-calendar"></span></span>
+						<input type="hidden" id="dtp_input2" value="" />
+					</div>
+				</div>
+				<div id="end_time" class="form-group">
+					<label for="dtp_input2" class="control-label">结束时间</label>
+					<div class="input-group date form_date2 " data-date="" data-date-format="yyyy-mm-dd" data-link-field="dtp_input2" data-link-format="yyyy-mm-dd">
+						<input class="form-control input_2" placeholder="请选择结束时间" size="16" type="text" value="" readonly>
+						<span class="input-group-addon"><span class="glyphicon glyphicon-remove"></span></span>
+						<span class="input-group-addon"><span class="glyphicon glyphicon-calendar"></span></span>
+
+						<input type="hidden" id="dtp_input2" value="" />
+					</div>
+				</div>
+
+				<input type="text" name="" id="text_sousuo" value="" placeholder="请输入需要查询的内容" />
+				<button id="search_chaxun" type="button" class="btn btn-success">搜索</button>
+				<div class="search_search">
+					<button data-toggle="modal" data-target="#myModal2" id="wuye_add-add" type="button" class="btn btn-info">添加物业</button>
+				</div>
+			</div>
+			<!--<div style="margin-top:0px;margin-left: 20px;" class="my_feilei">
+
+			</div>-->
+
+			<!--<div class="my_feilei">-->
+			<!-- /.box-header -->
+			<div class="box-body">
+				<table id="table_bb" class="table table-bordered">
+					<tr>
+						<th>序号</th>
+						<th>公司名称</th>
+						<th>省</th>
+						<th>市</th>
+						<th>法人</th>
+						<th>电话</th>
+						<th>查看</th>
+						<th>修改</th>
+					</tr>
+					<tbody id="tbbb">
+						<tr>
+							<td>1.</td>
+							<th>正在加载数据...</th>
+							<th>正在加载数据...</th>
+							<th>正在加载数据...</th>
+							<th>正在加载数据...</th>
+							<th>正在加载数据...</th>
+							<!--<th>正在加载数据...</th>-->
+							<th data-toggle="modal" data-target="#myModal" style="color:blue;cursor: pointer" ;><i class="fa fa-github-eye"></i></th>
+							<th data-toggle="modal" data-target="#myModal" style="color:blue;cursor: pointer" ;><i class="fa fa-github-alt"></i></th>
+						</tr>
+					</tbody>
+
+				</table>
+			</div>
+			<!-- /.box-body -->
+			<div class="box-footer clearfix">
+				<div>
+					<s style="margin-top: 5px;">共有：</s> <span id="count"></span><s>条,每页显示13条</s>
+				</div>
+				<ul id='bp-3-element-test'>
+				</ul>
+			</div>
+		</div>
+
+		<!-- 模态框（Modal） -->
+		<div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+			<div class="modal-dialog">
+				<div class="modal-content">
+					<div class="modal-header">
+						<button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+						<h4 class="modal-title" id="myModalLabel"></h4>
+					</div>
+					<div id="shenhe" class="modal-body">
+						<ul id="myTab" class="nav nav-tabs">
+							<li class="active">
+								<a href="#home" data-toggle="tab">
+									基础信息
+								</a>
+							</li>
+							<li>
+								<a href="#fix" data-toggle="tab">
+									法人信息
+								</a>
+							</li>
+							<li>
+								<a href="#zhuce" data-toggle="tab">
+									结算信息
+								</a>
+							</li>
+							<li>
+								<a href="#zizhi" data-toggle="tab">
+									资质图片
+								</a>
+							</li>
+						</ul>
+						<ul id="ppp">
+							<div id="myTabContent" class="tab-content">
+								<div class=" tab-pane fade in active" id="home">
+									<li>
+										<span>公司简称:</span><s id="wuye_jiancheng"></s>
+									</li>
+
+									<li>
+										<span>公司全名:</span><s id="wuye_quanming"></s>
+									</li>
+									<li style="display: none;">
+										<span>公司ID:</span><s id="wuye_id"></s>
+									</li>
+
+									<li>
+										<span>公司编码:</span><s id="wuye_bianma"></s>
+									</li>
+									<li>
+										<span>省:</span><s id="wuye_sheng"></s>
+									</li>
+									<li>
+										<span>市:</span><s id="wuye_shi"></s>
+									</li>
+									<li>
+										<span>创建人姓名:</span><s id="wuye_chuangjian"></s>
+									</li>
+									<li>
+										<span>创建时间:</span><s id="wuye_shijian"></s>
+									</li>
+									<li>
+										<span>详细地址:</span><s id="wuye_dizhi"></s>
+									</li>
+
+								</div>
+								<div class="tab-pane fade" id="fix">
+									<li>
+										<span>法人:</span><s id="wuye_faren"></s>
+									</li>
+									<li>
+										<span>联系电话:</span><s id="wuye_dianhua"></s>
+									</li>
+									<li>
+										<span>传真:</span><s id="wuye_chuanzhen"></s>
+									</li>
+									<li>
+										<span>电子邮箱:</span><s id="wuye_email"></s>
+									</li>
+									<li>
+										<span>身份证号码:</span><s id="wuye_idcard"></s>
+									</li>
+									<li>
+										<span>备注:</span><textarea id="wuye_beizhu" name="" rows="" cols=""></textarea>
+									</li>
+								</div>
+								<div class="tab-pane fade" id="zhuce">
+									<li>
+										<span>费率:</span><s id="wuye_feilv"></s>
+									</li>
+									<li>
+										<span>结算周期:</span><s id="wuye_zhouqi"></s>
+									</li>
+									<li>
+										<span>开户行:</span><s id="wuye_kaihu"></s>
+									</li>
+									<li>
+										<span>开户行账号名字:</span><s id="wuye_zhanghaoname"></s>
+									</li>
+									<li>
+										<span>开户行账号:</span><s id="wuye_zhanghao"></s>
+									</li>
+
+								</div>
+								<div class="tab-pane fade" id="zizhi">
+									<li>
+										<span>身份证照片面:</span>
+										<img data-action="zoom" id="wuye_shenfenzheng" src="" />
+
+									</li>
+									<li>
+										<span>身份证国徽面:</span>
+										<img data-action="zoom" id="wuye_shenfenfan" src="" />
+
+									</li>
+									<li>
+										<span>资质图:</span>
+										<img data-action="zoom" id="wuye_zizhi" src="" />
+
+									</li>
+									<li>
+										<span>营业执照图:</span>
+										<img data-action="zoom" id="wuye_zhizhao" src="" />
+									</li>
+								</div>
+							</div>
+						</ul>
+					</div>
+					<div class="modal-footer">
+						<div class="shenhe_no">
+							<button type="button" class="btn btn-default fanhui" data-dismiss="modal">返回</button>
+							<button type="button" class="btn btn-success wuye_chaxun_yonghu" data-dismiss="modal">查询系统用户</button>
+							<button type="button" class="btn btn-info wuye_chaxun_qixia" data-dismiss="modal">查看旗下小区</button>
+							<button data-toggle="modal" data-target="#myModal4" type="button" class="btn btn-danger">删除</button>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+
+		<!-- 模态框（Modal）增加 -->
+		<div class="modal fade" id="myModal2" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+			<div class="modal-dialog">
+				<div class="modal-content">
+					<div class="modal-header">
+						<button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+						<h4 class="modal-title" id="myModalLabel"></h4>
+					</div>
+					<div id="shenhe" class="modal-body">
+						<ul id="myTab" class="nav nav-tabs">
+							<li class="active">
+								<a href="#home1" data-toggle="tab">
+									基础信息
+								</a>
+							</li>
+							<li>
+								<a href="#fix1" data-toggle="tab">
+									法人信息
+								</a>
+							</li>
+							<li>
+								<a href="#zhuce1" data-toggle="tab">
+									结算信息
+								</a>
+							</li>
+							<li>
+								<a href="#zizhi1" data-toggle="tab">
+									资质图片
+								</a>
+							</li>
+						</ul>
+						<ul id="ppp">
+							<div id="myTabContent" class="tab-content">
+								<div class=" tab-pane fade in active" id="home1">
+									<li>
+										<span>提示：</span><s>带星号的为必填</s>
+									</li>
+									<li>
+										<span>公司简称 *:</span>
+										<input type="text" name="wuye_jiancheng_a" id="wuye_jiancheng_a" value="" />
+									</li>
+
+									<li>
+										<span>公司全名 *:</span>
+										<input type="text" name="wuye_jiancheng_a" id="wuye_quanming_a" value="" />
+									</li>
+
+									<li>
+										<span>公司编码 *:</span>
+										<input type="text" name="wuye_jiancheng_a" id="wuye_bianma_a" value="" />
+									</li>
+									<li>
+										<span>省:</span>
+										<select id="wuye_sheng_a" name="wuye_sheng_a">
+											<option value="0">请选择省</option>
+										</select>
+									</li>
+									<li>
+										<span>市:</span>
+										<select id="wuye_shi_a" name="wuye_shi_a">
+											<option value="0">请选择市</option>
+										</select>
+									</li>
+
+									<li>
+										<span>详细地址:</span>
+										<input type="text" name="wuye_jiancheng_a" id="wuye_dizhi_a" value="" />
+									</li>
+
+								</div>
+								<div class="tab-pane fade" id="fix1">
+									<li>
+										<span>法人:</span>
+										<input type="text" name="wuye_jiancheng_a" id="wuye_faren_a" value="" />
+									</li>
+									<li>
+										<span>联系电话:</span>
+										<input type="text" name="wuye_jiancheng_a" id="wuye_dianhua_a" value="" />
+									</li>
+									<li>
+										<span>传真:</span>
+										<input type="text" name="wuye_jiancheng_a" id="wuye_chuanzhen_a" value="" />
+									</li>
+									<li>
+										<span>电子邮箱:</span>
+										<input type="text" name="wuye_jiancheng_a" id="wuye_youxiang_a" value="" />
+									</li>
+									<li>
+										<span>身份证号码:</span>
+										<input type="text" name="wuye_jiancheng_a" id="wuye_shenfenzheng_a" value="" />
+									</li>
+									<li>
+										<span>备注:</span>
+										<textarea id="wuye_beizhu_a" name="" rows="" cols=""></textarea>
+									</li>
+								</div>
+								<div class="tab-pane fade" id="zhuce1">
+									<li>
+										<span>费率:</span>
+										<input type="text" name="wuye_jiancheng_a" id="wuye_feilv_a" value="" />
+									</li>
+									<li>
+										<span>结算周期:</span>
+										<input type="text" name="wuye_jiancheng_a" id="wuye_zhouqi_a" value="" />
+									</li>
+									<li>
+										<span>开户行:</span>
+										<input type="text" name="wuye_jiancheng_a" id="wuye_kaihu_a" value="" />
+									</li>
+									<li>
+										<span>开户行账号名字:</span>
+										<input type="text" name="wuye_jiancheng_a" id="wuye_kaihu_name_a" value="" />
+									</li>
+									<li>
+										<span>开户行账号:</span>
+										<input type="text" name="wuye_jiancheng_a" id="wuye_kaihuzhanghao_a" value="" />
+									</li>
+
+								</div>
+								<div class="tab-pane fade" id="zizhi1">
+									<form style="" id="Form1" action="http://www.wkdzkj.cn/pic/picApplication/pic/addServiceProviderQualifications" method="post" enctype="multipart/form-data" onsubmit="return saveReport();" target="hidden_frame">
+										<input id="uploadfile" name="files" type="file" class="file">
+									</form>
+									<form style="" id="Form2" action="http://www.wkdzkj.cn/pic/picApplication/pic/addServiceProviderQualifications" method="post" enctype="multipart/form-data" onsubmit="return saveReport();" target="hidden_frame">
+										<input id="uploadfile1" name="files" type="file" class="file">
+									</form>
+									<form style="" id="Form3" action="http://www.wkdzkj.cn/pic/picApplication/pic/addServiceProviderQualifications" method="post" enctype="multipart/form-data" onsubmit="return saveReport();" target="hidden_frame">
+										<input id="uploadfile2" name="files" type="file" class="file">
+									</form>
+									<form style="" id="Form4" action="http://www.wkdzkj.cn/pic/picApplication/pic/addServiceProviderQualifications" method="post" enctype="multipart/form-data" onsubmit="return saveReport();" target="hidden_frame">
+										<input id="uploadfile3" name="files" type="file" class="file">
+									</form>
+								</div>
+							</div>
+						</ul>
+					</div>
+					<div class="modal-footer">
+						<div class="shenhe_no">
+							<button type="button" class="btn btn-default fanhui" data-dismiss="modal">返回</button>
+							<button type="button" class="btn btn-default wuye_add ">确定增加</button>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+
+		<!-- 模态框（Modal）修改 -->
+		<div class="modal fade" id="myModal8" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+			<div class="modal-dialog">
+				<div class="modal-content">
+					<div class="modal-header">
+						<button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+						<h4 class="modal-title" id="myModalLabel"></h4>
+					</div>
+					<div id="shenhe" class="modal-body">
+						<ul id="myTab" class="nav nav-tabs">
+							<li class="active">
+								<a href="#home11" data-toggle="tab">
+									基础信息
+								</a>
+							</li>
+							<li>
+								<a href="#fix11" data-toggle="tab">
+									法人信息
+								</a>
+							</li>
+							<li>
+								<a href="#zhuce11" data-toggle="tab">
+									结算信息
+								</a>
+							</li>
+							<li>
+								<a href="#zizhi11" data-toggle="tab">
+									资质图片
+								</a>
+							</li>
+						</ul>
+						<ul id="ppp">
+							<div id="myTabContent" class="tab-content">
+								<div class=" tab-pane fade in active" id="home11">
+									<li>
+										<span>公司简称:</span>
+										<input type="text" id="wuye_jiancheng_f" />
+									</li>
+
+									<li>
+										<span>公司全名:</span>
+										<input type="text" id="wuye_quanming_f" />
+									</li>
+									<li style="display: none;">
+										<span>公司ID:</span>
+										<input type="text" id="wuye_id_f" />
+									</li>
+
+									<li>
+										<span>公司编码:</span>
+										<input type="text" id="wuye_bianma_f" />
+									</li>
+									<li>
+										<span>省:</span><s id="wuye_sheng_f"></s>
+
+									</li>
+									<li>
+										<span>市:</span><s id="wuye_shi_f"></s>
+									</li>
+									<li>
+										<span>创建人姓名:</span><s id="wuye_chuangjian_f"></s>
+
+									</li>
+									<li>
+										<span>创建时间:</span><s id="wuye_shijian_f"></s>
+									</li>
+									<li>
+										<span>详细地址:</span>
+										<input type="text" id="wuye_dizhi_f" />
+									</li>
+
+								</div>
+								<div class="tab-pane fade" id="fix11">
+									<li>
+										<span>法人:</span>
+										<input type="text" id="wuye_faren_f" />
+									</li>
+									<li>
+										<span>联系电话:</span>
+										<input type="number" id="wuye_dianhua_f" />
+									</li>
+									<li>
+										<span>传真:</span>
+										<input type="text" id="wuye_chuanzhen_f" />
+									</li>
+									<li>
+										<span>电子邮箱:</span>
+										<input type="email" id="wuye_email_f" />
+									</li>
+									<li>
+										<span>身份证号码:</span>
+										<input type="number" id="wuye_idcard_f" />
+									</li>
+									<li>
+										<span>备注:</span><textarea id="wuye_beizhu_f" name="" rows="" cols=""></textarea>
+									</li>
+								</div>
+								<div class="tab-pane fade" id="zhuce11">
+									<li>
+										<span>费率:</span>
+										<input type="number" id="wuye_feilv_f" />
+									</li>
+									<li>
+										<span>结算周期:</span>
+										<input type="text" id="wuye_zhouqi_f" />
+									</li>
+									<li>
+										<span>开户行:</span>
+										<input type="text" id="wuye_kaihu_f" />
+									</li>
+									<li>
+										<span>开户行账号名字:</span>
+										<input type="text" id="wuye_zhanghaoname_f" />
+									</li>
+									<li>
+										<span>开户行账号:</span>
+										<input type="text" id="wuye_zhanghao_f" />
+									</li>
+
+								</div>
+								<div class="tab-pane fade" id="zizhi11">
+									<form style="" id="Form1_f" action="http://www.wkdzkj.cn/pic/picApplication/pic/addServiceProviderQualifications" method="post" enctype="multipart/form-data" onsubmit="return saveReport();" target="hidden_frame">
+										<input id="uploadfile_f" name="files" type="file" class="file">
+									</form>
+									<form style="" id="Form2_f" action="http://www.wkdzkj.cn/pic/picApplication/pic/addServiceProviderQualifications" method="post" enctype="multipart/form-data" onsubmit="return saveReport();" target="hidden_frame">
+										<input id="uploadfile1_f" name="files" type="file" class="file">
+									</form>
+									<form style="" id="Form3_f" action="http://www.wkdzkj.cn/pic/picApplication/pic/addServiceProviderQualifications" method="post" enctype="multipart/form-data" onsubmit="return saveReport();" target="hidden_frame">
+										<input id="uploadfile2_f" name="files" type="file" class="file">
+									</form>
+									<form style="" id="Form4_f" action="http://www.wkdzkj.cn/pic/picApplication/pic/addServiceProviderQualifications" method="post" enctype="multipart/form-data" onsubmit="return saveReport();" target="hidden_frame">
+										<input id="uploadfile3_f" name="files" type="file" class="file">
+									</form>
+								</div>
+							</div>
+						</ul>
+					</div>
+					<div class="modal-footer">
+						<div class="shenhe_no">
+							<button type="button" class="btn btn-default fanhui" data-dismiss="modal">返回</button>
+							<button type="button" class="btn btn-default wuye_fix ">确定修改</button>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+
+		<!-- 模态框（Modal） -->
+		<div class="modal fade" id="myModal4" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+			<div class="modal-dialog">
+				<div class="modal-content">
+					<div class="modal-header">
+						<button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+						<h4 class="modal-title" id="myModalLabel">是否确认删除</h4>
+					</div>
+					<div class="modal-body">删除后数据无法找回</div>
+					<div class="modal-footer">
+						<button type="button" class="btn btn-default" data-dismiss="modal">关闭</button>
+						<button type="button" class="btn btn-danger wuye_remove">确定删除</button>
+					</div>
+				</div>
+				<!-- /.modal-content -->
+			</div>
+			<!-- /.modal -->
+		</div>
+		<!--<button type="button" onclick="method5('table_bb')">导出Excel方法五</button>''-->
+	</body>
+
+</html>
+<script src="js/jquery.min.js" type="text/javascript" charset="utf-8"></script>
+<script src="bootstrap/dist/js/bootstrap.min.js" type="text/javascript" charset="utf-8"></script>
+<script src="js/qunit-1.11.0.js" type="text/javascript" charset="utf-8"></script>
+<script src="js/bootstrap-paginator.js" type="text/javascript" charset="utf-8"></script>
+<script src="js/bootstrap-datetimepicker.js" type="text/javascript" charset="utf-8"></script>
+<script src="js/bootstrap-datetimepicker.zh-CN.js" type="text/javascript" charset="utf-8"></script>
+<script src="js/zooming.js" type="text/javascript" charset="utf-8"></script>
+<script src="js/data.js" type="text/javascript" charset="utf-8"></script>
+<script src="js/fileinput.min.js" type="text/javascript" charset="utf-8"></script>
+<script src="js/zh.js" type="text/javascript" charset="utf-8"></script>
+<script src="js/weyedang_an.js" type="text/javascript" charset="utf-8"></script>
+<script type="text/javascript">
+	$("#uploadfile").fileinput({
+		language: 'zh', //设置语言
+		uploadUrl: "http://www.wkdzkj.cn/pic/picApplication/pic/addFile", //上传的地址
+		allowedFileExtensions: ['jpg', 'png', 'gif'], //接收的文件后缀
+		//uploadExtraData:{"id": 1, "fileName":'123.mp3'},
+		uploadAsync: true, //默认异步上传
+		showUpload: true, //是否显示上传按钮
+		showRemove: true, //显示移除按钮
+		showPreview: true, //是否显示预览
+		showCaption: false, //是否显示标题
+		browseClass: "btn btn-primary", //按钮样式    
+		dropZoneEnabled: true, //是否显示拖拽区域
+		//minImageWidth: 50, //图片的最小宽度
+		//minImageHeight: 50,//图片的最小高度
+		//maxImageWidth: 1000,//图片的最大宽度
+		//maxImageHeight: 1000,//图片的最大高度
+		//maxFileSize:0,//单位为kb，如果为0表示不限制文件大小
+		//minFileCount: 0,
+		maxFileCount: 1, //表示允许同时上传的最大文件个数
+		enctype: 'multipart/form-data',
+		validateInitialCount: true,
+		previewFileIcon: "<iclass='glyphicon glyphicon-king'></i>",
+		msgFilesTooMany: "选择上传的文件数量({n}) 超过允许的最大数值{m}！",
+	}).on("fileuploaded", function(event, data, previewId, index) {
+		//	debugger
+		//	console.log(data.response);
+		var url1 = data.response.returnString;
+		var bb = JSON.parse(url1);
+		urlo = "http://www.wkdzkj.cn/pic/" + bb[0].url;
+		console.log(urlo);
+	});
+	$("#uploadfile1").fileinput({
+		language: 'zh', //设置语言
+		uploadUrl: "http://www.wkdzkj.cn/pic/picApplication/pic/addFile", //上传的地址
+		allowedFileExtensions: ['jpg', 'png', 'gif'], //接收的文件后缀
+		//uploadExtraData:{"id": 1, "fileName":'123.mp3'},
+		uploadAsync: true, //默认异步上传
+		showUpload: true, //是否显示上传按钮
+		showRemove: true, //显示移除按钮
+		showPreview: true, //是否显示预览
+		showCaption: false, //是否显示标题
+		browseClass: "btn btn-primary", //按钮样式    
+		dropZoneEnabled: true, //是否显示拖拽区域
+		//minImageWidth: 50, //图片的最小宽度
+		//minImageHeight: 50,//图片的最小高度
+		//maxImageWidth: 1000,//图片的最大宽度
+		//maxImageHeight: 1000,//图片的最大高度
+		//maxFileSize:0,//单位为kb，如果为0表示不限制文件大小
+		//minFileCount: 0,
+		maxFileCount: 1, //表示允许同时上传的最大文件个数
+		enctype: 'multipart/form-data',
+		validateInitialCount: true,
+		previewFileIcon: "<iclass='glyphicon glyphicon-king'></i>",
+		msgFilesTooMany: "选择上传的文件数量({n}) 超过允许的最大数值{m}！",
+	}).on("fileuploaded", function(event, data, previewId, index) {
+		//	debugger
+
+		//	console.log(data.response);
+		var url1 = data.response.returnString;
+		var bb = JSON.parse(url1);
+		url2 = "http://www.wkdzkj.cn/pic/" + bb[0].url;
+		console.log(url2);
+	});
+	$("#uploadfile2").fileinput({
+		language: 'zh', //设置语言
+		uploadUrl: "http://www.wkdzkj.cn/pic/picApplication/pic/addFile", //上传的地址
+		allowedFileExtensions: ['jpg', 'png', 'gif'], //接收的文件后缀
+		//uploadExtraData:{"id": 1, "fileName":'123.mp3'},
+		uploadAsync: true, //默认异步上传
+		showUpload: true, //是否显示上传按钮
+		showRemove: true, //显示移除按钮
+		showPreview: true, //是否显示预览
+		showCaption: false, //是否显示标题
+		browseClass: "btn btn-primary", //按钮样式    
+		dropZoneEnabled: true, //是否显示拖拽区域
+		//minImageWidth: 50, //图片的最小宽度
+		//minImageHeight: 50,//图片的最小高度
+		//maxImageWidth: 1000,//图片的最大宽度
+		//maxImageHeight: 1000,//图片的最大高度
+		//maxFileSize:0,//单位为kb，如果为0表示不限制文件大小
+		//minFileCount: 0,
+		maxFileCount: 1, //表示允许同时上传的最大文件个数
+		enctype: 'multipart/form-data',
+		validateInitialCount: true,
+		previewFileIcon: "<iclass='glyphicon glyphicon-king'></i>",
+		msgFilesTooMany: "选择上传的文件数量({n}) 超过允许的最大数值{m}！",
+	}).on("fileuploaded", function(event, data, previewId, index) {
+
+		var url1 = data.response.returnString;
+		var bb = JSON.parse(url1);
+		url3 = "http://www.wkdzkj.cn/pic/" + bb[0].url;
+		console.log(url3);
+	});
+	$("#uploadfile3").fileinput({
+		language: 'zh', //设置语言
+		uploadUrl: "http://www.wkdzkj.cn/pic/picApplication/pic/addFile", //上传的地址
+		allowedFileExtensions: ['jpg', 'png', 'gif'], //接收的文件后缀
+		//uploadExtraData:{"id": 1, "fileName":'123.mp3'},
+		uploadAsync: true, //默认异步上传
+		showUpload: true, //是否显示上传按钮
+		showRemove: true, //显示移除按钮
+		showPreview: true, //是否显示预览
+		showCaption: false, //是否显示标题
+		browseClass: "btn btn-primary", //按钮样式    
+		dropZoneEnabled: true, //是否显示拖拽区域
+		//minImageWidth: 50, //图片的最小宽度
+		//minImageHeight: 50,//图片的最小高度
+		//maxImageWidth: 1000,//图片的最大宽度
+		//maxImageHeight: 1000,//图片的最大高度
+		//maxFileSize:0,//单位为kb，如果为0表示不限制文件大小
+		//minFileCount: 0,
+		maxFileCount: 1, //表示允许同时上传的最大文件个数
+		enctype: 'multipart/form-data',
+		validateInitialCount: true,
+		previewFileIcon: "<iclass='glyphicon glyphicon-king'></i>",
+		msgFilesTooMany: "选择上传的文件数量({n}) 超过允许的最大数值{m}！",
+	}).on("fileuploaded", function(event, data, previewId, index) {
+		//	debugger
+		//	console.log(data.response);
+		var url1 = data.response.returnString;
+		var bb = JSON.parse(url1);
+		url4 = "http://www.wkdzkj.cn/pic/" + bb[0].url;
+		console.log(url4);
+	});
+
+	//修改
+	$("#uploadfile_f").fileinput({
+		language: 'zh', //设置语言
+		uploadUrl: "http://www.wkdzkj.cn/pic/picApplication/pic/addFile", //上传的地址
+		allowedFileExtensions: ['jpg', 'png', 'gif'], //接收的文件后缀
+		//uploadExtraData:{"id": 1, "fileName":'123.mp3'},
+		uploadAsync: true, //默认异步上传
+		showUpload: true, //是否显示上传按钮
+		showRemove: true, //显示移除按钮
+		showPreview: true, //是否显示预览
+		showCaption: false, //是否显示标题
+		browseClass: "btn btn-primary", //按钮样式    
+		dropZoneEnabled: true, //是否显示拖拽区域
+		//minImageWidth: 50, //图片的最小宽度
+		//minImageHeight: 50,//图片的最小高度
+		//maxImageWidth: 1000,//图片的最大宽度
+		//maxImageHeight: 1000,//图片的最大高度
+		//maxFileSize:0,//单位为kb，如果为0表示不限制文件大小
+		//minFileCount: 0,
+		maxFileCount: 1, //表示允许同时上传的最大文件个数
+		enctype: 'multipart/form-data',
+		validateInitialCount: true,
+		previewFileIcon: "<iclass='glyphicon glyphicon-king'></i>",
+		msgFilesTooMany: "选择上传的文件数量({n}) 超过允许的最大数值{m}！",
+	}).on("fileuploaded", function(event, data, previewId, index) {
+		//	debugger
+		//	console.log(data.response);
+		var url1 = data.response.returnString;
+		var bb = JSON.parse(url1);
+		url5 = "http://www.wkdzkj.cn/pic/" + bb[0].url;
+		console.log(url5);
+	});
+	$("#uploadfile1_f").fileinput({
+		language: 'zh', //设置语言
+		uploadUrl: "http://www.wkdzkj.cn/pic/picApplication/pic/addFile", //上传的地址
+		allowedFileExtensions: ['jpg', 'png', 'gif'], //接收的文件后缀
+		//uploadExtraData:{"id": 1, "fileName":'123.mp3'},
+		uploadAsync: true, //默认异步上传
+		showUpload: true, //是否显示上传按钮
+		showRemove: true, //显示移除按钮
+		showPreview: true, //是否显示预览
+		showCaption: false, //是否显示标题
+		browseClass: "btn btn-primary", //按钮样式    
+		dropZoneEnabled: true, //是否显示拖拽区域
+		//minImageWidth: 50, //图片的最小宽度
+		//minImageHeight: 50,//图片的最小高度
+		//maxImageWidth: 1000,//图片的最大宽度
+		//maxImageHeight: 1000,//图片的最大高度
+		//maxFileSize:0,//单位为kb，如果为0表示不限制文件大小
+		//minFileCount: 0,
+		maxFileCount: 1, //表示允许同时上传的最大文件个数
+		enctype: 'multipart/form-data',
+		validateInitialCount: true,
+		previewFileIcon: "<iclass='glyphicon glyphicon-king'></i>",
+		msgFilesTooMany: "选择上传的文件数量({n}) 超过允许的最大数值{m}！",
+	}).on("fileuploaded", function(event, data, previewId, index) {
+		//	debugger
+
+		//	console.log(data.response);
+		var url1 = data.response.returnString;
+		var bb = JSON.parse(url1);
+		url6 = "http://www.wkdzkj.cn/pic/" + bb[0].url;
+		console.log(url6);
+	});
+	$("#uploadfile2_f").fileinput({
+		language: 'zh', //设置语言
+		uploadUrl: "http://www.wkdzkj.cn/pic/picApplication/pic/addFile", //上传的地址
+		allowedFileExtensions: ['jpg', 'png', 'gif'], //接收的文件后缀
+		//uploadExtraData:{"id": 1, "fileName":'123.mp3'},
+		uploadAsync: true, //默认异步上传
+		showUpload: true, //是否显示上传按钮
+		showRemove: true, //显示移除按钮
+		showPreview: true, //是否显示预览
+		showCaption: false, //是否显示标题
+		browseClass: "btn btn-primary", //按钮样式    
+		dropZoneEnabled: true, //是否显示拖拽区域
+		//minImageWidth: 50, //图片的最小宽度
+		//minImageHeight: 50,//图片的最小高度
+		//maxImageWidth: 1000,//图片的最大宽度
+		//maxImageHeight: 1000,//图片的最大高度
+		//maxFileSize:0,//单位为kb，如果为0表示不限制文件大小
+		//minFileCount: 0,
+		maxFileCount: 1, //表示允许同时上传的最大文件个数
+		enctype: 'multipart/form-data',
+		validateInitialCount: true,
+		previewFileIcon: "<iclass='glyphicon glyphicon-king'></i>",
+		msgFilesTooMany: "选择上传的文件数量({n}) 超过允许的最大数值{m}！",
+	}).on("fileuploaded", function(event, data, previewId, index) {
+
+		var url1 = data.response.returnString;
+		var bb = JSON.parse(url1);
+		url7 = "http://www.wkdzkj.cn/pic/" + bb[0].url;
+		console.log(url7);
+	});
+	$("#uploadfile3_f").fileinput({
+		language: 'zh', //设置语言
+		uploadUrl: "http://www.wkdzkj.cn/pic/picApplication/pic/addFile", //上传的地址
+		allowedFileExtensions: ['jpg', 'png', 'gif'], //接收的文件后缀
+		//uploadExtraData:{"id": 1, "fileName":'123.mp3'},
+		uploadAsync: true, //默认异步上传
+		showUpload: true, //是否显示上传按钮
+		showRemove: true, //显示移除按钮
+		showPreview: true, //是否显示预览
+		showCaption: false, //是否显示标题
+		browseClass: "btn btn-primary", //按钮样式    
+		dropZoneEnabled: true, //是否显示拖拽区域
+		//minImageWidth: 50, //图片的最小宽度
+		//minImageHeight: 50,//图片的最小高度
+		//maxImageWidth: 1000,//图片的最大宽度
+		//maxImageHeight: 1000,//图片的最大高度
+		//maxFileSize:0,//单位为kb，如果为0表示不限制文件大小
+		//minFileCount: 0,
+		maxFileCount: 1, //表示允许同时上传的最大文件个数
+		enctype: 'multipart/form-data',
+		validateInitialCount: true,
+		previewFileIcon: "<iclass='glyphicon glyphicon-king'></i>",
+		msgFilesTooMany: "选择上传的文件数量({n}) 超过允许的最大数值{m}！",
+	}).on("fileuploaded", function(event, data, previewId, index) {
+		//	debugger
+		//	console.log(data.response);
+		var url1 = data.response.returnString;
+		var bb = JSON.parse(url1);
+		url8 = "http://www.wkdzkj.cn/pic/" + bb[0].url;
+		console.log(url8);
+	});
+</script>

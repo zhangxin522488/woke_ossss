@@ -1,0 +1,413 @@
+<!DOCTYPE html>
+<html>
+
+	<head>
+		<meta charset="UTF-8">
+		<title>服务商小区权限列表</title>
+		<link rel="stylesheet" type="text/css" href="css/public.css" />
+		<link rel="stylesheet" href="bootstrap/dist/css/bootstrap.min.css">
+		<link rel="stylesheet" href="css/font-awesome.min.css">
+		<link rel="stylesheet" href="css/ionicons.min.css">
+		<link rel="stylesheet" href="css/AdminLTE.min.css">
+		<link rel="stylesheet" href="dist/css/skins/_all-skins.min.css">
+		<link rel="stylesheet" type="text/css" href="css/bootstrap-datetimepicker.min.css" />
+		<link rel="stylesheet" type="text/css" href="css/fileinput.min.css" />
+		<link rel="stylesheet" type="text/css" href="css/public_main.css" />
+
+		<style type="text/css">
+			body #tbbb .btn {
+				padding: 0;
+				cursor: default;
+			}
+			
+			body #select_type {
+				display: inline-block;
+				/*margin-top: 5px;*/
+				width: 120px;
+				height: 34px;
+				margin-left: 10px;
+			}
+			
+			#search_chaxun {
+				/*margin-top: 10px;*/
+				margin-left: 10px;
+			}
+			
+			#text_sousuo {
+				margin-left: 10px;
+			}
+			
+			#add_pu_yy {
+				margin-top: 0px;
+				margin-left: 10px;
+			}
+		</style>
+	</head>
+
+	<body>
+		<div class="box">
+			<div class="box-header with-border">
+				<h3 class="box-title">商户应用列表</h3>
+			</div>
+
+			<div id="mohu" class="clear">
+				<div id="star_time" class="form-group">
+					<label for="dtp_input1" class=" control-label">开始时间</label>
+					<div class="input-group date form_date " data-date="" data-date-format="yyyy-mm-dd" data-link-field="dtp_input1" data-link-format="yyyy-mm-dd">
+						<input id="datepicker" placeholder="请选择开始时间" onchange="gaibian()" class="form-control input_1" size="16" type="text" value="" readonly>
+						<span class="input-group-addon"><span class="glyphicon glyphicon-remove"></span></span>
+						<span class="input-group-addon"><span class="glyphicon glyphicon-calendar"></span></span>
+
+						<input type="hidden" id="dtp_input2" value="" />
+					</div>
+				</div>
+				<div id="end_time" class="form-group">
+					<label for="dtp_input2" class="control-label">结束时间</label>
+					<div class="input-group date form_date2 " data-date="" data-date-format="yyyy-mm-dd" data-link-field="dtp_input2" data-link-format="yyyy-mm-dd">
+						<input class="form-control input_2" placeholder="请选择结束时间" size="16" type="text" value="" readonly>
+						<span class="input-group-addon"><span class="glyphicon glyphicon-remove"></span></span>
+						<span class="input-group-addon"><span class="glyphicon glyphicon-calendar"></span></span>
+
+						<input type="hidden" id="dtp_input2" value="" />
+					</div>
+				</div>
+				<label style="margin-left: 10px;" for="name">选择状态:</label>
+				<!--<s>选择状态</s>-->
+				<select id="select_type"  class="form-control">
+					<!--<option>全部</option>-->
+					<option>待审核</option>
+					<option>审核通过</option>
+					<option>审核不通过</option>
+					<option>全部</option>
+				</select>
+
+				<input type="text" name="" id="text_sousuo" value="" placeholder="请输入应用名称进行查询" />
+				<button id="search_chaxun" type="button" class="btn btn-success">搜索</button>
+				<button id="add_pu_yy" data-toggle="modal" data-target="#myModal2" type="button" class="btn btn-info">添加公用应用</button>
+			</div>
+			<!--<div style="margin-top:5px;margin-left: 20px;" class="my_feilei">
+
+			</div>-->
+
+			<!-- /.box-header -->
+			<div style="" class="box-body">
+				<table class="table table-bordered">
+					<tr>
+						<th>序号</th>
+						<th>商户名称</th>
+						<th>应用名字</th>
+						<th>创建人</th>
+						<th>创建时间</th>
+						<th>审核结果</th>
+						<th>查看</th>
+						<!--<th>操作</th>-->
+					</tr>
+					<tbody id="tbbb">
+						<tr>
+							<td>1.</td>
+							<th>正在加载数据...</th>
+							<th>正在加载数据...</th>
+							<th>正在加载数据...</th>
+							<th>正在加载数据...</th>
+							<th>正在加载数据...</th>
+							<th>正在加载数据...</th>
+
+						</tr>
+					</tbody>
+
+				</table>
+			</div>
+			<!-- /.box-body -->
+			<div class="box-footer clearfix">
+				<div>
+					<s style="margin-top: 5px;">共有：</s> <span id="count"></span><s>条,每页显示10条</s>
+				</div>
+				<ul id='bp-3-element-test'>
+				</ul>
+			</div>
+		</div>
+
+		<!-- 模态框（Modal） -->
+		<div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+			<div class="modal-dialog">
+				<div class="modal-content">
+					<div class="modal-header">
+						<button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+						<h4 class="modal-title" id="myModalLabel"></h4>
+					</div>
+					<div id="shenhe" class="modal-body">
+						<ul id="myTab" class="nav nav-tabs">
+							<li class="active">
+								<a href="#home" data-toggle="tab">
+									基础信息
+								</a>
+							</li>
+							<li>
+								<a href="#fix" data-toggle="tab">
+									地址信息
+								</a>
+							</li>
+							<li>
+								<a href="#zhuce" data-toggle="tab">
+									应用描述
+								</a>
+							</li>
+							<li>
+								<a href="#zizhi" data-toggle="tab">
+									审核批注
+								</a>
+							</li>
+						</ul>
+						<ul id="ppp">
+							<div id="myTabContent" class="tab-content">
+								<div class=" tab-pane fade in active" id="home">
+									<li>
+										<span>商户名:</span><s id="s_name"></s>
+									</li>
+									<li>
+										<span>应用名字:</span><s id="s_appname"></s>
+									</li>
+									<li>
+										<span>业务分类:</span><s id="s_fenlei"></s>
+									</li>
+									<li>
+										<span>创建人:</span><s id="s_creat"></s>
+									</li>
+									<li>
+										<span>创建时间:</span><s id="s_cr_time"></s>
+									</li>
+									<li>
+										<span>审核结果:</span><s id="s_shenhe"></s>
+									</li>
+
+								</div>
+								<div class=" tab-pane fade" id="fix">
+									<li>
+										<span>应用域名:</span><s id="s_yuming"></s>
+									</li>
+									<li>
+										<span>应用入口地址:</span><s id="s_rukou"></s>
+									</li>
+									<li>
+										<span>支付回调地址:</span><s id="s_zhifu"></s>
+									</li>
+									<li>
+										<span>消息回调地址:</span><s id="s_xiaoxi"></s>
+									</li>
+									<li>
+										<span>优惠券回调地址:</span><s id="s_youhui"></s>
+									</li>
+								</div>
+								<div class=" tab-pane fade" id="zhuce">
+									<li>
+										<span>应用描述:</span><s id="s_miaoshu"></s>
+									</li>
+
+									<li>
+										<span>通信秘钥:</span><s id="s_tongxin"></s>
+									</li>
+									<li>
+										<span>支付秘钥:</span><s id="s_zhifu"></s>
+									</li>
+									<li>
+										<span>账户名称:</span><s id="s_zhanghu"></s>
+									</li>
+									<li>
+										<span>应用图片:</span>
+										<img class="icon_img" src="" />
+									</li>
+									<li style="display: none;">
+										<span>账户名称:</span><s id="s_id"></s>
+									</li>
+								</div>
+								<div class="tab-pane fade" id="zizhi">
+									<li>
+										<span>审核理由:</span>
+										<textarea id="s_shenhe_reson" name="" rows="5" cols="60"></textarea>
+									</li>
+								</div>
+
+							</div>
+
+						</ul>
+					</div>
+					<div class="modal-footer">
+						<div class="shenhe_no">
+							<button type="button" class="btn btn-default fanhui" data-dismiss="modal">返回</button>
+							<button data-toggle="modal" data-target="#myModal4" type="button" class="btn btn-danger ">删除</button>
+						</div>
+						<div style="display: none;" class="shenhe_no1">
+							<button id="shenhe_pass" type="button" class="btn btn-success ">审核通过</button>
+							<button id="shenhe_nopass" type="button" class="btn btn-danger ">审核不通过</button>
+						</div>
+					</div>
+
+				</div>
+			</div>
+		</div>
+		<!-- 模态框（Modal） -->
+		<div class="modal fade" id="myModal4" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+			<div class="modal-dialog">
+				<div class="modal-content">
+					<div class="modal-header">
+						<button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+						<h4 class="modal-title" id="myModalLabel">是否确认删除</h4>
+					</div>
+					<div class="modal-body">删除后数据无法找回</div>
+					<div class="modal-footer">
+						<button type="button" class="btn btn-default" data-dismiss="modal">关闭</button>
+						<button type="button" class="btn btn-danger remove">确定删除</button>
+					</div>
+				</div>
+				<!-- /.modal-content -->
+			</div>
+			<!-- /.modal -->
+		</div>
+
+		<!-- 模态框（Modal）增加 -->
+		<div class="modal fade" id="myModal2" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+			<div class="modal-dialog">
+				<div class="modal-content">
+					<div class="modal-header">
+						<button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+						<h4 class="modal-title" id="myModalLabel"></h4>
+					</div>
+					<div id="shenhe" class="modal-body">
+						<ul id="myTab" class="nav nav-tabs">
+							<li class="active">
+								<a href="#home1" data-toggle="tab">
+									基础信息
+								</a>
+							</li>
+							<li>
+								<a href="#fix1" data-toggle="tab">
+									详细信息
+								</a>
+							</li>
+
+						</ul>
+						<ul id="ppp">
+							<div id="myTabContent" class="tab-content">
+								<div class=" tab-pane fade in active" id="home1">
+									<li>
+										<span>提示：</span><s>带星号的为必填</s>
+									</li>
+									<li>
+										<span>应用名称 *:</span>
+										<input type="text" name="yy_name" id="yy_name" value="" />
+									</li>
+
+									<li>
+										<span>应用地址 *:</span>
+										<input type="text" name="yy_dizhi" id="yy_dizhi" value="" />
+									</li>
+
+									<li>
+										<span>应用类型*:</span>
+										<select id="yy_type" name="yy_type">
+											<option value="0">请选择应用类型</option>
+										</select>
+									</li>
+									<form style="" id="Form1" action="http://www.wkdzkj.cn/pic/picApplication/pic/addServiceProviderQualifications" method="post" enctype="multipart/form-data" onsubmit="return saveReport();" target="hidden_frame">
+										<input id="uploadfile" name="files" type="file" class="file">
+									</form>
+
+								</div>
+								<div class="tab-pane fade" id="fix1">
+									<li>
+										<span>应用域名:</span>
+										<input type="text" name="wuye_jiancheng_a" id="yy_yuming" value="" />
+									</li>
+									<li>
+										<span>AppId:</span>
+										<input type="text" name="wuye_jiancheng_a" id="yy_appid" value="" />
+									</li>
+									<li>
+										<span>通讯密钥:</span>
+										<input type="text" name="wuye_jiancheng_a" id="yy_txmy" value="" />
+									</li>
+									<li>
+										<span>支付Id:</span>
+										<input type="text" name="wuye_jiancheng_a" id="yy_zfid" value="" />
+									</li>
+									<li>
+										<span>支付回调地址:</span>
+										<input type="text" name="wuye_jiancheng_a" id="yy_zfhddz" value="" />
+									</li>
+									<li>
+										<span>消息回调地址:</span>
+										<input type="text" name="wuye_jiancheng_a" id="yy_xxhddz" value="" />
+									</li>
+									<li>
+										<span>优惠券回调地址:</span>
+										<input type="text" name="wuye_jiancheng_a" id="yy_yhqhddz" value="" />
+									</li>
+									<li>
+										<span>应用描述:</span>
+										<input type="text" name="wuye_jiancheng_a" id="yy_yyms" value="" />
+									</li>
+								</div>
+							</div>
+						</ul>
+					</div>
+					<div class="modal-footer">
+						<div class="shenhe_no">
+							<button type="button" class="btn btn-default fanhui" data-dismiss="modal">返回</button>
+							<button type="button" class="btn btn-default yy_pu_add ">确定增加</button>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+
+	</body>
+
+</html>
+<script src="js/jquery.min.js" type="text/javascript" charset="utf-8"></script>
+<script src="bootstrap/dist/js/bootstrap.min.js" type="text/javascript" charset="utf-8"></script>
+<script src="js/jquery.slimscroll.min.js"></script>
+<script src="js/fastclick.js"></script>
+<script src="dist/js/adminlte.min.js"></script>
+<script src="dist/js/demo.js"></script>
+<script src="js/qunit-1.11.0.js" type="text/javascript" charset="utf-8"></script>
+<script src="js/bootstrap-paginator.js" type="text/javascript" charset="utf-8"></script>
+<script src="js/bootstrap-datetimepicker.js" type="text/javascript" charset="utf-8"></script>
+<script src="js/bootstrap-datetimepicker.zh-CN.js" type="text/javascript" charset="utf-8"></script>
+<script src="js/business_list.js" type="text/javascript" charset="utf-8"></script>
+<script src="js/data.js" type="text/javascript" charset="utf-8"></script>
+<script src="js/zooming.js" type="text/javascript" charset="utf-8"></script>
+<script src="js/fileinput.min.js" type="text/javascript" charset="utf-8"></script>
+<script src="js/zh.js" type="text/javascript" charset="utf-8"></script>
+<script type="text/javascript">
+	$("#uploadfile").fileinput({
+		language: 'zh', //设置语言
+		uploadUrl: "http://www.wkdzkj.cn/pic/picApplication/pic/addFile", //上传的地址
+		allowedFileExtensions: ['jpg', 'png', 'gif'], //接收的文件后缀
+		//uploadExtraData:{"id": 1, "fileName":'123.mp3'},
+		uploadAsync: true, //默认异步上传
+		showUpload: true, //是否显示上传按钮
+		showRemove: true, //显示移除按钮
+		showPreview: true, //是否显示预览
+		showCaption: false, //是否显示标题
+		browseClass: "btn btn-primary", //按钮样式    
+		dropZoneEnabled: true, //是否显示拖拽区域
+		//minImageWidth: 50, //图片的最小宽度
+		//minImageHeight: 50,//图片的最小高度
+		//maxImageWidth: 1000,//图片的最大宽度
+		//maxImageHeight: 1000,//图片的最大高度
+		//maxFileSize:0,//单位为kb，如果为0表示不限制文件大小
+		//minFileCount: 0,
+		maxFileCount: 1, //表示允许同时上传的最大文件个数
+		enctype: 'multipart/form-data',
+		validateInitialCount: true,
+		previewFileIcon: "<iclass='glyphicon glyphicon-king'></i>",
+		msgFilesTooMany: "选择上传的文件数量({n}) 超过允许的最大数值{m}！",
+	}).on("fileuploaded", function(event, data, previewId, index) {
+		//	debugger
+		//	console.log(data.response);
+		var url1 = data.response.returnString;
+		var bb = JSON.parse(url1);
+		urlo = "http://www.wkdzkj.cn/pic/" + bb[0].url;
+		console.log(urlo);
+	});
+</script>

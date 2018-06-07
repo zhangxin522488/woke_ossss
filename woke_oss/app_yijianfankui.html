@@ -1,0 +1,186 @@
+<!DOCTYPE html>
+<html>
+
+	<head>
+		<meta charset="UTF-8">
+		<title>服务商详情</title>
+		<link rel="stylesheet" type="text/css" href="css/public.css" />
+		<link rel="stylesheet" href="bootstrap/dist/css/bootstrap.min.css">
+		<link rel="stylesheet" href="font-awesome/css/font-awesome.min.css">
+		<link rel="stylesheet" href="css/ionicons.min.css">
+		<link rel="stylesheet" href="css/AdminLTE.min.css">
+		<link rel="stylesheet" href="dist/css/skins/_all-skins.min.css">
+		<link rel="stylesheet" type="text/css" href="css/bootstrap-datetimepicker.min.css" />
+		<link rel="stylesheet" type="text/css" href="css/fileinput.min.css" />
+		<link rel="stylesheet" type="text/css" href="css/public_main.css" />
+		<style type="text/css">
+			body #chuli_type {
+				display: inline-block;
+				/*margin-top: 5px;*/
+				width: 150px;
+				height: 34px;
+				margin-left: 10px;
+			}
+		</style>
+	</head>
+
+	<body>
+		<div class="box">
+			<div class="box-header with-border">
+				<h3 class="box-title">意见反馈</h3>
+			</div>
+			<div id="mohu">
+
+				<!--<label for="name">选择楼宇：</label>-->
+				<label>选择状态</label>
+				<select name="" id="chuli_type">
+					<option value="1">未处理</option>
+					<option value="2">已处理</option>
+					<option value="0">全部</option>
+				</select>
+				<input type="text" name="" id="text_sousuo" value="" placeholder="请输入需要查询的内容" />
+				<button id="search_chaxun" type="button" class="btn btn-success">搜索</button>
+			</div>
+			<!--<div class="my_feilei">-->
+			<!-- /.box-header -->
+			<div class="box-body">
+				<table class="table table-bordered">
+					<tr>
+						<th>序号</th>
+						<th>用户名</th>
+						<th>用户手机</th>
+						<th>创建时间</th>
+						<th>处理人</th>
+						<th>是否处理</th>
+						<th>查看详情</th>
+					</tr>
+					<tbody id="tbbb">
+						<tr>
+							<td>1.</td>
+							<th>正在加载数据...</th>
+							<th>正在加载数据...</th>
+							<th>正在加载数据...</th>
+							<th>正在加载数据...</th>
+							<th>正在加载数据...</th>
+							<th>正在加载数据...</th>
+							<th data-toggle="modal" data-target="#myModal" style="color:blue;cursor: pointer" ;><i class="fa fa-github-eye"></i></th>
+
+						</tr>
+					</tbody>
+
+				</table>
+			</div>
+			<!-- /.box-body -->
+			<div class="box-footer clearfix">
+				<div>
+					<s style="margin-top: 5px;">共有：</s> <span id="count"></span><s>条,每页显示13条</s>
+				</div>
+				<ul id='bp-3-element-test'>
+				</ul>
+			</div>
+		</div>
+
+		<!-- 模态框（Modal） -->
+		<div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+			<div class="modal-dialog">
+				<div class="modal-content">
+					<div class="modal-header">
+						<button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+						<h4 class="modal-title" id="myModalLabel"></h4>
+					</div>
+					<div id="shenhe" class="modal-body">
+						<ul id="myTab" class="nav nav-tabs">
+							<li class="active">
+								<a href="#home" data-toggle="tab">
+									基础信息
+								</a>
+							</li>
+							<li>
+								<a href="#fix" data-toggle="tab">
+									详细信息
+								</a>
+							</li>
+						</ul>
+						<ul id="ppp">
+							<div id="myTabContent" class="tab-content">
+								<div class=" tab-pane fade in active" id="home">
+									<li>
+										<span>用户名:</span><s id="yj_name"></s>
+									</li>
+
+									<li>
+										<span>用户手机:</span><s id="yj_mibil"></s>
+									</li>
+									<li>
+										<span>创建时间:</span><s id="yj_creatdate"></s>
+									</li>
+									<li>
+										<span>处理人:</span><s id="yj_clr"></s>
+									</li>
+									<li>
+										<span>是否处理:</span><s id="yj_sfcl"></s>
+									</li>
+								</div>
+								<div class="tab-pane fade" id="fix">
+									<li>
+										<span>用户意见反馈 id:</span><s id="yj_yhyjid"></s>
+									</li>
+									<li>
+										<span>用户id:</span><s id="yj_yhid"></s>
+									</li>
+									<li>
+										<span>处理人id:</span><s id="yj_clrid"></s>
+									</li>
+									<li>
+										<span>意见描述:</span><s id="yj_yjms"></s>
+									</li>
+									<li>
+										<span>图片地址:</span><img data-action="zoom" id="yj_tpdz" src="img/logo.png" alt="" />
+									</li>
+								</div>
+							</div>
+						</ul>
+					</div>
+					<div class="modal-footer">
+						<div class="shenhe_no">
+							<button type="button" class="btn btn-default fanhui" data-dismiss="modal">返回</button>
+							<button type="button" class="btn btn-info yj_fk_chuli" data-dismiss="modal">已处理</button>
+							<!--<button type="button" class="btn btn-info yh_jinyong" data-dismiss="modal">禁用</button>-->
+							<button data-toggle="modal" data-target="#myModal4" type="button" class="btn btn-danger ">删除</button>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+		<!-- 模态框（Modal） -->
+		<div class="modal fade" id="myModal4" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+			<div class="modal-dialog">
+				<div class="modal-content">
+					<div class="modal-header">
+						<button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+						<h4 class="modal-title" id="myModalLabel">是否确认删除</h4>
+					</div>
+					<div class="modal-body">删除后数据无法找回</div>
+					<div class="modal-footer">
+						<button type="button" class="btn btn-default" data-dismiss="modal">关闭</button>
+						<button type="button" class="btn btn-danger yj_remove">确定删除</button>
+					</div>
+				</div>
+				<!-- /.modal-content -->
+			</div>
+			<!-- /.modal -->
+		</div>
+	</body>
+
+</html>
+<script src="js/jquery.min.js" type="text/javascript" charset="utf-8"></script>
+<script src="bootstrap/dist/js/bootstrap.min.js" type="text/javascript" charset="utf-8"></script>
+<script src="js/qunit-1.11.0.js" type="text/javascript" charset="utf-8"></script>
+<script src="js/bootstrap-paginator.js" type="text/javascript" charset="utf-8"></script>
+<script src="js/bootstrap-datetimepicker.js" type="text/javascript" charset="utf-8"></script>
+<script src="js/bootstrap-datetimepicker.zh-CN.js" type="text/javascript" charset="utf-8"></script>
+<script src="js/zooming.js" type="text/javascript" charset="utf-8"></script>
+<script src="js/data.js" type="text/javascript" charset="utf-8"></script>
+<script src="js/fileinput.min.js" type="text/javascript" charset="utf-8"></script>
+<script src="js/zh.js" type="text/javascript" charset="utf-8"></script>
+<script src="js/app_yijianfankui.js" type="text/javascript" charset="utf-8"></script>

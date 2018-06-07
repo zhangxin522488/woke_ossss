@@ -1,0 +1,167 @@
+<!DOCTYPE html>
+<html>
+
+	<head>
+		<meta charset="UTF-8">
+		<title>服务商小区权限列表</title>
+		<link rel="stylesheet" type="text/css" href="css/public.css" />
+		<link rel="stylesheet" href="bootstrap/dist/css/bootstrap.min.css">
+		<link rel="stylesheet" href="css/font-awesome.min.css">
+		<link rel="stylesheet" href="css/ionicons.min.css">
+		<link rel="stylesheet" href="css/AdminLTE.min.css">
+		<link rel="stylesheet" href="dist/css/skins/_all-skins.min.css">
+		<link rel="stylesheet" type="text/css" href="css/bootstrap-datetimepicker.min.css" />
+		<link rel="stylesheet" type="text/css" href="css/public_main.css" />
+
+	</head>
+
+	<body>
+		<div class="box">
+			<div class="box-header with-border">
+				<h3 class="box-title">物业小区 </h3>
+			</div>
+
+			<div id="mohu" class="my_feilei">
+
+				<!--<label for="name">选择楼宇：</label>-->
+				<!--<s>选择状态</s>-->
+				<!--<select id="xiashulouyu_se" style="display: inline-block;" class="form-control">
+
+				</select>-->
+				<input type="text" name="" id="text_sousuo" value="" placeholder="请输入需要查询的内容" />
+				<button id="search_chaxun" type="button" class="btn btn-success">搜索</button>
+
+			</div>
+
+			<!--<div class="my_feilei">-->
+			<!-- /.box-header -->
+			<div style="margin-top: 0px;" class="box-body">
+				<table class="table table-bordered">
+					<tr>
+						<th>序号</th>
+						<th>小区名称</th>
+						<th style="display: none;">小区ID</th>
+						<th>小区编码</th>
+						<th>创建人</th>
+						<th>创建时间</th>
+						<th>操作</th>
+					</tr>
+					<tbody id="tbbb">
+						<tr>
+							<td>1.</td>
+							<th>正在加载数据...</th>
+							<th>正在加载数据...</th>
+							<th>正在加载数据...</th>
+							<th>正在加载数据...</th>
+							<th>正在加载数据...</th>
+							<th>正在加载数据...</th>
+
+						</tr>
+					</tbody>
+
+				</table>
+			</div>
+			<!-- /.box-body -->
+			<div class="box-footer clearfix">
+				<div>
+					<s style="margin-top: 5px;">共有：</s> <span id="count"></span><s>条,每页显示13条</s>
+				</div>
+				<ul id='bp-3-element-test'>
+				</ul>
+			</div>
+		</div>
+
+		<!-- 模态框（Modal） -->
+		<div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+			<div class="modal-dialog">
+				<div class="modal-content">
+					<div class="modal-header">
+						<button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+						<h4 class="modal-title" id="myModalLabel"></h4>
+					</div>
+					<div id="shenhe" class="modal-body">
+						<ul id="myTab" class="nav nav-tabs">
+							<li class="active">
+								<a href="#home" data-toggle="tab">
+									基础信息
+								</a>
+							</li>
+							<li>
+								<a href="#fix" data-toggle="tab">
+									详细信息
+								</a>
+							</li>
+
+						</ul>
+						<ul id="ppp">
+							<div id="myTabContent" class="tab-content">
+								<div class=" tab-pane fade in active" id="home">
+									<li>
+										<span>小区名称:</span><s id="xiaoqu_name"></s>
+									</li>
+
+									<li>
+										<span>小区编码:</span><s id="xiaoqu_bianma"></s>
+									</li>
+									<li style="display: none;">
+										<span>小区ID:</span><s id="xiaoqu_id"></s>
+									</li>
+
+									<li>
+										<span>创建人:</span><s id="xiaoqu_creat"></s>
+									</li>
+									<li>
+										<span>创建时间:</span><s id="xiaoqu_creattime"></s>
+									</li>
+									<li>
+										<span>联系电话:</span><s id="xiaoqu_tel"></s>
+									</li>
+								</div>
+								<div class="tab-pane fade" id="fix">
+									<li>
+										<span>小区地址:</span><s id="xiaoqu_adress"></s>
+									</li>
+									<li>
+										<span>楼宇数:</span><s id="xiaoqu_lou"></s>
+									</li>
+									<li>
+										<span>楼号首码:</span><s id="xiaoqu_louma"></s>
+									</li>
+									<li>
+										<span>省:</span><s id="xiaoqu_sheng"></s>
+									</li>
+									<li>
+										<span>市:</span><s id="xiaoqu_shi"></s>
+									</li>
+									<li>
+										<span>备注:</span><textarea id="xiaoqu_beizhu" name="" rows="" cols=""></textarea>
+									</li>
+								</div>
+							</div>
+						</ul>
+					</div>
+					<div class="modal-footer">
+						<div class="shenhe_no">
+							<button type="button" class="btn btn-default fanhui" data-dismiss="modal">返回</button>
+							<button type="button" class="btn btn-info xiashu_louyu">下属楼宇</button>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+
+	</body>
+
+</html>
+<script src="js/jquery.min.js" type="text/javascript" charset="utf-8"></script>
+<script src="bootstrap/dist/js/bootstrap.min.js" type="text/javascript" charset="utf-8"></script>
+<script src="js/jquery.slimscroll.min.js"></script>
+<script src="js/fastclick.js"></script>
+<script src="dist/js/adminlte.min.js"></script>
+<script src="dist/js/demo.js"></script>
+<script src="js/qunit-1.11.0.js" type="text/javascript" charset="utf-8"></script>
+<script src="js/bootstrap-paginator.js" type="text/javascript" charset="utf-8"></script>
+<script src="js/bootstrap-datetimepicker.js" type="text/javascript" charset="utf-8"></script>
+<script src="js/bootstrap-datetimepicker.zh-CN.js" type="text/javascript" charset="utf-8"></script>
+<script src="js/data.js" type="text/javascript" charset="utf-8"></script>
+<script src="js/wuyexiaoqu.js" type="text/javascript" charset="utf-8"></script>

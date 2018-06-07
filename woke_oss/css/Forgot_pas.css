@@ -1,0 +1,244 @@
+body {
+	margin: 0;
+	padding: 0;
+	width: 100%;
+	height: 100%;
+	background: #e7e8eb;
+}
+
+body input {
+	outline: none;
+}
+
+body header {
+	border-top: 2px solid blue;
+	background: #fff;
+	width: 100%;
+	box-shadow: 2px 3px 20px #2589F7;
+}
+
+body #reg1_main {
+	width: 95%;
+	margin: 0 auto;
+	background: #fff;
+	margin-top: 20px;
+}
+
+body #reg1_main .reg1_buzhu {
+	width: 100%;
+	border-bottom: 1px solid #dddee0;
+}
+
+body #reg1_main .reg1_buzhu ul {
+	width: 60%;
+	display: flex;
+	justify-content: space-between;
+}
+
+body #reg1_main .reg1_buzhu ul li {
+	width: 33.33%;
+	font: 15px/56px "";
+	color: #666666;
+	text-align: center;
+}
+
+body #reg1_main .reg1_buzhu ul .te_li_li {
+	color: blue;
+	border-bottom: 2px solid #2589f7;
+}
+
+body #reg1_main .jiben1_se {
+	margin-top: 120px;
+	margin-left: 275px;
+	display: block;
+}
+
+body #reg1_main .jiben1_se ul li {
+	margin-bottom: 33px;
+}
+
+body #reg1_main .jiben1_se span {
+	font: 13px/38px "";
+	color: #333333;
+	display: inline-block;
+	width: 120px;
+}
+
+body #reg1_main .jiben1_se input {
+	width: 360px;
+	height: 38px;
+	text-indent: 1rem;
+}
+
+body #reg1_main .jiben1_se #code1 {
+	width: 140px;
+	height: 38px;
+	border: 1px solid #2589f7;
+	color: #2589f7;
+	text-align: center;
+	font: 12px/38px "";
+	margin-left: 10px;
+	cursor: pointer;
+	background: #fff;
+}
+
+body #reg1_main .jiben1_se p {
+	margin-left: 120px;
+	font: 12px/24px "";
+	color: #7a7a7a;
+	display: inline-block;
+}
+
+body #reg1_main .jiben1_se s {
+	margin-left: 12px;
+	font: 12px/24px "";
+	color: red;
+}
+
+body #reg1_main .jiben1_se #fix_xiayi {
+	display: block;
+	width: 360px;
+	height: 44px;
+	font: 14px/44px "";
+	color: #fff;
+	background: #2589f7;
+	margin-left: 120px;
+	text-align: center;
+	border-radius: 22px;
+	cursor: pointer;
+	border: none;
+}
+
+body #reg1_main .jiben2_se {
+	margin-top: 120px;
+	margin-left: 275px;
+	display: none;
+}
+
+body #reg1_main .jiben2_se ul li {
+	margin-bottom: 33px;
+}
+
+body #reg1_main .jiben2_se span {
+	font: 13px/38px "";
+	color: #333333;
+	display: inline-block;
+	width: 120px;
+}
+
+body #reg1_main .jiben2_se input {
+	width: 360px;
+	height: 38px;
+	text-indent: 1rem;
+}
+
+body #reg1_main .jiben2_se #code1 {
+	width: 140px;
+	height: 38px;
+	border: 1px solid #2589f7;
+	color: #2589f7;
+	text-align: center;
+	font: 12px/38px "";
+	margin-left: 10px;
+	cursor: pointer;
+	background: #fff;
+}
+
+body #reg1_main .jiben2_se p {
+	margin-left: 120px;
+	font: 12px/24px "";
+	color: #7a7a7a;
+	display: inline-block;
+}
+
+body #reg1_main .jiben2_se s {
+	margin-left: 12px;
+	font: 12px/24px "";
+	color: red;
+}
+
+body #reg1_main .jiben2_se #FIXpas_xiayi {
+	display: block;
+	width: 360px;
+	height: 44px;
+	font: 14px/44px "";
+	color: #fff;
+	background: #2589f7;
+	margin-left: 120px;
+	text-align: center;
+	border-radius: 22px;
+	cursor: pointer;
+	border: none;
+}
+
+body #reg1_main .jiben3_se {
+	margin-top: 120px;
+	margin-left: 275px;
+	display: none;
+}
+
+body #reg1_main .jiben3_se div {
+	width: 100%;
+	height: 35px;
+	margin-bottom: 34px;
+	margin-left: 120px;
+}
+
+body #reg1_main .jiben3_se div img {
+	width: 35px;
+	height: auto;
+	margin-top: -13px;
+}
+
+body #reg1_main .jiben3_se div span {
+	color: #69bf8d;
+	font: 25px/35px "";
+}
+
+body #reg1_main .jiben3_se s {
+	font-size: 18px;
+	color: #333333;
+	font-weight: 600;
+	margin-top: 6px;
+}
+
+body #reg1_main .jiben3_se b {
+	margin-top: 6px;
+	color: red;
+	font-size: 16px;
+}
+
+body #reg1_main .jiben3_se p {
+	margin-top: 26px;
+	color: #333333;
+	font: 13px/26px "";
+}
+
+body #reg1_main .jiben3_se a {
+	display: block;
+	width: 360px;
+	height: 44px;
+	margin-top: 30px;
+}
+
+body #reg1_main .jiben3_se a input {
+	width: 100%;
+	height: 100%;
+	display: block;
+	font: 14px/44px "";
+	color: #fff;
+	background: #2589f7;
+	margin-left: 120px;
+	text-align: center;
+	border-radius: 22px;
+	cursor: pointer;
+	border: none;
+	outline: none;
+}
+
+body #reg1_main .jiben3_se a input:hover {
+	background: #3366ff;
+}
+
+
+/*# sourceMappingURL=Forgot_pas.css.map */

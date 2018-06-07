@@ -1,0 +1,595 @@
+<!DOCTYPE html>
+<html>
+
+	<head>
+		<meta charset="UTF-8">
+		<title>服务商小区权限列表</title>
+		<link rel="stylesheet" type="text/css" href="css/public.css" />
+		<link rel="stylesheet" href="bootstrap/dist/css/bootstrap.min.css">
+		<link rel="stylesheet" href="css/font-awesome.min.css">
+		<link rel="stylesheet" href="css/ionicons.min.css">
+		<link rel="stylesheet" href="css/AdminLTE.min.css">
+		<link rel="stylesheet" href="dist/css/skins/_all-skins.min.css">
+		<link rel="stylesheet" type="text/css" href="css/bootstrap-datetimepicker.min.css" />
+		<link rel="stylesheet" type="text/css" href="css/public_main.css" />
+		<style type="text/css">
+			body #select_zhanwei {
+				display: inline-block;
+				/*margin-top: 5px;*/
+				width: 120px;
+				height: 34px;
+			}
+			
+			#search_chaxun {
+				/*margin-top: 10px;*/
+				margin-left: 30px;
+			}
+			
+			body #tbbb .btn {
+				padding: 0;
+				cursor: default;
+			}
+			
+			body #select_type {
+				display: inline-block;
+				/*margin-top: 5px;*/
+				width: 160px;
+				height: 34px;
+				margin-left: 10px;
+			}
+			
+			body #select_type1 {
+				display: inline-block;
+				/*margin-top: 5px;*/
+				width: 120px;
+				height: 34px;
+				margin-left: 10px;
+			}
+			
+			#search_chaxun {
+				/*margin-top: 10px;*/
+				margin-left: 10px;
+			}
+			
+			#text_sousuo {
+				margin-left: 20px;
+			}
+			
+			.id_dingdan {
+				position: absolute;
+				top: 0;
+				left: 650px;
+			}
+			
+			.id_dingdan input {
+				width: 200px;
+				height: 34px;
+				margin-left: 20px;
+			}
+		</style>
+
+	</head>
+
+	<body>
+		<div class="box">
+			<div class="box-header with-border">
+				<h3 class="box-title">订单列表</h3>
+			</div>
+			<div id="mohu" class="clear">
+				<div id="star_time" class="form-group">
+					<label for="dtp_input2" class=" control-label">开始时间</label>
+					<div class="input-group date form_date " data-date="" data-date-format="yyyy-mm-dd" data-link-field="dtp_input2" data-link-format="yyyy-mm-dd">
+						<input id="datepicker" placeholder="请选择开始时间" onchange="gaibian()" class="form-control input_1" size="16" type="text" value="" readonly>
+						<span class="input-group-addon"><span class="glyphicon glyphicon-remove"></span></span>
+						<span class="input-group-addon"><span class="glyphicon glyphicon-calendar"></span></span>
+
+						<input type="hidden" id="dtp_input2" value="" />
+					</div>
+				</div>
+				<div id="end_time" class="form-group">
+					<label for="dtp_input2" class="control-label">结束时间</label>
+					<div class="input-group date form_date2 " data-date="" data-date-format="yyyy-mm-dd" data-link-field="dtp_input2" data-link-format="yyyy-mm-dd">
+						<input class="form-control input_2" placeholder="请选择结束时间" size="16" type="text" value="" readonly>
+						<span class="input-group-addon"><span class="glyphicon glyphicon-remove"></span></span>
+						<span class="input-group-addon"><span class="glyphicon glyphicon-calendar"></span></span>
+
+						<input type="hidden" id="dtp_input2" value="" />
+					</div>
+				</div>
+				<!--<div class="id_dingdan">
+					<input type="text" name="billid_dingdan" id="billid_dingdan" value="" placeholder="请输入订单id" />
+				</div>-->
+				<label for="name">选择状态</label>
+				<!--<s>选择状态</s>-->
+				<select id="select_type" style="display: inline-block;" class="form-control">
+					<option value="">全部</option>
+					<option value="0">未支付</option>
+					<option value="1">已支付</option>
+					<option value="2">已取消</option>
+					<option value="3">已退款</option>
+					<option value="5">缴费失败，未退款</option>
+					<option value="4">缴费失败，已退款</option>
+				</select>
+
+				<label style="margin-left:10px;" for="name">订单类型</label>
+				<!--<s>选择状态</s>-->
+				<select id="select_type1" style="display: inline-block;" class="form-control">
+					<option value="">全部</option>
+					<option value="1">缴费订单</option>
+					<option value="2">充值订单</option>
+					<option value="3">商户</option>
+				</select>
+				<input type="text" name="" id="text_sousuo" value="" placeholder="请输入需要查询的内容" />
+				<button id="search_chaxun"  type="button" class="btn btn-success">搜索</button>
+			</div>
+			<!--<div style="margin-top:0px;margin-left: 20px;" class="my_feilei">
+
+			</div>-->
+			<!-- /.box-header -->
+			<div class="box-body">
+				<table class="table table-bordered">
+					<tr>
+						<th>序号</th>
+						<th>会员名字</th>
+						<th>订单类型</th>
+						<th>订单日期</th>
+						<th>订单金额</th>
+						<th>订单状态</th>
+						<th>操作</th>
+					</tr>
+					<tbody id="tbbb">
+						<tr>
+							<td>1.</td>
+							<th>正在加载数据...</th>
+							<th>正在加载数据...</th>
+							<th>正在加载数据...</th>
+
+							<th>正在加载数据...</th>
+							<th>正在加载数据...</th>
+						</tr>
+					</tbody>
+
+				</table>
+			</div>
+			<!-- /.box-body -->
+			<div class="box-footer clearfix">
+				<div>
+					<s style="margin-top: 5px;">共有：</s> <span id="count"></span><s>条,每页显示10条</s>
+				</div>
+				<ul id='bp-3-element-test'>
+				</ul>
+			</div>
+		</div>
+
+		<!-- 模态框（Modal） -->
+		<div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+			<div class="modal-dialog">
+				<div class="modal-content">
+					<div class="modal-header">
+						<button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+						<h4 class="modal-title" id="myModalLabel"></h4>
+					</div>
+					<div id="shenhe" class="modal-body">
+						<ul id="myTab" class="nav nav-tabs">
+							<li class="active">
+								<a href="#home" data-toggle="tab">
+									基础信息
+								</a>
+							</li>
+							<li>
+								<a href="#fix" data-toggle="tab">
+									支付信息
+								</a>
+							</li>
+							<li>
+								<a href="#zizhi" data-toggle="tab">
+									地址信息
+								</a>
+							</li>
+							<li>
+								<a href="#zhuce" data-toggle="tab">
+									优惠信息
+								</a>
+							</li>
+
+						</ul>
+						<ul id="ppp">
+							<div id="myTabContent" class="tab-content">
+								<div class=" tab-pane fade in active" id="home">
+									<li>
+										<span>订单状态:</span><s id="s_aud1"></s>
+									</li>
+									<li>
+										<span>订单金额:</span><s id="s_jine1"></s>
+									</li>
+
+									<li>
+										<span>订单类型:</span><s id="s_type1"></s>
+									</li>
+									<li>
+										<span>订单日期:</span><s id="s_data1"></s>
+									</li>
+									<li>
+										<span>欠单号:</span><s id="s_qian1"></s>
+									</li>
+									<li>
+										<span>费用时段:</span><s id="s_feiyong1"></s>
+									</li>
+									<li>
+										<span>交费金额:</span><s id="s_jiaofei1"></s>
+									</li>
+									<li>
+										<span>实付金额:</span><s id="s_shifu1"></s>
+									</li>
+
+								</div>
+								<div class="tab-pane fade" id="fix">
+									<li>
+										<span>支付方式:</span><s id="s_payf1"></s>
+									</li>
+									<li>
+										<span>支付日期:</span><s id="s_paydata1"></s>
+									</li>
+									<li>
+										<span>支付结果:</span><s id="s_jieguo1"></s>
+									</li>
+									<li>
+										<span>结算状态:</span><s id="s_jiesuantype1"></s>
+									</li>
+									<li>
+										<span>结算日期:</span><s id="s_jiesuandate1"></s>
+									</li>
+									<li>
+										<span>结算单id:</span><s id="s_jiesuanID1"></s>
+									</li>
+
+									<li>
+										<span>第三方支付id:</span><s id="s_payid1"></s>
+									</li>
+
+									<li>
+										<span>记录id:</span><s id="s_jilvid1"></s>
+									</li>
+									<li>
+										<span>会员id:</span><s id="s_huiyuanid1"></s>
+									</li>
+
+								</div>
+								<div class="tab-pane fade" id="zizhi">
+									<li>
+										<span>序号:</span><s id="s_xuhao1"></s>
+									</li>
+									<li>
+										<span>楼号:</span><s id="s_lohao1"></s>
+									</li>
+									<li>
+										<span>小区名:</span><s id="s_xiaoquname1"></s>
+									</li>
+									<li>
+										<span>物业名:</span><s id="s_wuyename1"></s>
+									</li>
+									<li>
+										<span>是否供暖:</span><s id="s_shifou_gn1"></s>
+									</li>
+								</div>
+								<div class="tab-pane fade" id="zhuce">
+									<li>
+										<span>优惠券抵扣额:</span><s id="s_quan1"></s>
+									</li>
+									<li style="display: none;">
+										<span>优惠券id:</span><s id="s_quanid1"></s>
+									</li>
+									<li>
+										<span>沃豆抵消额度:</span><s id="s_wodou1"></s>
+									</li>
+									<li>
+										<span>滞纳金:</span><s id="s_zhina1"></s>
+									</li>
+								</div>
+							</div>
+						</ul>
+					</div>
+					<div class="modal-footer">
+						<div class="modal-footer">
+							<button type="button" class="btn btn-default fanhui" data-dismiss="modal">返回</button>
+						</div>
+					</div>
+
+				</div>
+			</div>
+		</div>
+		<!-- 模态框（Modal） -->
+		<div class="modal fade" id="myModal1" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+			<div class="modal-dialog">
+				<div class="modal-content">
+					<div class="modal-header">
+						<button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+						<h4 class="modal-title" id="myModalLabel"></h4>
+					</div>
+					<div id="shenhe" class="modal-body">
+						<ul id="myTab1" class="nav nav-tabs">
+							<li class="active">
+								<a href="#home1" data-toggle="tab">
+									基础信息
+								</a>
+							</li>
+							<li>
+								<a href="#fix1" data-toggle="tab">
+									支付信息
+								</a>
+							</li>
+							<li>
+								<a href="#zizhi1" data-toggle="tab">
+									地址信息
+								</a>
+							</li>
+							<li>
+								<a href="#zhuce1" data-toggle="tab">
+									充值信息
+								</a>
+							</li>
+
+						</ul>
+						<ul id="ppp">
+							<div id="myTabContent" class="tab-content">
+								<div class=" tab-pane fade in active" id="home1">
+									<li>
+										<span>充值类:</span><s id="s_chongzhilei2"></s>
+									</li>
+
+									<li>
+										<span>订单状态:</span><s id="s_aud2"></s>
+									</li>
+									<li>
+										<span>交费金额:</span><s id="s_jiaofei2"></s>
+									</li>
+									<li>
+										<span>实付金额:</span><s id="s_shifu2"></s>
+									</li>
+									<li>
+										<span>优惠券抵扣额:</span><s id="s_quan2"></s>
+									</li>
+									<li style="display: none;">
+										<span>优惠券id:</span><s id="s_quanid2"></s>
+									</li>
+									<li>
+										<span>沃豆抵消额度:</span><s id="s_wodou2"></s>
+									</li>
+								</div>
+								<div class="tab-pane fade" id="fix1">
+									<li>
+										<span>充值流水号:</span><s id="s_liushui2"></s>
+									</li>
+									<li>
+										<span>支付方式:</span><s id="s_payf2"></s>
+									</li>
+									<li>
+										<span>支付结果:</span><s id="s_jieguo2"></s>
+									</li>
+									<li>
+										<span>支付日期:</span><s id="s_paydata2"></s>
+									</li>
+									<li>
+										<span>结算状态:</span><s id="s_jiesuantype2"></s>
+									</li>
+									<li>
+										<span>结算日期:</span><s id="s_jiesuandate2"></s>
+									</li>
+									<li>
+										<span>结算单id:</span><s id="s_jiesuanID2"></s>
+									</li>
+									<li>
+										<span>第三方支付id:</span><s id="s_payid2"></s>
+									</li>
+									<li>
+										<span>会员id:</span><s id="s_huiyuanid2"></s>
+									</li>
+
+								</div>
+								<div class="tab-pane fade" id="zizhi1">
+									<li>
+										<span>房号:</span><s id="s_xuhao2"></s>
+									</li>
+									<li>
+										<span>楼号:</span><s id="s_lohao2"></s>
+									</li>
+									<li>
+										<span>小区名:</span><s id="s_xiaoquname2"></s>
+									</li>
+									<li>
+										<span>物业名:</span><s id="s_wuyename2"></s>
+									</li>
+									<li style="display: none;">
+										<span>表具id:</span><s id="s_biao2"></s>
+									</li>
+									<li>
+										<span>表具号:</span><s id="s_biaoid2"></s>
+									</li>
+								</div>
+								<div class="tab-pane fade" id="zhuce1">
+
+									<li>
+										<span>上送状态:</span><s id="s_shangsong2"></s>
+									</li>
+									<li>
+										<span>上送接口时间:</span><s id="s_shangsongdata2"></s>
+									</li>
+									<li>
+										<span>受理状态信息:</span><s id="s_shouli2"></s>
+									</li>
+									<li>
+										<span>受理状态:</span><s id="s_shoulitype2"></s>
+									</li>
+
+									<li>
+										<span>充值结果:</span><s id="s_chongzhiresult2"></s>
+									</li>
+									<li>
+										<span>完成充值时间:</span><s id="s_enddata2"></s>
+									</li>
+									<li>
+										<span>充值状态码:</span><s id="s_chongzhiresultma2"></s>
+									</li>
+								</div>
+							</div>
+						</ul>
+					</div>
+					<div class="modal-footer">
+						<div class="modal-footer">
+							<button type="button" class="btn btn-default fanhui" data-dismiss="modal">返回</button>
+						</div>
+					</div>
+
+				</div>
+			</div>
+		</div>
+		<!-- 模态框（Modal2） -->
+		<div class="modal fade" id="myModal2" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+			<div class="modal-dialog">
+				<div class="modal-content">
+					<div class="modal-header">
+						<button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+						<h4 class="modal-title" id="myModalLabel"></h4>
+					</div>
+					<div id="shenhe" class="modal-body">
+						<ul id="myTab" class="nav nav-tabs">
+							<li class="active">
+								<a href="#home2" data-toggle="tab">
+									订单信息
+								</a>
+							</li>
+							<li>
+								<a href="#fix2" data-toggle="tab">
+									支付信息
+								</a>
+							</li>
+							<li>
+								<a href="#zizhi2" data-toggle="tab">
+									通知信息
+								</a>
+							</li>
+							<li>
+								<a href="#zhuce2" data-toggle="tab">
+									优惠信息
+								</a>
+							</li>
+
+						</ul>
+						<ul id="ppp">
+							<div id="myTabContent" class="tab-content">
+								<div class=" tab-pane fade in active" id="home2">
+									<li>
+										<span>会员id:</span><s id="s_huiyuanID3"></s>
+									</li>
+									<li>
+										<span>订单状态:</span><s id="s_dingdanzhuangtai3"></s>
+									</li>
+									<li>
+										<span>商品:</span><s id="s_shangpin3"></s>
+									</li>
+									<li>
+										<span>商户名:</span><s id="s_spname3"></s>
+									</li>
+									<li>
+										<span>支付时间:</span><s id="s_paydata3"></s>
+									</li>
+									<li>
+										<span>订单id:</span><s id="s_dingdanid3"></s>
+									</li>
+									<li>
+										<span>商户订单Id:</span><s id="s_shdingdanid3"></s>
+									</li>
+
+								</div>
+								<div class="tab-pane fade" id="fix2">
+									<li>
+										<span>应付金额:</span><s id="s_cash3"></s>
+									</li>
+									<li>
+										<span>支付金额:</span><s id="s_shifu3"></s>
+									</li>
+									<li>
+										<span>结算状态:</span><s id="s_jiesuantype3"></s>
+									</li>
+									<li>
+										<span>结算日期:</span><s id="s_jiesuandate3"></s>
+									</li>
+									<li>
+										<span>结算单id:</span><s id="s_jiesuanID3"></s>
+									</li>
+									<li>
+										<span>退款状态:</span><s id="s_tuikuantype3"></s>
+									</li>
+									<li>
+										<span>退款时间:</span><s id="s_tuikuandata3"></s>
+									</li>
+									<li>
+										<span>退款金额:</span><s id="s_tuikuancash3"></s>
+									</li>
+
+									<li>
+										<span>退款摘要:</span><s id="s_zhaiyao3"></s>
+									</li>
+								</div>
+								<div class="tab-pane fade" id="zizhi2">
+									<li>
+										<span>通知商户:</span><s id="s_tongzhi3"></s>
+									</li>
+									<li>
+										<span>通知地址:</span><s id="s_tongzhiadress3"></s>
+									</li>
+									<li>
+										<span>通知次数:</span><s id="s_cishu3"></s>
+									</li>
+									<li>
+										<span>通知时间:</span><s id="s_data3"></s>
+									</li>
+									<li>
+										<span>通知信息:</span><s id="s_message3"></s>
+									</li>
+									<li>
+										<span>撤销状态:</span><s id="s_chexiao3"></s>
+									</li>
+									<li>
+										<span>撤销时间:</span><s id="s_chexiaodata3"></s>
+									</li>
+								</div>
+								<div class="tab-pane fade" id="zhuce2">
+									<li>
+										<span>沃豆抵消额度:</span><s id="s_wodou3"></s>
+									</li>
+									<li style="display: none;">
+										<span>优惠券id:</span><s id="s_youhuiquanID3"></s>
+									</li>
+									<li>
+										<span>优惠券抵消额度:</span><s id="s_youhuidixiao3"></s>
+									</li>
+								</div>
+							</div>
+						</ul>
+					</div>
+					<div class="modal-footer">
+						<div class="modal-footer">
+							<button type="button" class="btn btn-default fanhui" data-dismiss="modal">返回</button>
+						</div>
+					</div>
+
+				</div>
+			</div>
+		</div>
+
+	</body>
+
+</html>
+<script src="js/jquery.min.js" type="text/javascript" charset="utf-8"></script>
+<script src="bootstrap/dist/js/bootstrap.min.js" type="text/javascript" charset="utf-8"></script>
+<script src="js/jquery.slimscroll.min.js"></script>
+<script src="js/fastclick.js"></script>
+<script src="dist/js/adminlte.min.js"></script>
+<script src="dist/js/demo.js"></script>
+<script src="js/qunit-1.11.0.js" type="text/javascript" charset="utf-8"></script>
+<script src="js/bootstrap-paginator.js" type="text/javascript" charset="utf-8"></script>
+<script src="js/bootstrap-datetimepicker.js" type="text/javascript" charset="utf-8"></script>
+<script src="js/bootstrap-datetimepicker.zh-CN.js" type="text/javascript" charset="utf-8"></script>
+<script src="js/dingdanguanli.js" type="text/javascript" charset="utf-8"></script>
+<script src="js/data.js" type="text/javascript" charset="utf-8"></script>

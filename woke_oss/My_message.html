@@ -1,0 +1,358 @@
+<!DOCTYPE html>
+<html>
+
+	<head>
+		<meta charset="UTF-8">
+		<title>服务商详情</title>
+		<link rel="stylesheet" type="text/css" href="css/public.css" />
+		<link rel="stylesheet" href="bootstrap/dist/css/bootstrap.min.css">
+		<link rel="stylesheet" href="css/font-awesome.min.css">
+		<link rel="stylesheet" href="css/ionicons.min.css">
+		<link rel="stylesheet" href="css/AdminLTE.min.css">
+		<link rel="stylesheet" href="dist/css/skins/_all-skins.min.css">
+		<link rel="stylesheet" type="text/css" href="css/bootstrap-datetimepicker.min.css" />
+		<link rel="stylesheet" type="text/css" href="css/public_main.css" />
+		<style type="text/css">
+			.badge {
+				cursor: pointer;
+			}
+			
+			.badge:hover {
+				background: red;
+			}
+			
+			#butt_yanzhangma {
+				margin-left: 10px;
+			}
+			
+			#butt_yanzhangma1 {
+				margin-left: 10px;
+			}
+			
+			#butt_yanzhangma2 {
+				margin-left: 10px;
+			}
+		</style>
+	</head>
+
+	<body>
+		<div class="box">
+			<div class="box-header with-border">
+				<h3 class="box-title">我的信息</h3>
+			</div>
+			<div style="" class="box-body">
+				<ul id="box_ul_span" class="list-group">
+					<li class="list-group-item">
+						<s>姓名:</s><b id="my_name"></b>
+						<!--<span data-toggle="modal" data-target="#myModal" class="badge span_m1">修改</span>-->
+						<span data-toggle="modal" data-target="#myModal" class="glyphicon glyphicon-pencil span_m1 "></span>
+					</li>
+					<li class="list-group-item">
+						<s>昵称：</s><b id="my_nick"></b>
+						<!--<span data-toggle="modal" data-target="#myModal2" class="badge span_m2">修改</span>-->
+						<span data-toggle="modal" data-target="#myModal2" class="glyphicon glyphicon-pencil span_m2 "></span>
+						
+					</li>
+					<li class="list-group-item">
+						<s>ID：</s><b id="my_ID"></b>
+					</li>
+					<li class="list-group-item">
+						<s>登录账号：</s><b id="my_zhanghao"></b>
+					</li>
+					<li class="list-group-item">
+						<s>登录密码：</s><b id="my_mima"></b>
+						<!--<span data-toggle="modal" data-target="#myModal4" class="badge span_m4">修改</span>-->
+						<span data-toggle="modal" data-target="#myModal4" class="glyphicon glyphicon-pencil span_m4 "></span>
+						
+					</li>
+
+					<li class="list-group-item">
+						<s>职位：</s><b id="my_zhiwei"></b>
+
+					</li>
+					<li class="list-group-item">
+						<s>邮箱：</s><b id="my_email"></b>
+						<!--<span data-toggle="modal" data-target="#myModal3" class="badge span_m3 glyphicon glyphicon-pencil"></span>-->
+
+						<span data-toggle="modal" data-target="#myModal3" class="glyphicon glyphicon-pencil span_m3 "></span>
+
+					</li>
+					<li class="list-group-item">
+						<s>手机号码：</s><b id="my_tel"></b>
+						<!--<span id="fix_tel" class="badge">修改</span>-->
+						<span id="fix_tel" class="glyphicon glyphicon-pencil "></span>
+					</li>
+					<li class="list-group-item">
+						<s>手机号码验证状态：</s><b id="my_tel_yanzheng"></b>
+						<!--<span data-toggle="modal" data-target="#myModal5" class="badge span_m5">修改</span>-->
+						<span data-toggle="modal" data-target="#myModal5" class="glyphicon glyphicon-pencil span_m5 "></span>
+						
+					</li>
+					<!--<li class="list-group-item">
+						<s>创建人id：</s><b id="my_cr_id"></b>						
+					</li>-->
+					<li class="list-group-item">
+						<s>创建人姓名：</s><b id="my_cr_name"></b>
+
+					</li>
+					<li class="list-group-item">
+						<s>创建时间：</s><b id="my_cr_time"></b>
+
+					</li>
+					<!--<li class="list-group-item">
+						<s>修改人ID：</s><b id="my_up_id"></b>
+						
+					</li>
+					<li class="list-group-item">
+						<s>修改人名字：</s><b id="my_up_name"></b>
+					</li>
+					<li class="list-group-item">
+						<s>修改时间：</s><b id="my_up_time"></b>
+					</li>
+					-->
+				</ul>
+
+			</div>
+		</div>
+		<!-- 按钮触发模态框 -->
+
+		<!-- 模态框（Modal） 修改名字-->
+		<div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+			<div class="modal-dialog">
+				<div class="modal-content">
+					<div class="modal-header">
+						<button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+						<h4 class="modal-title" id="myModalLabel">修改手机</h4>
+					</div>
+					<div id="shenhe" class="modal-body">
+						<ul id="ppp">
+							<li>
+								<span>原姓名：</span><s id="old_name"></s>
+							</li>
+							<li>
+								<span>新姓名：</span><input type="text" name="new_name" id="new_name" placeholder="点击输入新的名字" value="" />
+							</li>
+
+						</ul>
+					</div>
+					<div class="modal-footer">
+						<button type="button" class="btn btn-default" data-dismiss="modal">关闭</button>
+						<button type="button" class="btn btn-primary fix_name">提交更改</button>
+					</div>
+				</div>
+				<!-- /.modal-content -->
+			</div>
+			<!-- /.modal -->
+		</div>
+		<!-- 模态框（Modal）修改昵称 -->
+		<div class="modal fade" id="myModal2" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+			<div class="modal-dialog">
+				<div class="modal-content">
+					<div class="modal-header">
+						<button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+						<h4 class="modal-title" id="myModalLabel">修改昵称</h4>
+					</div>
+					<div id="shenhe" class="modal-body">
+						<ul id="ppp">
+							<li>
+								<span>原昵称：</span><s id="old_nick"></s>
+							</li>
+							<li>
+								<span>新昵称：</span><input type="text" name="new_name" id="new_nick" value="" placeholder="点击输入新的昵称" />
+							</li>
+
+						</ul>
+					</div>
+					<div class="modal-footer">
+						<button type="button" class="btn btn-default" data-dismiss="modal">关闭</button>
+						<button type="button" class="btn btn-primary fix_nick">提交更改</button>
+					</div>
+				</div>
+				<!-- /.modal-content -->
+			</div>
+			<!-- /.modal -->
+		</div>
+		<!-- 模态框（Modal） 修改email-->
+		<div class="modal fade" id="myModal3" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+			<div class="modal-dialog">
+				<div class="modal-content">
+					<div class="modal-header">
+						<button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+						<h4 class="modal-title" id="myModalLabel">修改email</h4>
+					</div>
+					<div id="shenhe" class="modal-body">
+						<ul id="ppp">
+							<li>
+								<span>原邮箱：</span><s id="old_email"></s>
+							</li>
+							<li>
+								<span>新邮箱：</span><input type="text" name="new_name" id="new_email" value="" placeholder="点击输入新的邮箱" />
+							</li>
+
+						</ul>
+					</div>
+					<div class="modal-footer">
+						<button type="button" class="btn btn-default" data-dismiss="modal">关闭</button>
+						<button type="button" class="btn btn-primary fix_email">提交更改</button>
+					</div>
+				</div>
+
+			</div>
+
+		</div>
+
+		<!-- 模态框（Modal） 修改密码-->
+		<div class="modal fade" id="myModal4" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+			<div class="modal-dialog">
+				<div class="modal-content">
+					<div class="modal-header">
+						<button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+						<h4 class="modal-title" id="myModalLabel">修改密码</h4>
+					</div>
+					<div id="shenhe" class="modal-body">
+						<ul id="ppp">
+							<li>
+								<span>原密码：</span><input type="password" name="" id="new_pas" value="" placeholder="点击输入您的原密码" />
+							</li>
+							<li>
+								<span>新密码：</span><input type="password" name="" id="new_pas1" value="" placeholder="点击输入您的新密码" />
+							</li>
+							<li>
+								<span>确认新密码：</span><input type="password" name="" id="new_pas_sure" value="" placeholder="点击再次输入您的新密码" />
+							</li>
+
+						</ul>
+					</div>
+					<div class="modal-footer">
+						<button type="button" class="btn btn-default" data-dismiss="modal">关闭</button>
+						<button type="button" class="btn btn-primary fix_pas">提交更改</button>
+					</div>
+				</div>
+				<!-- /.modal-content -->
+			</div>
+			<!-- /.modal -->
+		</div>
+		<!-- 模态框（Modal） 绑定手机-->
+		<div class="modal fade" id="myModal5" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+			<div class="modal-dialog">
+				<div class="modal-content">
+					<div class="modal-header">
+						<button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+						<h4 class="modal-title" id="myModalLabel">绑定手机号码</h4>
+					</div>
+					<div id="shenhe" class="modal-body">
+						<ul id="ppp">
+							<li>
+								<span>手机号码：</span><s id="old_inphone"></s>
+							</li>
+							<button id="butt_yanzhangma" type="button" class="btn btn-default">点击发送验证码</button>
+							<li>
+								<span>验证码：</span><input id="s_yanzhnegma" type="text" placeholder="请输入验证码" />
+							</li>
+
+						</ul>
+					</div>
+					<div class="modal-footer">
+						<button type="button" class="btn btn-default" data-dismiss="modal">关闭</button>
+						<button type="button" class="btn btn-primary yanzheng_tel">提交更改</button>
+					</div>
+				</div>
+				<!-- /.modal-content -->
+			</div>
+			<!-- /.modal -->
+		</div>
+
+		<!-- 模态框（Modal） 绑定手机-->
+		<div class="modal fade" id="myModal6" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+			<div class="modal-dialog">
+				<div class="modal-content">
+					<div class="modal-header">
+						<button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+						<h4 class="modal-title" id="myModalLabel">未绑定手机修改密码</h4>
+					</div>
+					<div id="shenhe" class="modal-body">
+						<ul id="ppp">
+							<li>
+								<span>新手机号码：</span><input type="tel" name="weixiu_new_tel" id="weixiu_new_tel" value="" placeholder="请输入新的手机号码" />
+								<!--<s id="weixiu_new_tel"></s>-->
+							</li>
+							<li>
+								<s style="color: red;" id="old_tips2"></s>
+							</li>
+						</ul>
+					</div>
+					<div class="modal-footer">
+						<button type="button" class="btn btn-default" data-dismiss="modal">关闭</button>
+						<button type="button" class="btn btn-primary weiyanzheng_tel_new">提交更改</button>
+					</div>
+				</div>
+				<!-- /.modal-content -->
+			</div>
+			<!-- /.modal -->
+		</div>
+		<!-- 模态框（Modal） 绑定手机-->
+		<div class="modal fade" id="myModal7" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+			<div class="modal-dialog">
+				<div class="modal-content">
+					<div class="modal-header">
+						<button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+						<h4 class="modal-title" id="myModalLabel">已绑定手机修改密码</h4>
+					</div>
+					<div id="shenhe" class="modal-body">
+						<ul id="ppp">
+							<div id="old_old_tel">
+								<ul>
+									<li>
+										<span>原手机号码：</span><s id="old_tel"></s>
+									</li>
+									<button id="butt_yanzhangma1" type="button" class="btn btn-default">点击发送验证码</button>
+									<li>
+										<span>输入验证码：</span><input type="tel" id="old_yanzhengma" placeholder="请输入验证码" />
+									</li>
+									<li>
+										<s style="color: red;" id="old_tips"></s>
+									</li>
+								</ul>
+							</div>
+							<div style="display: none;" id="new_haoma">
+								<ul>
+									<li>
+										<span>新手机号码：</span><input type="tel" id="new_tel" placeholder="请输入新的手机号码" />
+									</li>
+									<button id="butt_yanzhangma2" type="button" class="btn btn-default">点击发送验证码</button>
+									<li>
+										<span>输入验证码：</span><input type="tel" id="new_yanzhengma" placeholder="请输入验证码" />
+									</li>
+									<li>
+										<s style="color: red;" id="old_tips1"></s>
+									</li>
+								</ul>
+							</div>
+
+						</ul>
+					</div>
+					<div class="modal-footer">
+						<button type="button" class="btn btn-default" data-dismiss="modal">关闭</button>
+						<button type="button" class="btn btn-primary next_old">下一步</button>
+						<button style="display: none;" type="button" class="btn btn-primary new_tijiao">提交更改</button>
+					</div>
+				</div>
+				<!-- /.modal-content -->
+			</div>
+			<!-- /.modal -->
+		</div>
+
+	</body>
+
+</html>
+<script src="js/jquery.min.js" type="text/javascript" charset="utf-8"></script>
+<script src="bootstrap/dist/js/bootstrap.min.js" type="text/javascript" charset="utf-8"></script>
+<script src="js/jquery.slimscroll.min.js"></script>
+<script src="js/fastclick.js"></script>
+<script src="dist/js/adminlte.min.js"></script>
+<script src="dist/js/demo.js"></script>
+<script src="js/qunit-1.11.0.js" type="text/javascript" charset="utf-8"></script>
+<script src="js/bootstrap-paginator.js" type="text/javascript" charset="utf-8"></script>
+<script src="js/bootstrap-datetimepicker.js" type="text/javascript" charset="utf-8"></script>
+<script src="js/bootstrap-datetimepicker.zh-CN.js" type="text/javascript" charset="utf-8"></script>
+<script src="js/My_message.js" type="text/javascript" charset="utf-8"></script>

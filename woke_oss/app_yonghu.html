@@ -1,0 +1,221 @@
+<!DOCTYPE html>
+<html>
+
+	<head>
+		<meta charset="UTF-8">
+		<title>服务商详情</title>
+		<link rel="stylesheet" type="text/css" href="css/public.css" />
+		<link rel="stylesheet" href="bootstrap/dist/css/bootstrap.min.css">
+		<link rel="stylesheet" href="font-awesome/css/font-awesome.min.css">
+		<link rel="stylesheet" href="css/ionicons.min.css">
+		<link rel="stylesheet" href="css/AdminLTE.min.css">
+		<link rel="stylesheet" href="dist/css/skins/_all-skins.min.css">
+		<link rel="stylesheet" type="text/css" href="css/bootstrap-datetimepicker.min.css" />
+		<link rel="stylesheet" type="text/css" href="css/fileinput.min.css" />
+		<link rel="stylesheet" type="text/css" href="css/public_main.css" />
+		<style type="text/css">
+			body #xiashulouyu_se {
+				display: inline-block;
+				/*margin-top: 5px;*/
+				width: 300px;
+				height: 34px;
+				margin-left: 10px;
+			}
+		</style>
+	</head>
+
+	<body>
+		<div class="box">
+			<div class="box-header with-border">
+				<h3 class="box-title">app用户列表</h3>
+			</div>
+			<div style="margin-top:0px;margin-left: 20px;" class="my_feilei">
+
+				<!--<label for="name">选择楼宇：</label>-->
+				<!--<s>选择状态</s>-->
+				<!--<select id="xiashulouyu_se" style="display: inline-block;" class="form-control">
+
+				</select>-->
+				<input type="text" name="" id="text_sousuo" value="" placeholder="请输入需要查询的内容" />
+				<button id="search_chaxun"  type="button" class="btn btn-success">搜索</button>
+
+			</div>
+
+			<!--<div class="my_feilei">-->
+			<!-- /.box-header -->
+			<div class="box-body">
+				<table class="table table-bordered">
+					<tr>
+						<th>序号</th>
+						<th>姓名</th>
+						<th>昵称</th>
+						<th>性别</th>
+						<th>创建时间</th>
+						<th>手机号</th>
+						<th style="display: none;">id</th>
+						<th>查看详情</th>
+					</tr>
+					<tbody id="tbbb">
+						<tr>
+							<td>1.</td>
+							<th>正在加载数据...</th>
+							<th>正在加载数据...</th>
+							<th>正在加载数据...</th>
+							<th>正在加载数据...</th>
+							<th>正在加载数据...</th>
+							<th>正在加载数据...</th>
+							<!--<th>正在加载数据...</th>-->
+							<!--<th>正在加载数据...</th>-->
+							<th data-toggle="modal" data-target="#myModal" style="color:blue;cursor: pointer" ;><i class="fa fa-github-eye"></i></th>
+
+						</tr>
+					</tbody>
+
+				</table>
+			</div>
+			<!-- /.box-body -->
+			<div class="box-footer clearfix">
+				<div>
+					<s style="margin-top: 5px;">共有：</s> <span id="count"></span><s>条,每页显示13条</s>
+				</div>
+				<ul id='bp-3-element-test'>
+				</ul>
+			</div>
+		</div>
+
+		<!-- 模态框（Modal） -->
+		<div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+			<div class="modal-dialog">
+				<div class="modal-content">
+					<div class="modal-header">
+						<button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+						<h4 class="modal-title" id="myModalLabel"></h4>
+					</div>
+					<div id="shenhe" class="modal-body">
+						<ul id="myTab" class="nav nav-tabs">
+							<li class="active">
+								<a href="#home" data-toggle="tab">
+									基础信息
+								</a>
+							</li>
+							<li>
+								<a href="#fix" data-toggle="tab">
+									详细信息
+								</a>
+							</li>
+							<li>
+								<a href="#zhuce" data-toggle="tab">
+									资产信息
+								</a>
+							</li>
+
+						</ul>
+						<ul id="ppp">
+							<div id="myTabContent" class="tab-content">
+								<div class=" tab-pane fade in active" id="home">
+									<li>
+										<span>姓名:</span><s id="yh_name"></s>
+									</li>
+
+									<li>
+										<span>昵称:</span><s id="yh_nicheng"></s>
+									</li>
+									<li style="display: none;">
+										<span>用户ID:</span><s id="yh_id"></s>
+									</li>
+									<li style="display: none;">
+										<span>app终端唯一ID:</span><s id="yh_appId"></s>
+									</li>
+									<li>
+										<span>创建时间:</span><s id="yh_creattime"></s>
+									</li>
+									<li>
+										<span>登录名:</span><s id="yh_dengluname"></s>
+									</li>
+									<li>
+										<span>会员状态:</span><s id="yh_type"></s>
+									</li>
+									<li>
+										<span>最后登录时间:</span><s id="yh_lasttime"></s>
+									</li>
+
+								</div>
+								<div class="tab-pane fade" id="fix">
+									<li>
+										<span>性别:</span><s id="yh_sex"></s>
+									</li>
+									<li>
+										<span>生日:</span><s id="yh_bir"></s>
+									</li>
+									<li>
+										<span>手机:</span><s id="yh_tel"></s>
+									</li>
+									<li>
+										<span>身份证号:</span><s id="yh_shenfen"></s>
+									</li>
+									<li>
+										<span>头像:</span><img data-action="zoom" id="yh_touxing" src="img/logo.png" alt="" />
+									</li>
+
+								</div>
+								<div class="tab-pane fade" id="zhuce">
+									<li>
+										<span>钱包余额:</span><s id="yh_qianbao"></s>
+									</li>
+									<li>
+										<span>优惠券张数:</span><s id="yh_youhui"></s>
+									</li>
+									<li>
+										<span>沃豆数:</span><s id="yh_wodou"></s>
+									</li>
+								</div>
+
+							</div>
+						</ul>
+					</div>
+					<div class="modal-footer">
+						<div class="shenhe_no">
+							<button type="button" class="btn btn-default fanhui" data-dismiss="modal">返回</button>
+							<button type="button" class="btn btn-info yh_qiyong" data-dismiss="modal">启用</button>
+							<button type="button" class="btn btn-danger yh_jinyong" data-dismiss="modal">禁用</button>
+							<button type="button" class="btn btn-primary yh_youhuiquan" data-dismiss="modal">优惠券列表</button>
+							<button type="button" class="btn btn-success yh_wodou" data-dismiss="modal">沃豆详情</button>
+							<button type="button" class="btn btn-info yh_fangwu" data-dismiss="modal">房产信息</button>							
+							<!--<button data-toggle="modal" data-target="#myModal4" type="button" class="btn btn-danger ">删除</button>-->
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+		<!-- 模态框（Modal） -->
+		<div class="modal fade" id="myModal4" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+			<div class="modal-dialog">
+				<div class="modal-content">
+					<div class="modal-header">
+						<button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+						<h4 class="modal-title" id="myModalLabel">是否确认删除</h4>
+					</div>
+					<div class="modal-body">删除后数据无法找回</div>
+					<div class="modal-footer">
+						<button type="button" class="btn btn-default" data-dismiss="modal">关闭</button>
+						<button type="button" class="btn btn-danger yh_remove">确定删除</button>
+					</div>
+				</div>
+				<!-- /.modal-content -->
+			</div>
+			<!-- /.modal -->
+		</div>
+	</body>
+
+</html>
+<script src="js/jquery.min.js" type="text/javascript" charset="utf-8"></script>
+<script src="bootstrap/dist/js/bootstrap.min.js" type="text/javascript" charset="utf-8"></script>
+<script src="js/qunit-1.11.0.js" type="text/javascript" charset="utf-8"></script>
+<script src="js/bootstrap-paginator.js" type="text/javascript" charset="utf-8"></script>
+<script src="js/bootstrap-datetimepicker.js" type="text/javascript" charset="utf-8"></script>
+<script src="js/bootstrap-datetimepicker.zh-CN.js" type="text/javascript" charset="utf-8"></script>
+<script src="js/zooming.js" type="text/javascript" charset="utf-8"></script>
+<script src="js/data.js" type="text/javascript" charset="utf-8"></script>
+<script src="js/fileinput.min.js" type="text/javascript" charset="utf-8"></script>
+<script src="js/zh.js" type="text/javascript" charset="utf-8"></script>
+<script src="js/app_yonghu.js" type="text/javascript" charset="utf-8"></script>

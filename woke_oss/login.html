@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html>
+
+	<head>
+		<meta charset="UTF-8">
+		<meta name="renderer" content="webkit">
+		<meta http-equiv="X-UA-Compatible" content="IE=10" />
+		<title>沃克科技后台管理登录</title>
+		<link rel="stylesheet" href="css/public.css" />
+		<link rel="stylesheet" type="text/css" href="css/login.css" />
+		<link rel="Shortcut Icon" href="img/logo.png" type="image/x-icon">
+		<!--<link rel="stylesheet" type="text/css" href="bootstrap/dist/css/bootstrap.css"/>-->
+		<style type="text/css">
+			button {
+				border: none;
+			}
+		</style>
+	</head>
+
+	<body>
+		<section id="denglu">
+			<h3 id="title">沃克科技后台管理系统</h3>
+			<div class="login">
+				<ul class="clear">
+					<li class="te_li">账号登录</li>
+					<li>手机号登录</li>
+				</ul>
+				<div class="zhang_login">
+					<input type="text" name="" onblur="checkzhanghao()" id="denglu_use" value="" placeholder="请输入员工账号" />
+					<span id="use_tip"></span>
+					<input type="password" onblur="checkpas()" name="" id="denglu_pas" value="" placeholder="请输入密码" />
+					<span id="pas_tip"></span>
+					<!--<p id="now_denglu_zhanghao">账号登录</p>-->
+					<!--<button data-loading-text="Loading..." id="now_denglu_zhanghao" type="button" class="btn btn-info">账号登录</button>-->
+					<button id="now_denglu_zhanghao" class="btn btn-primary" data-loading-text="Loading..." type="button">账号登录</button>
+
+				</div>
+				<div style="display: none;" class="tel_login">
+					<input type="text" name="" onblur="checktel()" id="denglu_use1" value="" placeholder="请输入手机号码" />
+					<span id="use_tip1"></span>
+					<input type="password" name="" onblur="checkpas1()" id="denglu_pas1" value="" placeholder="请输入密码" />
+					<span id="pas_tip1"></span>
+					<!--<p id="now_denglu_tel">手机号登录</p>-->
+					<button id="now_denglu_tel" type="button" class="btn btn-primary" data-loading-text="Loading...">手机号登录</button>
+				</div>
+				<div class="denglu_button">
+					<a href="Forgot_pas.html"><s id="wangji_pas">忘记密码</s></a>
+
+				</div>
+			</div>
+		</section>
+	</body>
+
+</html>
+
+<script src="js/jquery.min.js" type="text/javascript" charset="utf-8"></script>
+<script src="bootstrap/dist/js/bootstrap.min.js" type="text/javascript" charset="utf-8"></script>
+<script src="js/login.js" type="text/javascript" charset="utf-8"></script>

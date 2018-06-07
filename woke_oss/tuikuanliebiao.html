@@ -1,0 +1,309 @@
+<!DOCTYPE html>
+<html>
+
+	<head>
+		<meta charset="UTF-8">
+		<title>服务商小区权限列表</title>
+		<link rel="stylesheet" type="text/css" href="css/public.css" />
+		<link rel="stylesheet" href="bootstrap/dist/css/bootstrap.min.css">
+		<link rel="stylesheet" href="css/font-awesome.min.css">
+		<link rel="stylesheet" href="css/ionicons.min.css">
+		<link rel="stylesheet" href="css/AdminLTE.min.css">
+		<link rel="stylesheet" href="dist/css/skins/_all-skins.min.css">
+		<link rel="stylesheet" type="text/css" href="css/bootstrap-datetimepicker.min.css" />
+		<link rel="stylesheet" type="text/css" href="css/public_main.css" />
+		<style type="text/css">
+			body #select_zhanwei {
+				display: inline-block;
+				/*margin-top: 5px;*/
+				width: 120px;
+				height: 34px;
+			}
+			
+			#search_chaxun {
+				/*margin-top: 10px;*/
+				margin-left: 30px;
+			}
+			
+			body #tbbb .btn {
+				padding: 0;
+				cursor: default;
+			}
+			
+			body #select_type {
+				display: inline-block;
+				/*margin-top: 5px;*/
+				width: 100px;
+				height: 34px;
+				margin-left: 10px;
+			}
+			
+			#search_chaxun {
+				/*margin-top: 10px;*/
+				margin-left: 10px;
+			}
+			
+			#text_sousuo {
+				margin-left: 10px;
+			}
+		</style>
+
+	</head>
+
+	<body>
+		<div class="box">
+			<div class="box-header with-border">
+				<h3 class="box-title">展位审核记录</h3>
+			</div>
+
+			<div id="mohu" class="clear">
+				<div id="star_time" class="form-group">
+					<label for="dtp_input2" class=" control-label">开始时间</label>
+					<div class="input-group date form_date " data-date="" data-date-format="yyyy-mm-dd" data-link-field="dtp_input2" data-link-format="yyyy-mm-dd">
+						<input id="datepicker" placeholder="请选择开始时间" onchange="gaibian()" class="form-control input_1" size="16" type="text" value="" readonly>
+						<span class="input-group-addon"><span class="glyphicon glyphicon-remove"></span></span>
+						<span class="input-group-addon"><span class="glyphicon glyphicon-calendar"></span></span>
+
+						<input type="hidden" id="dtp_input2" value="" />
+					</div>
+				</div>
+				<div id="end_time" class="form-group">
+					<label for="dtp_input2" class="control-label">结束时间</label>
+					<div class="input-group date form_date2 " data-date="" data-date-format="yyyy-mm-dd" data-link-field="dtp_input2" data-link-format="yyyy-mm-dd">
+						<input class="form-control input_2" placeholder="请选择结束时间" size="16" type="text" value="" readonly>
+						<span class="input-group-addon"><span class="glyphicon glyphicon-remove"></span></span>
+						<span class="input-group-addon"><span class="glyphicon glyphicon-calendar"></span></span>
+
+						<input type="hidden" id="dtp_input2" value="" />
+					</div>
+				</div>
+				<label for="name">选择状态</label>
+				<!--<s>选择状态</s>-->
+				<select id="select_type" style="display: inline-block;" class="form-control">
+					<option value="">全部</option>
+					<option value="0">未退款</option>
+					<option value="1">已退款</option>
+					<option value="2">退款中</option>
+				</select>
+				<label for="name"></label>
+				<input type="text" name="" id="text_sousuo1" value="" placeholder="请输入需要查询的id" />
+				<input type="text" name="" id="text_sousuo" value="" placeholder="请输入需要查询的内容" />
+				<button id="search_chaxun"  type="button" class="btn btn-success">搜索</button>
+			</div>
+			<!--<div style="margin-top:0px;margin-left: 20px;" class="my_feilei">
+
+			</div>-->
+			<!-- /.box-header -->
+			<div class="box-body">
+				<table class="table table-bordered">
+					<tr>
+						<th>序号</th>
+						<th>用户名</th>
+						<th>金额</th>
+						<th>订单状态</th>
+						<th>退款状态</th>
+						<th>退款类型</th>
+						<th>操作</th>
+					</tr>
+					<tbody id="tbbb">
+						<tr>
+							<td>1.</td>
+							<th>正在加载数据...</th>
+							<th>正在加载数据...</th>
+							<th>正在加载数据...</th>
+
+							<th>正在加载数据...</th>
+							<th>正在加载数据...</th>
+						</tr>
+					</tbody>
+
+				</table>
+			</div>
+			<!-- /.box-body -->
+			<div class="box-footer clearfix">
+				<div>
+					<s style="margin-top: 5px;">共有：</s> <span id="count"></span><s>条,每页显示10条</s>
+				</div>
+				<ul id='bp-3-element-test'>
+				</ul>
+			</div>
+		</div>
+
+		<div class="modal fade" id="myModal2" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+			<div class="modal-dialog">
+				<div class="modal-content">
+					<div class="modal-header">
+						<button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+						<h4 class="modal-title" id="myModalLabel"></h4>
+					</div>
+					<div id="shenhe" class="modal-body">
+						<ul id="myTab" class="nav nav-tabs">
+							<li class="active">
+								<a href="#home2" data-toggle="tab">
+									订单信息
+								</a>
+							</li>
+							<li>
+								<a href="#fix2" data-toggle="tab">
+									支付信息
+								</a>
+							</li>
+							<li>
+								<a href="#tui2" data-toggle="tab">
+									物业信息
+								</a>
+							</li>
+							<li>
+								<a href="#zizhi2" data-toggle="tab">
+									通知信息
+								</a>
+							</li>
+							<li>
+								<a href="#zhuce2" data-toggle="tab">
+									优惠信息
+								</a>
+							</li>
+
+						</ul>
+						<ul id="ppp">
+							<div id="myTabContent" class="tab-content">
+								<div class=" tab-pane fade in active" id="home2">
+									<li>
+										<span>会员名字:</span><s id="s_huiyuanname3"></s>
+									</li>
+									<li>
+										<span>会员id:</span><s id="s_huiyuanID3"></s>
+									</li>
+									<li>
+										<span>退款单id:</span><s id="s_tuikuanID3"></s>
+									</li>
+									<li>
+										<span>订单号:</span><s id="s_dingdan3"></s>
+									</li>
+									<li>
+										<span>订单日期:</span><s id="s_dingdandata3"></s>
+									</li>
+									<li>
+										<span>金额:</span><s id="s_jine3"></s>
+									</li>
+									<li>
+										<span>产品:</span><s id="s_chanpin3"></s>
+									</li>
+									<li>
+										<span>订单状态:</span><s id="s_dingdanzhuangtai3"></s>
+									</li>
+									<li>
+										<span>订单金额:</span><s id="s_dingdanjine3"></s>
+									</li>
+								</div>
+								<div class="tab-pane fade" id="fix2">
+									<li>
+										<span>支付状态:</span><s id="s_zhifuzhuangtai3"></s>
+									</li>
+									<li>
+										<span>支付类型:</span><s id="s_zhifuleixing3"></s>
+									</li>
+									<li>
+										<span>支付Id:</span><s id="s_zhifuID3"></s>
+									</li>
+									<li>
+										<span>结算状态:</span><s id="s_jiesuantype3"></s>
+									</li>
+									<li>
+										<span>结算日期:</span><s id="s_jiesuandate3"></s>
+									</li>
+									<li>
+										<span>结算单id:</span><s id="s_jiesuanID3"></s>
+									</li>
+									<li>
+										<span>退款状态:</span><s id="s_tuikuanzhuangtai3"></s>
+									</li>
+									<li>
+										<span>退款时间:</span><s id="s_tuikuanshijian3"></s>
+									</li>
+									<li>
+										<span>退款金额:</span><s id="s_tuikuanjine3"></s>
+									</li>
+									<li>
+										<span>退款单类型:</span><s id="s_tuikuandanleixing3"></s>
+									</li>
+									<li>
+										<span>退款摘要:</span>
+										<textarea id="s_tuikuanzhaiyao3" name="" rows="" cols=""></textarea>
+									</li>
+								</div>
+								<div class="tab-pane fade" id="zizhi2">
+									<li>
+										<span>物业公司Id:</span><s id="s_wuyegongsiid3"></s>
+									</li>
+									<li>
+										<span>物业公司名称:</span><s id="s_wuyegsname3"></s>
+									</li>
+									<li>
+										<span>物业退款单id:</span><s id="s_wuyetkdanid3"></s>
+									</li>
+								</div>
+								<div class="tab-pane fade" id="tui2">
+									<li>
+										<span>通知商户:</span><s id="s_tongzhishanghu3"></s>
+									</li>
+									<li>
+										<span>通知地址:</span><s id="s_tzdz3"></s>
+									</li>
+									<li>
+										<span>通知次数:</span><s id="s_tzcs3"></s>
+									</li>
+									<li>
+										<span>通知时间:</span><s id="s_tzsj3"></s>
+									</li>
+
+									<li>
+										<span>撤销状态:</span><s id="s_cxzt3"></s>
+									</li>
+									<li>
+										<span>撤销时间:</span><s id="s_cxsj3"></s>
+									</li>
+									<li>
+										<span>通知信息:</span>
+										<textarea id="s_tzxx3" name="" rows="" cols=""></textarea>
+									</li>
+								</div>
+								<div class="tab-pane fade" id="zhuce2">
+									<li>
+										<span>沃豆抵消额度:</span><s id="s_wddxed3"></s>
+									</li>
+									<li>
+										<span>优惠券id:</span><s id="s_yhqid3"></s>
+									</li>
+									<li>
+										<span>优惠券抵扣额:</span><s id="s_yhqdke3"></s>
+									</li>
+								</div>
+							</div>
+						</ul>
+					</div>
+					<div class="modal-footer">
+						<div class="modal-footer">
+							<button type="button" class="btn btn-default fanhui" data-dismiss="modal">返回</button>
+						</div>
+					</div>
+
+				</div>
+			</div>
+		</div>
+
+	</body>
+
+</html>
+<script src="js/jquery.min.js" type="text/javascript" charset="utf-8"></script>
+<script src="bootstrap/dist/js/bootstrap.min.js" type="text/javascript" charset="utf-8"></script>
+<script src="js/jquery.slimscroll.min.js"></script>
+<script src="js/fastclick.js"></script>
+<script src="dist/js/adminlte.min.js"></script>
+<script src="dist/js/demo.js"></script>
+<script src="js/qunit-1.11.0.js" type="text/javascript" charset="utf-8"></script>
+<script src="js/bootstrap-paginator.js" type="text/javascript" charset="utf-8"></script>
+<script src="js/bootstrap-datetimepicker.js" type="text/javascript" charset="utf-8"></script>
+<script src="js/bootstrap-datetimepicker.zh-CN.js" type="text/javascript" charset="utf-8"></script>
+<script src="js/tuikuanliebiao.js" type="text/javascript" charset="utf-8"></script>
+<script src="js/data.js" type="text/javascript" charset="utf-8"></script>

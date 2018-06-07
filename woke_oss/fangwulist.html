@@ -1,0 +1,178 @@
+<!DOCTYPE html>
+<html>
+
+	<head>
+		<meta charset="UTF-8">
+		<title>服务商详情</title>
+		<link rel="stylesheet" type="text/css" href="css/public.css" />
+		<link rel="stylesheet" href="bootstrap/dist/css/bootstrap.min.css">
+		<link rel="stylesheet" href="font-awesome/css/font-awesome.min.css">
+		<link rel="stylesheet" href="css/ionicons.min.css">
+		<link rel="stylesheet" href="css/AdminLTE.min.css">
+		<link rel="stylesheet" href="dist/css/skins/_all-skins.min.css">
+		<link rel="stylesheet" type="text/css" href="css/bootstrap-datetimepicker.min.css" />
+		<link rel="stylesheet" type="text/css" href="css/fileinput.min.css" />
+		<link rel="stylesheet" type="text/css" href="css/public_main.css" />
+		<style type="text/css">
+			body #xiashulouyu_se {
+				display: inline-block;
+				/*margin-top: 5px;*/
+				width: 200px;
+				height: 34px;
+				margin-left: 10px;
+			}
+		</style>
+	</head>
+
+	<body>
+		<div class="box">
+			<div class="box-header with-border">
+				<h3 class="box-title">房屋列表</h3>
+			</div>
+			<div id="mohu" class="my_feilei">
+
+				<!--<label for="name">使用情况：</label>			
+				<select id="xiashulouyu_se" style="display: inline-block;" class="form-control">
+					<option value="111">全部</option>
+					<option value="0">未使用</option>
+					<option value="1">已使用</option>
+				</select>-->
+				<!--<input type="text" name="" id="text_sousuo" value="" placeholder="请输入需要查询的内容" />
+				<button id="search_chaxun" style="margin-top: -2px;" type="button" class="btn btn-success">搜索</button>-->
+
+			</div>
+
+			<!--<div class="my_feilei">-->
+			<!-- /.box-header -->
+			<div class="box-body">
+				<table class="table table-bordered">
+					<tr>
+						<th>序号</th>
+						<th>所在小区</th>
+						<th>所在楼栋</th>
+						<th>房屋编号</th>
+						<th>房屋面积</th>
+						<th>默认房屋</th>
+						<th>查看详情</th>
+					</tr>
+					<tbody id="tbbb">
+						<tr>
+							<td>1.</td>
+							<th>正在加载数据...</th>
+							<th>正在加载数据...</th>
+							<th>正在加载数据...</th>
+							<th>正在加载数据...</th>
+							<th>正在加载数据...</th>
+							<th data-toggle="modal" data-target="#myModal" style="color:blue;cursor: pointer" ;><i class="fa fa-github-eye"></i></th>
+
+						</tr>
+					</tbody>
+
+				</table>
+			</div>
+			<!-- /.box-body -->
+			<div class="box-footer clearfix">
+				<div>
+					<s style="margin-top: 5px;">共有：</s> <span id="count"></span><s>条,每页显示13条</s>
+				</div>
+				<ul id='bp-3-element-test'>
+				</ul>
+			</div>
+		</div>
+		<!-- 模态框（Modal） -->
+		<div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+			<div class="modal-dialog">
+				<div class="modal-content">
+					<div class="modal-header">
+						<button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+						<h4 class="modal-title" id="myModalLabel"></h4>
+					</div>
+					<div id="shenhe" class="modal-body">
+						<ul id="myTab" class="nav nav-tabs">
+							<li class="active">
+								<a href="#home" data-toggle="tab">
+									基础信息
+								</a>
+							</li>
+							<li>
+								<a href="#fix" data-toggle="tab">
+									详细信息
+								</a>
+							</li>
+						</ul>
+						<ul id="ppp">
+							<div id="myTabContent" class="tab-content">
+								<div class=" tab-pane fade in active" id="home">
+									<li>
+										<span>业主姓名:</span><s id="yh_name"></s>
+									</li>
+
+									<li>
+										<span>联系电话:</span><s id="yh_tel"></s>
+									</li>
+									<li>
+										<span>是否业主:</span><s id="yh_yezhu"></s>
+									</li>
+									<li>
+										<span>默认房屋:</span><s id="yh_moren"></s>
+									</li>
+									<li>
+										<span>认证途径:</span><s id="yh_renzheng"></s>
+									</li>
+									<li>
+										<span>认证手机号:</span><s id="yh_rztel"></s>
+									</li>
+									<li>
+										<span>认证时间:</span><s id="yh_rztime"></s>
+									</li>
+
+								</div>
+								<div class="tab-pane fade" id="fix">
+									<li>
+										<span>所在小区名字:</span><s id="yh_szxiaoqu"></s>
+									</li>
+									<li>
+										<span>所在楼栋:</span><s id="yh_sz_lou"></s>
+									</li>
+									<li>
+										<span>房屋编号:</span><s id="yh_room_bianhao"></s>
+									</li>
+									<li>
+										<span>房屋面积:</span><s id="yh_mianji"></s>
+									</li>
+									<li style="display: none;">
+										<span>ID:</span><s id="yh_id"></s>
+									</li>
+									<li style="display: none;">
+										<span>房屋ID:</span><s id="yh_roomId"></s>
+									</li>
+									<li style="display: none;">
+										<span>小区ID:</span><s id="yh_xiaoquId"></s>
+									</li>
+								</div>
+							</div>
+						</ul>
+					</div>
+					<div class="modal-footer">
+						<div class="shenhe_no">
+							<button type="button" class="btn btn-default fanhui" data-dismiss="modal">返回</button>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+
+	</body>
+
+</html>
+<script src="js/jquery.min.js" type="text/javascript" charset="utf-8"></script>
+<script src="bootstrap/dist/js/bootstrap.min.js" type="text/javascript" charset="utf-8"></script>
+<script src="js/qunit-1.11.0.js" type="text/javascript" charset="utf-8"></script>
+<script src="js/bootstrap-paginator.js" type="text/javascript" charset="utf-8"></script>
+<script src="js/bootstrap-datetimepicker.js" type="text/javascript" charset="utf-8"></script>
+<script src="js/bootstrap-datetimepicker.zh-CN.js" type="text/javascript" charset="utf-8"></script>
+<script src="js/zooming.js" type="text/javascript" charset="utf-8"></script>
+<script src="js/data.js" type="text/javascript" charset="utf-8"></script>
+<script src="js/fileinput.min.js" type="text/javascript" charset="utf-8"></script>
+<script src="js/zh.js" type="text/javascript" charset="utf-8"></script>
+<script src="js/fangwulist.js" type="text/javascript" charset="utf-8"></script>
